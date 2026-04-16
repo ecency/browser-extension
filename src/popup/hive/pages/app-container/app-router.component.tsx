@@ -43,7 +43,6 @@ import { ManageAccountAuthoritiesComponent } from 'src/popup/hive/pages/app-cont
 import { AddKeyComponent } from 'src/popup/hive/pages/app-container/settings/accounts/manage-account/add-key/add-key.component';
 import { ManageAccountComponent } from 'src/popup/hive/pages/app-container/settings/accounts/manage-account/manage-account.component';
 import { AdvancedSettingsPageComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/advanced-settings.component';
-import { AnalyticsComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/analytics/analytics.component';
 import { AutoLockComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/auto-lock/auto-lock.component';
 import { ChangePasswordComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/change-password/change-password.component';
 import { ClearAllDataComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/clear-all-data/clear-all-data.component';
@@ -179,8 +178,6 @@ const AppRouter = ({
         return <CreateAccountStepOneComponent />;
       case Screen.CREATE_ACCOUNT_PAGE_STEP_TWO:
         return <CreateAccountStepTwoComponent />;
-      case Screen.SETTINGS_ANALYTICS:
-        return <AnalyticsComponent />;
       default:
         return null;
     }
