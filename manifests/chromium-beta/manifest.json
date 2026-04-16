@@ -1,6 +1,6 @@
 {
-  "name": "Hive Keychain Beta",
-  "description": "Hive Keychain Beta (don't forget to switch back to production version)",
+  "name": "Hive Keeper Beta",
+  "description": "Hive Keeper Beta (don't forget to switch back to production version)",
   "default_locale": "en",
   "version": "3.15.3",
   "permissions": ["storage", "idle", "alarms", "offscreen"],

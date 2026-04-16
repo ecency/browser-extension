@@ -3,7 +3,6 @@ import { TokenPendingUnstakePage } from '@popup/hive/pages/app-container/home/to
 import { PendingRecurrentTransfersPageComponent } from '@popup/hive/pages/app-container/home/transfer-fund/recurrent-transfers/recurrent-transfers.component';
 import { ExportAccountsSubMenuComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/export-accounts-sub-menu.component';
 import { ExportedAccountsQRComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/exported-accounts-qr/exported-accounts-qr.component';
-import { HelpSubMenuComponent } from '@popup/hive/pages/app-container/settings/help-sub-menu/help-sub-menu.component';
 import { ExportTransactionsComponent } from '@popup/hive/pages/app-container/settings/user-preferences/export-transactions/export-transactions.component';
 import { RootState } from '@popup/multichain/store';
 import React from 'react';
@@ -163,8 +162,6 @@ const AppRouter = ({
         return <FavoriteAccountsComponent />;
       case Screen.SETTINGS_ABOUT:
         return <AboutPageComponent />;
-      case Screen.SETTINGS_HELP:
-        return <HelpSubMenuComponent />;
       case Screen.CREATE_ACCOUNT_PAGE_STEP_ONE:
         return <CreateAccountStepOneComponent />;
       case Screen.CREATE_ACCOUNT_PAGE_STEP_TWO:

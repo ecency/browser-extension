@@ -30,11 +30,6 @@ const SettingsMenuItems = (logout: () => void): MenuItem[] => {
       nextScreen: Screen.GOVERNANCE_PAGE,
     },
     {
-      label: 'popup_html_help',
-      icon: SVGIcons.MENU_HELP,
-      nextScreen: Screen.SETTINGS_HELP,
-    },
-    {
       label: 'popup_html_about',
       icon: SVGIcons.MENU_ABOUT,
       nextScreen: Screen.SETTINGS_ABOUT,

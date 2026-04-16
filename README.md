@@ -1,63 +1,76 @@
-# Hive Keychain Extension
+# Hive Keeper
 
-Secure Hive Wallet Extension.
+Secure browser-extension wallet for the Hive blockchain.
 
-Hive Keychain is an extension for accessing Hive-enabled distributed applications, or "dApps" in your Chromium or Firefox browser!
+Hive Keeper stores Hive account keys locally (encrypted with a master password) and signs operations on demand. It exposes a `window.hive` API to dApps so they can request transfers, votes, custom JSON, and other Hive operations without ever touching the user's keys.
 
-The extension injects the Hive Keychain API into every website's javascript context, so that dApps can read from the blockchain.
-
-Hive Keychain also lets the user create and manage their own identities, so when a dApp wants to perform a transaction and write to the blockchain, the user gets a secure interface to review the transaction, before approving or rejecting it.
-
-## Building locally
+## Build locally
 
 #### Clone the repository
 
-`git clone https://github.com/hive-keychain/hive-keychain-extension`
+```bash
+git clone https://github.com/ecency/browser-extension
+cd browser-extension
+```
 
-#### Install the modules
+#### Install dependencies
 
-`npm i`
+```bash
+npm install
+```
 
 #### Run the dev server
 
-`npm run dev`
-It will create two repositories `dist-dev` and `dist-dev-firefox`.
-Alternatively, you can run the dev server for either browser by using `npm run dev:chromium` or `npm run dev:firefox`
+```bash
+npm run dev
+```
+
+This builds both browsers and watches for changes. The output goes to `dist-dev/` (Chromium) and `dist-dev-firefox/` (Firefox). To target a single browser, use `npm run dev:chromium` or `npm run dev:firefox`.
 
 #### Make a production build
 
-`npm run build`
-In the same manner, this will create `dist-prod` and `dist-prod-firefox` folders, and you can choose to build for one type of browser only by using `npm run build:chromium` or `npm run build:firefox`
+```bash
+npm run build
+```
 
-#### Test your local build
+Outputs land in `dist-prod/` and `dist-prod-firefox/`. Single-browser variants: `npm run build:chromium`, `npm run build:firefox`.
+
+#### Load the build
 
 ##### Chromium
 
-- Go to your browser extension page
-- Activate the developer mode
-- Load unpacked
-- Choose the `dist-dev` folder
+1. Open `chrome://extensions`
+2. Enable Developer Mode
+3. Load unpacked → select the `dist-dev/` folder
 
-After making changes to the background, reload the extension.
+After background-script changes, reload the extension.
 
 ##### Firefox
 
-- Go to `about:debugging#/runtime/this-firefox`
-- Load temporary Add-on
-- Choose the `dist-dev-firefox` folder
+1. Open `about:debugging#/runtime/this-firefox`
+2. Load Temporary Add-on → select `dist-dev-firefox/manifest.json`
 
-After making changes to the background, reload the extension.
+After background-script changes, reload the extension.
 
-## Contributing
+## dApp integration
 
-Before contributing to Hive Keychain, contact us on [Discord](https://discord.com/invite/3EM6YfRrGv).
+dApps interact with the extension through `window.hive`. To detect availability:
 
-## Useful links
+```js
+const api = window.hive;
+if (api) {
+  api.requestHandshake(() => console.log('Hive Keeper installed'));
+}
+```
 
-- [Keychain SDK](https://www.npmjs.com/package/keychain-sdk) and [playground](https://play.hive-keychain.com)
-- [Developers documentation](./documentation/README.md) for how to interact with Hive Keychain from your website
-- [Contribution Guidelines](/CONTRIBUTING.md)
-- [Landing page](https://hive-keychain.com)
-- [Support Discord](https://discord.com/invite/3EM6YfRrGv)
-- [Keychain for Chromium browsers](https://chrome.google.com/webstore/detail/hive-keychain/jcacnejopjdphbnjgfaaobbfafkihpep?hl=en)
-- [Keychain for Firefox](https://addons.mozilla.org/en-US/firefox/addon/hive-keychain/)
+If you previously integrated with Hive Keychain (`window.hive_keychain`), add a fallback:
+
+```js
+const api = window.hive || window.hive_keychain;
+```
+
+Method shapes (`requestBroadcast`, `requestSignBuffer`, `requestCustomJson`, etc.) are unchanged.
+
+## License
+
+MIT

@@ -80,9 +80,6 @@ export enum SVGIcons {
   MENU_GOVERNANCE = 'menu/governance',
   MENU_LOGOUT = 'menu/logout',
   MENU_PLUGINS = 'menu/plugins',
-  MENU_HELP = 'menu/help',
-
-  MENU_SUPPORT = 'menu/help/support',
 
   MENU_USER_PREFERENCES_DETACH_EXTENSION = 'menu/user-preferences/detach',
   MENU_USER_PREFERENCES = 'menu/user-preferences',
@@ -90,11 +87,6 @@ export enum SVGIcons {
   MENU_USER_PREFERENCES_AUTOMATED_TASKS = 'menu/user-preferences/automated-tasks',
   MENU_USER_PREFERENCES_FAVORITE_ACCOUNTS = 'menu/user-preferences/favorite-accounts',
   MENU_USER_PREFERENCES_THEME = 'menu/user-preferences/theme',
-
-  MENU_BOTTOM_BAR_DISCORD = 'menu/bottom-bar/discord',
-  MENU_BOTTOM_BAR_HIVE = 'menu/bottom-bar/hive',
-  MENU_BOTTOM_BAR_TWITTER = 'menu/bottom-bar/twitter',
-  MENU_BOTTOM_BAR_MEDIUM = 'menu/bottom-bar/medium',
 
   MENU_RPC_ADD_BUTTON = 'menu/rpc/add-button',
   MENU_RPC_CLOSE_BUTTON = 'menu/rpc/close-button',
@@ -193,10 +185,8 @@ export const Icons = {
   AUTOMATED_TASKS: SVGIcons.MENU_USER_PREFERENCES_AUTOMATED_TASKS,
   CONVERT: SVGIcons.WALLET_CONVERT,
   SETTINGS: SVGIcons.MENU_ADVANCED_SETTINGS,
-  HIVE: SVGIcons.MENU_BOTTOM_BAR_HIVE,
   SEND: SVGIcons.WALLET_SEND,
   AUTO_LOCK: SVGIcons.MENU_ADVANCED_SETTINGS_AUTO_LOCK,
-  SUPPORT: SVGIcons.MENU_SUPPORT,
   INFO: SVGIcons.MENU_ABOUT,
   CLEAR: SVGIcons.MENU_ADVANCED_SETTINGS_CLEAR_ALL,
   IMPORT_EXPORT: SVGIcons.MENU_ADVANCED_SETTINGS_IMPORT_EXPORT,

@@ -87,7 +87,7 @@ export const PreloadedImage = ({
     };
     img.onerror = () => {
       if (addBackground && useDefaultSVG) {
-        setBackground('#e31337');
+        setBackground('#f7c737');
       } else {
         img.src = alt ?? '';
       }

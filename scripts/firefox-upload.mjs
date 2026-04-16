@@ -172,9 +172,11 @@ async function deploy() {
     }
 
     console.log('🎉 Firefox Add-on deployed and published:', notesResult);
-    await exec(
-      `open https://addons.mozilla.org/en-US/developers/addon/hive-keychain/versions`,
-    );
+    if (process.env.FIREFOX_ADDON_SLUG) {
+      await exec(
+        `open https://addons.mozilla.org/en-US/developers/addon/${process.env.FIREFOX_ADDON_SLUG}/versions`,
+      );
+    }
   } catch (err) {
     console.error('❌ Deployment error:', err);
     process.exit(1);

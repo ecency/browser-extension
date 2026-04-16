@@ -1,7 +1,7 @@
 {
-  "name": "hive-keychain",
+  "name": "hive-keeper",
   "version": "3.15.3",
-  "description": "Hive Keychain extension",
+  "description": "Hive Keeper browser extension",
   "main": "index.js",
   "scripts": {
     "dev": "npm outdated; concurrently \"npm:dev:*\"",
@@ -29,23 +29,24 @@
     "upload": "concurrently \"npm:upload:*\"",
     "upload:chromium": "node scripts/chromium-upload.mjs",
     "upload:firefox": "node scripts/firefox-upload.mjs",
-    "git:archive": "rm -rf hive-keychain*.zip; sh -c 'uploadStash=$(git stash create); git archive -o \"hive-keychain-$(date +%Y%m%d-%H%M%S).zip\" ${uploadStash:-HEAD}'"
+    "git:archive": "rm -rf hive-keeper*.zip; sh -c 'uploadStash=$(git stash create); git archive -o \"hive-keeper-$(date +%Y%m%d-%H%M%S).zip\" ${uploadStash:-HEAD}'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stoodkev/hive-keychain.git"
+    "url": "git+https://github.com/ecency/browser-extension.git"
   },
   "keywords": [
     "hive",
-    "keychain",
-    "extension"
+    "wallet",
+    "extension",
+    "ecency"
   ],
-  "author": "stoodkev",
+  "author": "Ecency",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stoodkev/hive-keychain/issues"
+    "url": "https://github.com/ecency/browser-extension/issues"
   },
-  "homepage": "https://github.com/stoodkev/hive-keychain#readme",
+  "homepage": "https://github.com/ecency/browser-extension#readme",
   "dependencies": {
     "@engrave/ledger-app-hive": "3.5.6",
     "@hiveio/hive-js": "2.0.8",
