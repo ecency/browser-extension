@@ -135,7 +135,6 @@ const NAVIGATION_SCREENS: Screen[] = [
   Screen.TOKENS_TRANSFER,
   Screen.TOKENS_HISTORY,
 
-  Screen.BUY_COINS_PAGE,
   Screen.GOVERNANCE_PAGE,
 
   // Screen.TOKENS_PAGE,

@@ -10,7 +10,7 @@ describe('navigation.actions tests:\n', () => {
         ...initialEmptyStateStore,
         navigation: {
           stack: [
-            { currentPage: Screen.BUY_COINS_PAGE } as Navigation,
+            { currentPage: Screen.HOME_PAGE } as Navigation,
           ] as Navigation[],
         },
       });

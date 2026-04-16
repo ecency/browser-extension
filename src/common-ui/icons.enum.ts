@@ -1,5 +1,4 @@
 export enum SVGIcons {
-  BOTTOM_BAR_BUY = 'bottom-bar/buy',
   BOTTOM_BAR_ECOSYSTEM = 'bottom-bar/ecosystem',
   BOTTOM_BAR_SEND = 'bottom-bar/send',
   BOTTOM_BAR_SWAPS = 'bottom-bar/swaps',
@@ -9,7 +8,6 @@ export enum SVGIcons {
   BUY_HUOBI = 'buy/huobi',
   BUY_IONOMY = 'buy/ionomy',
   BUY_MEXC = 'buy/mexc',
-  BUY_TRANSAK = 'buy/transak',
   BUY_UPBIT = 'buy/upbit',
 
   CHECKBOX_CHECKED = 'checkbox/checked',
@@ -190,7 +188,6 @@ export enum SVGIcons {
   HUOBI = 'huobi',
   MEXC = 'mexc-global',
   PROBIT = 'probit',
-  TRANSAK = 'transak',
   UPBIT = 'upbit',
 }
 

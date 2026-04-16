@@ -21,9 +21,8 @@ import phishing from 'src/__tests__/utils-for-testing/data/phishing';
 import objects from 'src/__tests__/utils-for-testing/helpers/objects';
 import reactTestingLibrary from 'src/__tests__/utils-for-testing/react-testing-library-render/react-testing-library-render-functions';
 import { Icons } from 'src/common-ui/icons.enum';
+import { ExchangesUtils } from 'hive-keychain-commons';
 import { HiveAppComponent } from 'src/popup/hive/hive-app.component';
-import { BuyCoinType } from 'src/popup/hive/pages/app-container/home/buy-coins/buy-coin-type.enum';
-import { BuyCoinsListItem } from 'src/popup/hive/pages/app-container/home/buy-coins/buy-coins-list-item.list';
 describe('transfer-fund.component tests:\n', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -210,10 +209,9 @@ describe('transfer-fund.component tests:\n', () => {
       });
 
       it('Must show memo warning when transferring to an exchange account', async () => {
-        const exchangeUsername = BuyCoinsListItem(
-          BuyCoinType.BUY_HIVE,
-          mk.user.one,
-        ).exchanges[0].username;
+        const exchangeUsername = ExchangesUtils.getExchanges().find(
+          (exchange) => exchange.acceptedCoins?.includes('HIVE'),
+        )!.username;
         await act(async () => {
           await userEvent.type(
             screen.getByTestId(dataTestIdInput.username),

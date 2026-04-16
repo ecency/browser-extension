@@ -7,10 +7,6 @@ const panel = {
   witness,
 };
 
-const buyCoins = {
-  buyCoins: 'switch-buy-coins',
-};
-
-const dataTestIdSwitch = { witness, panel, buyCoins };
+const dataTestIdSwitch = { witness, panel };
 
 export default dataTestIdSwitch;

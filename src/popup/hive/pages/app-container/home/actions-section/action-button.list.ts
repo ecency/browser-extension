@@ -14,9 +14,4 @@ export const ActionButtonList: ActionButton[] = [
     nextScreenParams: { selectedCurrency: 'hive' },
     icon: SVGIcons.BOTTOM_BAR_SEND,
   },
-  {
-    label: 'popup_html_buy',
-    icon: SVGIcons.BOTTOM_BAR_BUY,
-    nextScreen: Screen.BUY_COINS_PAGE,
-  },
 ];

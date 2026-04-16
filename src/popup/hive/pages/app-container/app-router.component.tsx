@@ -18,7 +18,6 @@ import { AddByAuthComponent } from 'src/popup/hive/pages/add-account/add-by-auth
 import { AddByKeysComponent } from 'src/popup/hive/pages/add-account/add-by-keys/add-by-keys.component';
 import { ImportKeysComponent } from 'src/popup/hive/pages/add-account/import-keys/import-keys.component';
 import { SelectKeysComponent } from 'src/popup/hive/pages/add-account/select-keys/select-keys.component';
-import { BuyCoinsComponent } from 'src/popup/hive/pages/app-container/home/buy-coins/buy-coins.component';
 import { ConversionComponent } from 'src/popup/hive/pages/app-container/home/conversion/conversion.component';
 import { PendingConversionPageComponent } from 'src/popup/hive/pages/app-container/home/conversion/pending-conversion/pending-conversion.component';
 import { DelegationsComponent } from 'src/popup/hive/pages/app-container/home/delegations/delegations.component';
@@ -80,8 +79,6 @@ const AppRouter = ({
         return <PowerUpDownComponent />;
       case Screen.POWER_DOWN_PAGE:
         return <PowerUpDownComponent />;
-      case Screen.BUY_COINS_PAGE:
-        return <BuyCoinsComponent />;
       case Screen.WALLET_HISTORY_PAGE:
         return <WalletHistoryComponent />;
       case Screen.CONFIRMATION_PAGE:

@@ -14,7 +14,6 @@ const dataTestIdComponent = {
   userTokens: 'my-tokens',
   governancePage: 'governance-page',
   powerUpDownPage: 'power-up-page',
-  buyCoinsPage: 'buy-coins-page',
   conversionPage: 'conversion-page',
   savingsPage: 'savings-page',
   delegationsPage: 'delegations-page',
