@@ -1,15 +1,11 @@
 {
   "keychain": {
-    "message": "Hive Keychain",
+    "message": "Hive Keeper",
     "description": "Extension name, night not need to translate it."
   },
   "description": {
     "message": "Portefeuille sécurisé pour Hive.",
     "description": "Extension description, as shown in the store."
-  },
-  "popup_html_wrong_key": {
-    "message": "Clé incorrecte. Veuillez utiliser $1",
-    "description": "while using wrong private key"
   },
   "common_yes": {
     "message": "Oui",
@@ -111,16 +107,16 @@
     "description": "text after clicking forgot password"
   },
   "popup_html_clear_all_data_desc": {
-    "message": "En confirmant, toutes vos données seront perdues. Assurez-vous que toutes vos clés sont enregistrées en dehors de Keychain",
+    "message": "En confirmant, toutes vos données seront perdues. Assurez-vous que toutes vos clés sont enregistrées en dehors de Hive Keeper",
     "description": "description of clear all data confirm page"
   },
   "popup_html_vm": {
     "message": "Mana de vote",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_rc": {
     "message": "Crédits de ressource",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_send": {
     "message": "Envoyer $1",
@@ -192,7 +188,7 @@
     "description": "Import one key"
   },
   "popup_html_import_success": {
-    "message": "Import réussi! <br><br>Veuillez sélectionner les clés que vous souhaitez stocker sur Hive Keychain:",
+    "message": "Import réussi! <br><br>Veuillez sélectionner les clés que vous souhaitez stocker sur Hive Keeper:",
     "description": "When adding an account via master key"
   },
   "popup_html_posting": {
@@ -247,10 +243,6 @@
     "message": "Verrouillage automatique",
     "description": "on settings page"
   },
-  "popup_html_keychainify": {
-    "message": "Keychainify",
-    "description": "on settings page"
-  },
   "popup_html_import_export_settings": {
     "message": "Importer / Exporter les paramètres",
     "description": "on settings page"
@@ -268,7 +260,7 @@
     "description": "on settings page"
   },
   "popup_html_about": {
-    "message": "À propos de Hive Keychain",
+    "message": "À propos de Hive Keeper",
     "description": "on settings page"
   },
   "popup_html_clear": {
@@ -280,7 +272,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_default_info": {
-    "message": "Verrouiller Keychain manuellement.",
+    "message": "Verrouiller Hive Keeper manuellement.",
     "description": "on autolock settings"
   },
   "popup_html_al_locked_title": {
@@ -288,7 +280,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_locked_info": {
-    "message": "Verrouillage automatique de Keychain lorsque l'appareil est verrouillé.",
+    "message": "Verrouillage automatique de Hive Keeper lorsque l'appareil est verrouillé.",
     "description": "on autolock settings"
   },
   "popup_html_al_idle_title": {
@@ -296,20 +288,8 @@
     "description": "on autolock settings"
   },
   "popup_html_al_idle_info": {
-    "message": "Verrouillage automatique de Keychain lorsque le navigateur est inactif pendant un temps donné.",
+    "message": "Verrouillage automatique de Hive Keeper lorsque le navigateur est inactif pendant un temps donné.",
     "description": "on autolock settings"
-  },
-  "popup_html_keychainify_text": {
-    "message": "Cette fonctionnalité vous permet de réaliser une opération Hive Keychain lorsque vous cliquez sur un lien pris en charge sur une page Web ou en accédant directement à l'URL dans un onglet du navigateur. Prend actuellement en charge les liens Hivesigner suivants : transferts, délégation, JSON personnalisé, proxy témoin et votes.",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_title": {
-    "message": "Activer Keychainify",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_info": {
-    "message": "Cette fonctionnalité ouvre une popup Keychain lorsque vous cliquez sur les liens pris en charge.",
-    "description": "on keychainify settings"
   },
   "popup_html_import": {
     "message": "Importer",
@@ -324,15 +304,15 @@
     "description": "on import / export settings"
   },
   "popup_html_about_text": {
-    "message": "L'équipe de Hive Keychain est dirigée par <a href=\"https://peakd.com/@stoodkev\" target=\"_blank\">@stoodkev</a>, un développeur et witness sur Hive, et se compose d'un total de 3 développeurs à temps plein. Nous bénéficions également de l'aide de <a href=\"https://peakd.com/@nateaguila\" target=\"_blank\">@nateaguila</a>, directeur créatif de Splinterlands, et de nombreux autres membres de la communauté.<br><br>Alors que le projet est actuellement financé par le Decentralized Hive Fund (DHF), l'idée originale et les fonds ont été fournis par <a href=\"https://peakd.com/@aggroed\" target=\"_blank\">@aggroed</a> et <a href=\"https://peakd.com/@yabapmatt\" target=\"_blank\">@yabapmatt</a> (witness) via leur entreprise commune Splinterlands, un jeu de cartes à collectionner construit sur Hive. N'oubliez pas d'y jeter un oeil à <a href=\"https://splinterlands.io\" target=\"_blank\">https://splinterlands. o</a>!<br/><br/>Pour plus d'informations sur nos produits (extensions et applications mobiles), visitez notre <a href='https://hive-keychain.com' target='__blank'>site web</a>.",
+    "message": "Hive Keeper est un fork de Hive Keychain maintenu par Ecency. Nous remercions les contributeurs originaux de Hive Keychain et la communauté Hive pour leur travail. Pour plus d'informations, consultez notre <a href='https://github.com/ecency/browser-extension' target='__blank'>dépôt GitHub</a>.",
     "description": "on about keychain"
   },
   "popup_html_delete_account": {
-    "message": "Retirer de Keychain",
+    "message": "Retirer de Hive Keeper",
     "description": "on manage accounts"
   },
   "popup_html_delete_account_confirmation_message": {
-    "message": "Vous êtes sur le point de supprimer le compte @$1 de Keychain. Vous devrez rajouter vos clés pour ajouter ce compte à nouveau. Veuillez confirmer pour continuer.",
+    "message": "Vous êtes sur le point de supprimer le compte @$1 de Hive Keeper. Vous devrez rajouter vos clés pour ajouter ce compte à nouveau. Veuillez confirmer pour continuer.",
     "description": "on manage accounts"
   },
   "popup_html_show_qr": {
@@ -873,7 +853,7 @@
     "message": "Données <span class='small'>(cliquez pour afficher)</span>"
   },
   "dialog_header_unlock": {
-    "message": "Déverrouiller Keychain",
+    "message": "Déverrouiller Hive Keeper",
     "description": "When website request a transaction but keychain is locked"
   },
   "dialog_header_error": {
@@ -1012,7 +992,7 @@
     "description": "when user didnt create a wallet yet"
   },
   "bgd_init_no_wallet_explained": {
-    "message": "Pour pouvoir utiliser Hive Keychain, veuillez créer votre portefeuille. Cliquez sur le logo Hive Keychain en haut à droite de votre navigateur (il peut se trouver dans le menu extension), puis configurez votre mot de passe et importez vos comptes.",
+    "message": "Pour pouvoir utiliser Hive Keeper, veuillez créer votre portefeuille. Cliquez sur le logo Hive Keeper en haut à droite de votre navigateur (il peut se trouver dans le menu extension), puis configurez votre mot de passe et importez vos comptes.",
     "description": "when user didnt create a wallet yet"
   },
   "bgd_lifecycle_request_canceled": {
@@ -1047,22 +1027,22 @@
     "message": "Le portefeuille est verrouillé !"
   },
   "bgd_auth_locked_desc": {
-    "message": "Une dApp essaie d'envoyer une requête à l'extension Hive Keychain. Veuillez entrer votre mot de passe ci-dessous pour déverrouiller le portefeuille et continuer."
+    "message": "Une dApp essaie d'envoyer une requête à l'extension Hive Keeper. Veuillez entrer votre mot de passe ci-dessous pour déverrouiller le portefeuille et continuer."
   },
   "bgd_auth_canceled": {
     "message": "La requête a été annulée par l'utilisateur."
   },
   "bgd_auth_transfer_no_active": {
-    "message": "Une dApp essaie d'envoyer une demande de transfert à Hive Keychain pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
+    "message": "Une dApp essaie d'envoyer une demande de transfert à Hive Keeper pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
   },
   "bgd_auth_transfer_no_memo": {
-    "message": "Une dApp essaie d'envoyer une demande de transfert à l'extension Hive Keychain pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
+    "message": "Une dApp essaie d'envoyer une demande de transfert à l'extension Hive Keeper pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
   },
   "bgd_auth_no_account": {
-    "message": "Une dApp essaie d'envoyer une requête à l'extension Hive Keychain pour le compte @$1 qui n'a pas été ajouté au portefeuille."
+    "message": "Une dApp essaie d'envoyer une requête à l'extension Hive Keeper pour le compte @$1 qui n'a pas été ajouté au portefeuille."
   },
   "bgd_auth_no_key": {
-    "message": "Une dApp essaie d'envoyer une demande de transfert à l'extension Hive Keychain pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
+    "message": "Une dApp essaie d'envoyer une demande de transfert à l'extension Hive Keeper pour le compte @$1 en utilisant la clé de mémo, qui n'a pas été ajoutée au portefeuille."
   },
   "bgd_ops_witness_voted": {
     "message": "A voté pour @$1 en tant que witness."
@@ -1095,7 +1075,7 @@
     "message": "Ce nom d'utilisateur n'existe pas."
   },
   "bgd_ops_add_account": {
-    "message": "Le compte @$1 a été ajouté avec succès à Keychain."
+    "message": "Le compte @$1 a été ajouté avec succès à Hive Keeper."
   },
   "bgd_ops_transfer_success": {
     "message": "Transféré avec succès $1 $2 de @$3 à @$4."
@@ -1223,7 +1203,7 @@
     "description": "Text when adding new method."
   },
   "popup_html_auth_text": {
-    "message": "Ajoutez le nouveau compte en spécifiant un compte qui a autorité sur lui, et qui est déjà enregistré sur Hive Keychain.",
+    "message": "Ajoutez le nouveau compte en spécifiant un compte qui a autorité sur lui, et qui est déjà enregistré sur Hive Keeper.",
     "description": "On Add new account => via auth"
   },
   "popup_html_auth_placeholder_username_auth": {
@@ -1231,7 +1211,7 @@
     "description": "The placeholder for the authorized account that will use its keys for this account."
   },
   "popup_no_auth_account": {
-    "message": "Veuillez enregistrer @$1 sur Hive Keychain Hive avant de l'utiliser en tant que compte autorisé."
+    "message": "Veuillez enregistrer @$1 sur Hive Keeper Hive avant de l'utiliser en tant que compte autorisé."
   },
   "popup_accounts_no_auth": {
     "message": "@$1 n'a pas autorité sur @$2.",
@@ -1242,7 +1222,7 @@
     "description": "Title of import keys popup"
   },
   "import_html_text": {
-    "message": "Importez vos clés depuis une autre instance de la Keychain en utilisant un fichier .kc.<br/><br/>Vous devez utiliser le même mot de passe sur les deux instances pour déchiffrer les clés."
+    "message": "Importez vos clés depuis une autre instance de la Hive Keeper en utilisant un fichier .kc.<br/><br/>Vous devez utiliser le même mot de passe sur les deux instances pour déchiffrer les clés."
   },
   "import_html_success": {
     "message": "Vous avez importé vos clés avec succès !"
@@ -1254,7 +1234,7 @@
     "message": "Importer les paramètres"
   },
   "import_permissions_html_text": {
-    "message": "Importez vos paramètres depuis une autre instance Keychain en utilisant un fichier .kc."
+    "message": "Importez vos paramètres depuis une autre instance Hive Keeper en utilisant un fichier .kc."
   },
   "bgd_auth_no_active": {
     "message": "Pas de compte avec autorité active."
@@ -1274,14 +1254,6 @@
   "popup_warning_exchange_wallet": {
     "message": "ATTENTION : Les dépôts/retraits sont désactivés sur cet échange.",
     "description": "When wallet is disabled on exchange."
-  },
-  "popup_html_buy_hive": {
-    "message": "Acheter HIVE",
-    "description": "When clicking on the Hive arrow menu"
-  },
-  "popup_html_buy_hbd": {
-    "message": "Acheter HBD",
-    "description": "When clicking on the Hbd arrow menu"
   },
   "popup_html_convert_hbd": {
     "message": "Convertir HBD",
@@ -1359,18 +1331,6 @@
     "message": "Épargne de $1",
     "description": "Saving page title"
   },
-  "popup_html_buy_intro": {
-    "message": "Choisissez votre méthode préférée et achetez du $1 rapidement et facilement. Hive Keychain ne prend pas de frais supplémentaires sur les transactions.",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_swap_title": {
-    "message": "Échange rapide",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_exchanges_title": {
-    "message": "Échanges traditionnels",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
   "dialog_keys": {
     "message": "Clés privées",
     "description": "When adding an account by request"
@@ -1380,7 +1340,7 @@
     "description": "When adding an account by request"
   },
   "dialog_header_register": {
-    "message": "Bienvenue sur Hive Keychain",
+    "message": "Bienvenue sur Hive Keeper",
     "description": "When registering from request"
   },
   "popup_html_automated_intro": {
@@ -1404,11 +1364,11 @@
     "description": "When on automated tasks page"
   },
   "popup_html_proposal_request": {
-    "message": "Soutenir le proposal de développement de Hive Keychain",
+    "message": "Soutenir le proposal de développement de Hive Keeper",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_kc_proposal_vote_successful": {
-    "message": "À voté ! Merci de soutenir le développement de Keychain via le DHF",
+    "message": "À voté ! Merci de soutenir le développement de Hive Keeper via le DHF",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_proposal_vote_successful": {
@@ -1751,10 +1711,6 @@
     "message": "Votez pour @stoodkev en tant que witness",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_made_with_love_by_stoodkev": {
-    "message": "Fait avec ❤ par l'équipe Keychain",
-    "description": "Footer"
-  },
   "html_popup_vote_stoodkev_witness_error_30_votes": {
     "message": "Vous avez déjà voté pour 30 witness. Veuillez en retirer un avant de voter pour @stoodkev",
     "description": "Error message when vote for stoodkev as witness with 30 votes"
@@ -1912,7 +1868,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "Vous ne voulez pas vous préoccuper de tout ce qui touche à la gouvernance? Définissez @keychain comme proxy pour suivre automatiquement les votes de witness/proposals de l'équipe Keychain. Vous pouvez modifier cela à tout moment à partir du menu de gouvernance.",
+    "message": "Vous ne voulez pas vous préoccuper de tout ce qui touche à la gouvernance? Définissez @keychain comme proxy pour suivre automatiquement les votes de witness/proposals de l'équipe Hive Keeper. Vous pouvez modifier cela à tout moment à partir du menu de gouvernance.",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {

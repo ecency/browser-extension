@@ -1,31 +1,11 @@
 {
   "keychain": {
-    "message": "Hive Keychain",
+    "message": "Hive Keeper",
     "description": "Extension name, night not need to translate it."
   },
   "description": {
     "message": "Ekstensi Dompet Aman Hive.",
     "description": "Extension description, as shown in the store."
-  },
-  "popup_html_wrong_key": {
-    "message": "Kunci salah. Silakan gunakan $1",
-    "description": "while using wrong private key"
-  },
-  "popup_html_tutorial_popup_title": {
-    "message": "Selamat datang di Hive Keychain!\n",
-    "description": "tutorial popup"
-  },
-  "popup_html_tutorial_popup_description": {
-    "message": "Baru di Keychain, atau Hive? Cek tutorial onboarding kami. <br/> Bisa diakses kapan saja di pengaturan> Bantuan> Tutorial",
-    "description": "tutorial popup"
-  },
-  "popup_html_tutorial_popup_show_label": {
-    "message": "Tampilkan",
-    "description": "tutorial popup"
-  },
-  "popup_html_tutorial_popup_skip_label": {
-    "message": "Lewati",
-    "description": "tutorial popup"
   },
   "popup_html_wrong_key_active": {
     "message": "Kunci tidak valid. Silahkan masukkan active key",
@@ -159,16 +139,16 @@
     "description": "text after clicking forgot password"
   },
   "popup_html_clear_all_data_desc": {
-    "message": "Konfirmasi akan menghapus semua data. Simpan semua kunci Anda di luar Keychain",
+    "message": "Konfirmasi akan menghapus semua data. Simpan semua kunci Anda di luar Hive Keeper",
     "description": "description of clear all data confirm page"
   },
   "popup_html_vm": {
     "message": "Voting Mana",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_rc": {
     "message": "Resource Credits",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_send": {
     "message": "Kirimkan 1$",
@@ -228,11 +208,11 @@
     "description": "Keyless keychain"
   },
   "popup_html_keyless_keychain_setup": {
-    "message": "Keychain sedang dalam mode keyless dan akan menggunakan HiveAuth untuk mengirim permintaan persetujuan transaksi ke perangkat mobile Anda.\nAutentikasi dApp dilakukan melalui Keychain dengan memindai kode QR.",
+    "message": "Hive Keeper sedang dalam mode keyless dan akan menggunakan HiveAuth untuk mengirim permintaan persetujuan transaksi ke perangkat mobile Anda.\nAutentikasi dApp dilakukan melalui Hive Keeper dengan memindai kode QR.",
     "description": "When setting up keyless keychain"
   },
   "popup_html_keyless_keychain_register": {
-    "message": "Keychain sedang dalam mode tanpa kunci dan akan menggunakan HiveAuth untuk mengautentikasi Anda.Pindai kode QR ini dengan perangkat mobile Anda untuk memulai.",
+    "message": "Hive Keeper sedang dalam mode tanpa kunci dan akan menggunakan HiveAuth untuk mengautentikasi Anda.Pindai kode QR ini dengan perangkat mobile Anda untuk memulai.",
     "description": "When setting up keyless keychain"
   },
   "popup_html_keyless_keychain_setup_qr": {
@@ -280,7 +260,7 @@
     "description": "Import one key"
   },
   "popup_html_import_success": {
-    "message": "Impor berhasil!<br><br>Silakan pilih kunci yang ingin Anda simpan di Hive Keychain:",
+    "message": "Impor berhasil!<br><br>Silakan pilih kunci yang ingin Anda simpan di Hive Keeper:",
     "description": "When adding an account via master key"
   },
   "popup_html_posting": {
@@ -387,10 +367,6 @@
     "message": "Kunci otomatis",
     "description": "on settings page"
   },
-  "popup_html_keychainify": {
-    "message": "kechainify",
-    "description": "on settings page"
-  },
   "popup_html_import_export_settings": {
     "message": "Pengaturan impor/ekspor ",
     "description": "on settings page"
@@ -420,7 +396,7 @@
     "description": "on settings page"
   },
   "popup_html_about": {
-    "message": "Tentang Hive Keychain",
+    "message": "Tentang Hive Keeper",
     "description": "on settings page"
   },
   "popup_html_clear": {
@@ -432,7 +408,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_default_info": {
-    "message": "Kunci Keychain secara manual.",
+    "message": "Kunci Hive Keeper secara manual.",
     "description": "on autolock settings"
   },
   "popup_html_al_locked_title": {
@@ -440,7 +416,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_locked_info": {
-    "message": "Keychain terkunci otomatis saat perangkat terkunci",
+    "message": "Hive Keeper terkunci otomatis saat perangkat terkunci",
     "description": "on autolock settings"
   },
   "popup_html_al_idle_title": {
@@ -448,20 +424,8 @@
     "description": "on autolock settings"
   },
   "popup_html_al_idle_info": {
-    "message": "Keychain akan terkunci otomatis setelah peramban tidak aktif sesuai waktu yang telah diatur.",
+    "message": "Hive Keeper akan terkunci otomatis setelah peramban tidak aktif sesuai waktu yang telah diatur.",
     "description": "on autolock settings"
-  },
-  "popup_html_keychainify_text": {
-    "message": "Fitur ini memungkinkan Anda menjalankan operasi Hive Keychain dengan mengklik tautan yang didukung di halaman web atau membuka URL langsung di tab browser. Saat ini, tautan Hivesigner yang didukung meliputi: transfer, delegasi, custom JSON, witness proxy dan voting.",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_title": {
-    "message": "Aktifkan Keychainify",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_info": {
-    "message": "Jika diaktifkan, fitur ini akan membuka jendela Keychain saat Anda mengklik tautan yang didukung.",
-    "description": "on keychainify settings"
   },
   "popup_html_import": {
     "message": "Impor",
@@ -484,7 +448,7 @@
     "description": "on import / export settings"
   },
   "popup_html_about_text": {
-    "message": "<ul> <li> <span class='text'> Hive Keychain dikembangkan oleh <a href=\"https://peakd.com/@stoodkev\" target=\"_blank\">@stoodkev</a> (Lead Developer & Hive Witness), bersama <a href=\"https://peakd.com/@cedricguillas\" target=\"_blank\">@cedricguillas</a> dan <a href=\"https://peakd.com/@krios003\" target=\"_blank\">@krios003</a> (Developer), serta <a href=\"https://peakd.com/@manuphotos\" target=\"_blank\">@manuphotos</a> (Manajer Komunitas). Didanai oleh DHF dengan dukungan komunitas Hive. </span> </li> <div class='separator horizontal'></div> <li> <span class='text'> Tersedia juga di Android & iOS, serta Keychain Store untuk bisnis yang menerima HIVE & HBD. </span> </li> <div class='separator horizontal'></div> <li> <span class='text'> Info lengkap: <a href='https://hive-keychain.com' target='__blank'>hive-keychain.com</a> </span> </li> </ul>",
+    "message": "Hive Keeper adalah fork dari Hive Keychain yang dikelola oleh Ecency. Kami berterima kasih kepada para kontributor asli Hive Keychain dan komunitas Hive atas pekerjaan mereka. Untuk informasi lebih lanjut, kunjungi <a href='https://github.com/ecency/browser-extension' target='__blank'>repositori GitHub kami</a>.",
     "description": "on about keychain"
   },
   "popup_html_delete_account": {
@@ -504,7 +468,7 @@
     "description": "on my witness"
   },
   "popup_html_delete_account_confirmation_message": {
-    "message": "Anda akan menghapus @$1 dari Keychain. Tindakan ini tidak dapat dibatalkan tanpa mengimpor ulang kunci Anda. Harap konfirmasi untuk melanjutkan.",
+    "message": "Anda akan menghapus @$1 dari Hive Keeper. Tindakan ini tidak dapat dibatalkan tanpa mengimpor ulang kunci Anda. Harap konfirmasi untuk melanjutkan.",
     "description": "on manage accounts"
   },
   "popup_html_disable_witness_account_confirmation_message": {
@@ -524,7 +488,7 @@
     "description": "on manage accounts"
   },
   "popup_html_qr_disclaimer1": {
-    "message": "Kode QR ini berisi semua private keys Anda untuk akun ini dan hanya boleh digunakan untuk mengimpor kunci Anda ke Aplikasi seluler Hive Keychain.",
+    "message": "Kode QR ini berisi semua private keys Anda untuk akun ini dan hanya boleh digunakan untuk mengimpor kunci Anda ke Aplikasi seluler Hive Keeper.",
     "description": "on manage accounts"
   },
   "popup_html_qr_check1": {
@@ -536,7 +500,7 @@
     "description": "on settings accounts / export / qr"
   },
   "popup_html_qr_exported_set_disclaimer1": {
-    "message": "Kode QR ini berisi seluruh kunci pribadi untuk rangkaian akun Anda, dan hanya boleh digunakan untuk mengimpor kunci ke aplikasi seluler Hive Keychain.",
+    "message": "Kode QR ini berisi seluruh kunci pribadi untuk rangkaian akun Anda, dan hanya boleh digunakan untuk mengimpor kunci ke aplikasi seluler Hive Keeper.",
     "description": "on settings accounts / export / qr"
   },
   "popup_html_qr_exported_check1": {
@@ -1253,7 +1217,7 @@
     "message": "Data"
   },
   "dialog_header_unlock": {
-    "message": "Buka Keychain",
+    "message": "Buka Hive Keeper",
     "description": "When website request a transaction but keychain is locked"
   },
   "dialog_header_error": {
@@ -1400,7 +1364,7 @@
     "description": "When requesting recurrent transfers"
   },
   "bgd_keyless_keychain_error": {
-    "message": "Keychain dalam mode tanpa kunci mengalami kesalahan.",
+    "message": "Hive Keeper dalam mode tanpa kunci mengalami kesalahan.",
     "description": "Keyless Keychain Error"
   },
   "bgd_init_no_wallet": {
@@ -1408,7 +1372,7 @@
     "description": "when user didnt create a wallet yet"
   },
   "bgd_init_no_wallet_explained": {
-    "message": "Untuk menggunakan Hive Keychain, silakan atur dompet Anda. Klik logo Hive Keychain di pojok kanan atas peramban Anda (mungkin tersembunyi di menu ekstensi), lalu atur kata sandi dan impor akun Anda.",
+    "message": "Untuk menggunakan Hive Keeper, silakan atur dompet Anda. Klik logo Hive Keeper di pojok kanan atas peramban Anda (mungkin tersembunyi di menu ekstensi), lalu atur kata sandi dan impor akun Anda.",
     "description": "when user didnt create a wallet yet"
   },
   "bgd_lifecycle_request_canceled": {
@@ -1416,7 +1380,7 @@
     "description": "Generic answer to websites when user cancel transaction (in the background so it wont show on screen)"
   },
   "bgd_lifecycle_request_pending_multisig": {
-    "message": "Permintaan sedang menunggu persetujuan multisig dari penanda tangan lain. Keychain akan memberi tahu Anda jika atau saat permintaan berhasil disiarkan.",
+    "message": "Permintaan sedang menunggu persetujuan multisig dari penanda tangan lain. Hive Keeper akan memberi tahu Anda jika atau saat permintaan berhasil disiarkan.",
     "description": "Generic answer to websites when the window is closed during multisig (in the background so it wont show on screen)"
   },
   "bgd_context_transfer_user": {
@@ -1447,22 +1411,22 @@
     "message": "Dompet terkunci!"
   },
   "bgd_auth_locked_desc": {
-    "message": "Situs web ini sedang mengirimkan permintaan ke ekstensi Hive Keychain di peramban Anda. Masukkan kata sandi Anda untuk membuka dompet dan melanjutkan proses."
+    "message": "Situs web ini sedang mengirimkan permintaan ke ekstensi Hive Keeper di peramban Anda. Masukkan kata sandi Anda untuk membuka dompet dan melanjutkan proses."
   },
   "bgd_auth_canceled": {
     "message": "Permintaan dibatalkan oleh pengguna."
   },
   "bgd_auth_transfer_no_active": {
-    "message": "Situs web saat ini mencoba mengirim permintaan transfer ke ekstensi browser Hive Keychain untuk akun @$1 menggunakan active key, yang belum ditambahkan ke dompet."
+    "message": "Situs web saat ini mencoba mengirim permintaan transfer ke ekstensi browser Hive Keeper untuk akun @$1 menggunakan active key, yang belum ditambahkan ke dompet."
   },
   "bgd_auth_transfer_no_memo": {
-    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keychain untuk akun @$1 menggunakan memo key yang belum ditambahkan ke dompet."
+    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keeper untuk akun @$1 menggunakan memo key yang belum ditambahkan ke dompet."
   },
   "bgd_auth_no_account": {
-    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keychain untuk akun @$1 yang belum ditambahkan ke dompet."
+    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keeper untuk akun @$1 yang belum ditambahkan ke dompet."
   },
   "bgd_auth_no_key": {
-    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keychain untuk akun @$1 menggunakan kunci $2, yang belum ditambahkan ke dompet."
+    "message": "Situs web saat ini mencoba mengirim permintaan ke ekstensi browser Hive Keeper untuk akun @$1 menggunakan kunci $2, yang belum ditambahkan ke dompet."
   },
   "bgd_ops_witness_voted": {
     "message": "Berhasil memilih @$1 untuk witness."
@@ -1495,7 +1459,7 @@
     "message": "Nama pengguna akun ini tidak ada."
   },
   "bgd_ops_add_account": {
-    "message": "Berhasil menambahkan akun @$1 ke Keychain."
+    "message": "Berhasil menambahkan akun @$1 ke Hive Keeper."
   },
   "bgd_ops_transfer_success": {
     "message": "Berhasil mentransfer $1 $2 dari @$3 ke @$4"
@@ -1507,7 +1471,7 @@
     "message": "Pesan berhasil ditandatangani."
   },
   "bgd_ops_sign_requested": {
-    "message": "Permintaan transaksi dikirim. Buka aplikasi Keychain di ponsel Anda untuk menandatangani."
+    "message": "Permintaan transaksi dikirim. Buka aplikasi Hive Keeper di ponsel Anda untuk menandatangani."
   },
   "bgd_ops_sign_error": {
     "message": "Tidak dapat menandatangani."
@@ -1636,7 +1600,7 @@
     "description": "Text when adding new method."
   },
   "popup_html_auth_text": {
-    "message": "Tambahkan akun baru melalui akun berotoritas yang telah tersimpan di Hive Keychain.",
+    "message": "Tambahkan akun baru melalui akun berotoritas yang telah tersimpan di Hive Keeper.",
     "description": "On Add new account => via auth"
   },
   "popup_html_auth_placeholder_username_auth": {
@@ -1644,7 +1608,7 @@
     "description": "The placeholder for the authorized account that will use its keys for this account."
   },
   "popup_no_auth_account": {
-    "message": "Harap simpan @$1 di Hive Keychain untuk menggunakannya sebagai akun terotorisasi."
+    "message": "Harap simpan @$1 di Hive Keeper untuk menggunakannya sebagai akun terotorisasi."
   },
   "popup_accounts_no_auth": {
     "message": "@$1 tidak memiliki otoritas yang cukup atas @$2",
@@ -1655,7 +1619,7 @@
     "description": "Title of import keys popup"
   },
   "import_html_text": {
-    "message": "Impor kunci Anda dari instalasi Hive Keychain lain menggunakan file .kc.<br/><br/>Anda perlu menggunakan master password yang sama pada keduanya untuk mengaksesnya. "
+    "message": "Impor kunci Anda dari instalasi Hive Keeper lain menggunakan file .kc.<br/><br/>Anda perlu menggunakan master password yang sama pada keduanya untuk mengaksesnya. "
   },
   "import_html_success": {
     "message": "Anda berhasil mengimpor kunci Anda!"
@@ -1667,7 +1631,7 @@
     "message": "Pengaturan impor"
   },
   "import_permissions_html_text": {
-    "message": "Impor pengaturan Anda dari instalasi Hive Keychain lain menggunakan file .kc.json."
+    "message": "Impor pengaturan Anda dari instalasi Hive Keeper lain menggunakan file .kc.json."
   },
   "bgd_auth_no_active": {
     "message": "Tidak ada akun dengan otoritas aktif"
@@ -1695,14 +1659,6 @@
   "popup_warning_exchange_wallet": {
     "message": "PERINGATAN: Penyetoran/Penarikan dinonaktifkan di exchange ini. ",
     "description": "When wallet is disabled on exchange."
-  },
-  "popup_html_buy_hive": {
-    "message": "Beli Hive ",
-    "description": "When clicking on the Hive arrow menu"
-  },
-  "popup_html_buy_hbd": {
-    "message": "Beli HBD",
-    "description": "When clicking on the Hbd arrow menu"
   },
   "popup_html_convert": {
     "message": "Konversi",
@@ -1796,18 +1752,6 @@
     "message": "Simpanan",
     "description": "Saving page title"
   },
-  "popup_html_buy_intro": {
-    "message": "Pilih metode favorit Anda dan beli $1 dengan cepat dan mudah",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_swap_title": {
-    "message": "Jual/Beli Cepat",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_exchanges_title": {
-    "message": "Bursa tradisional",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
   "dialog_keys": {
     "message": "Private Keys",
     "description": "When adding an account by request"
@@ -1817,15 +1761,15 @@
     "description": "When adding an account by request"
   },
   "dialog_header_register": {
-    "message": "Selamat datang di Hive Keychain",
+    "message": "Selamat datang di Hive Keeper",
     "description": "When registering from request"
   },
   "dialog_register_keyless_title": {
-    "message": "Daftarkan Keychain tanpa kunci",
+    "message": "Daftarkan Hive Keeper tanpa kunci",
     "description": "When registering from request"
   },
   "dialog_header_keyless_username": {
-    "message": "Daftarkan Keychain tanpa kunci",
+    "message": "Daftarkan Hive Keeper tanpa kunci",
     "description": "When registering from request"
   },
   "dialog_register_keyless_loading": {
@@ -1837,7 +1781,7 @@
     "description": "When registering to keyless keychain via HiveAuth"
   },
   "dialog_anonymous_keyless_content": {
-    "message": "Anda akan menjalankan operasi tanpa kunci secara anonim. Masukkan nama pengguna untuk mendaftarkan Keychain tanpa kunci Anda.",
+    "message": "Anda akan menjalankan operasi tanpa kunci secara anonim. Masukkan nama pengguna untuk mendaftarkan Hive Keeper tanpa kunci Anda.",
     "description": "When registering from request"
   },
   "dialog_keyless_unsupported_operation": {
@@ -1909,11 +1853,11 @@
     "description": "When on automated tasks page"
   },
   "popup_html_proposal_request": {
-    "message": "Support pengembangan Hive Keychain",
+    "message": "Support pengembangan Hive Keeper",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_kc_proposal_vote_successful": {
-    "message": "Voting berhasil! Terima kasih telah mendukung pengembangan Keychain melalui proposal DHF kami.",
+    "message": "Voting berhasil! Terima kasih telah mendukung pengembangan Hive Keeper melalui proposal DHF kami.",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_proposal_vote_successful": {
@@ -2280,10 +2224,6 @@
     "message": "Vote $1 sebagai witness",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_made_with_love_by_stoodkev": {
-    "message": "Dibuat dengan cinta oleh tim Keychain",
-    "description": "Footer"
-  },
   "html_popup_vote_stoodkev_witness_error_30_votes": {
     "message": "Anda sudah mencapai batas 30 witness. Hapus satu untuk memilih @stoodkev.",
     "description": "Error message when vote for stoodkev as witness with 30 votes"
@@ -2533,7 +2473,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "Kebingungan dengan tata kelola votes? Tentukan @keychain sebagai proksi agar bisa secara otomatis mengikuti Keychain team witness dan proposal vote mereka. Anda bisa mengubah ini kapan saja dari menu tata kelola. ",
+    "message": "Kebingungan dengan tata kelola votes? Tentukan @keychain sebagai proksi agar bisa secara otomatis mengikuti Hive Keeper team witness dan proposal vote mereka. Anda bisa mengubah ini kapan saja dari menu tata kelola. ",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {
@@ -2554,10 +2494,6 @@
   },
   "popup_html_contact_support": {
     "message": "Layanan Dukungan",
-    "description": "Contact support"
-  },
-  "popup_html_tutorial": {
-    "message": "Tutorial",
     "description": "Contact support"
   },
   "popup_html_wallet_info_transfer_in": {
@@ -3021,7 +2957,7 @@
     "description": "When on automated tasks page"
   },
   "popup_html_enable_autoclaim_savings_info": {
-    "message": "Untuk mengklaim bunga savings, Keychain akan menyetor atau menarik 0,001 HBD ke/dari tabungan Anda setiap 30 hari.",
+    "message": "Untuk mengklaim bunga savings, Hive Keeper akan menyetor atau menarik 0,001 HBD ke/dari tabungan Anda setiap 30 hari.",
     "description": "When on automated tasks page"
   },
   "html_popup_new_account_history": {
@@ -3056,10 +2992,6 @@
     "message": "Iterasi dan frekuensi harus diisi",
     "description": "Error message during transfer if missing iteration and/or frequency and recucrent"
   },
-  "popup_html_whats_new": {
-    "message": "Apa yang baru di versi $1?",
-    "description": "What's new popup title"
-  },
   "popup_html_whats_new_next": {
     "message": "Selanjutnya",
     "description": "What's new popup title"
@@ -3067,22 +2999,6 @@
   "popup_html_whats_new_previous": {
     "message": "Sebelumnya",
     "description": "What's new popup title"
-  },
-  "popup_html_whats_new_got_it": {
-    "message": "Saya mengerti!",
-    "description": "What's new popup button"
-  },
-  "popup_html_vesting_routes_title": {
-    "message": "Rute vesting Anda telah berubah",
-    "description": "Vesting shares popup title"
-  },
-  "popup_html_vesting_routes_warning_message": {
-    "message": "ika Anda tidak mengubahnya, silakan minta bantuan di <a href=\"https://discord.gg/UpXnBQtJw7\" target=\"_blank\">channel Discord Hive</a>.",
-    "description": "Vesting shares popup warning message"
-  },
-  "popup_html_vesting_routes_handled_successfully": {
-    "message": "Rute vesting berhasil diamankan!",
-    "description": "Vesting shares end list being handled by user"
   },
   "popup_html_vesting_route_account_item_label": {
     "message": "Akun",
@@ -3157,11 +3073,11 @@
     "description": "General"
   },
   "html_popup_create_account_safely_copied_keys": {
-    "message": "Saya telah menyalin semua kunci saya dengan aman dan menyimpannya di luar Keychain",
+    "message": "Saya telah menyalin semua kunci saya dengan aman dan menyimpannya di luar Hive Keeper",
     "description": "checkbox content on create account page"
   },
   "html_popup_create_account_storage_understanding": {
-    "message": "Saya memahami bahwa Keychain bukan tempat penyimpanan utama untuk semua kunci saya. ",
+    "message": "Saya memahami bahwa Hive Keeper bukan tempat penyimpanan utama untuk semua kunci saya. ",
     "description": "checkbox content on create account page"
   },
   "html_popup_copy": {
@@ -3205,7 +3121,7 @@
     "description": "Create account payment message"
   },
   "html_popup_create_account_successful": {
-    "message": "Akun Anda telah berhasil dibuat dan ditambahkan ke Keychain",
+    "message": "Akun Anda telah berhasil dibuat dan ditambahkan ke Hive Keeper",
     "description": "Create account successful message"
   },
   "html_popup_creating_account": {
@@ -3276,18 +3192,6 @@
     "message": "Peringatan: Bursa Kripto bisa menolak penarikan Anda dari savings anda ke rekening kritpo Anda. Harap gunakan transfer reguler. ",
     "description": "Transfer from savings to an exchange platform warning message"
   },
-  "popup_html_buy": {
-    "message": "Beli",
-    "description": "Main page buy button"
-  },
-  "html_popup_transak_description": {
-    "message": "Beli HIVE dengan fiat melalui Transak.Layanan ini mendukung kartu kredit, transfer bank, Apple Pay, dan MobiKwik di lebih dari 100 negara (opsi pembayaran dapat berbeda tergantung negara).\nHIVE akan langsung dikirim ke dompet Hive Keychain Anda.",
-    "description": "Buy coin, transak description"
-  },
-  "html_popup_blocktrades_description": {
-    "message": "Tukar HIVE atau HBD secara instan dengan kripto lain melalui Blocktrades.",
-    "description": "Buy coin, blocktrades description"
-  },
   "html_popup_exchanges": {
     "message": "Platform Pembelian Kripto",
     "description": "Buy coin exchanges"
@@ -3307,54 +3211,6 @@
   "popup_html_pending_conversions": {
     "message": "Anda $1  memiliki $2 konversi  yang tertunda",
     "description": "Global"
-  },
-  "popup_html_analytics": {
-    "message": "Analitik",
-    "description": "Analytics menu item"
-  },
-  "popup_html_analytics_allow_ga": {
-    "message": "Kumpulkan Data Penggunaan",
-    "description": "Allow google analytics checkbox label"
-  },
-  "popup_html_analytics_allow_ga_hint": {
-    "message": "Izinkan kami menggunakan Google Analytics untuk membantu meningkatkan pengalaman Anda di Hive Keychain.",
-    "description": "Allow google analytics hint"
-  },
-  "popup_html_analytics_save": {
-    "message": "Simpan",
-    "description": "accept button on analytics popup"
-  },
-  "popup_html_wrong_key_popup_replace": {
-    "message": "Gantikan",
-    "description": "replace key button on wrong key popup"
-  },
-  "popup_html_wrong_key_popup_do_nothing": {
-    "message": "Jangan lakukan apa-apa",
-    "description": "do nothing button on wrong key popup"
-  },
-  "popup_html_analytics_accept_to_share": {
-    "message": "Saya setuju untuk berbagi data penggunaan dengan Keychain",
-    "description": "accept on analytics popup"
-  },
-  "popup_html_analytics_thank_you": {
-    "message": "Terima kasih atas bantuan Anda.",
-    "description": "Thank you for your help"
-  },
-  "popup_html_analytics_title": {
-    "message": "Bantu kami meningkatkan Keychain",
-    "description": "Analytics popup title"
-  },
-  "popup_html_analytics_message": {
-    "message": "Bantu kami menyempurnakan Keychain dengan mengizinkan pengumpulan data secara anonim. Fitur ini dapat dimatikan kapan saja di 'Pengaturan Lanjutan'.",
-    "description": "Analytics popup message"
-  },
-  "popup_html_analytics_privacy_policy_text": {
-    "message": "Dengan klik lanjut, Anda menyetujui",
-    "description": "Followed by 'Privacy Policy'"
-  },
-  "popup_html_analytics_privacy_policy": {
-    "message": "kebijakan data privasi",
-    "description": "By continuing, your are accepting our [...]"
   },
   "popup_html_delegate_rc": {
     "message": "Delegasi RC"
@@ -3413,14 +3269,6 @@
     "message": "Delegasi RC gagal",
     "description": "RC delegation failed"
   },
-  "popup_html_survey_no_thanks": {
-    "message": "Lewati",
-    "description": "No thanks button on survey popup"
-  },
-  "popup_html_survey_help_us": {
-    "message": "Beri Masukan",
-    "description": "Help us button on survey popup"
-  },
   "popup_html_public_key_not_matching": {
     "message": "Public keys tidak cocok dengan public keys di blockchain. Mungkin sudah diperbarui.",
     "description": "select keys => public not matching"
@@ -3446,7 +3294,7 @@
     "description": "Ledger not available error message"
   },
   "html_ledger_not_detected": {
-    "message": "Ledger belum terdeteksi. Jika sudah terhubung dan tidak terkunci, buka Pengaturan Lanjutan Keychain dan pilih Hubungkan Ledger. ",
+    "message": "Ledger belum terdeteksi. Jika sudah terhubung dan tidak terkunci, buka Pengaturan Lanjutan Hive Keeper dan pilih Hubungkan Ledger. ",
     "description": "Ledger not available error message"
   },
   "html_ledger_no_device_selected": {
@@ -3655,7 +3503,7 @@
   },
   "popup_html_setup_keyless_keychain": {
     "message": "Keyless Keychain",
-    "description": "Keychain is in keyless mode and will use HiveAuth to request transactions to be signed on your mobile device"
+    "description": "Hive Keeper is in keyless mode and will use HiveAuth to request transactions to be signed on your mobile device"
   },
   "add_key_from_ledger": {
     "message": "Link key",
@@ -3706,7 +3554,7 @@
     "description": "Add missing keys when import account from Ledger"
   },
   "ledger_account_discovery_caption": {
-    "message": "Tautkan Ledger Anda untuk memakai akun di Keychain",
+    "message": "Tautkan Ledger Anda untuk memakai akun di Hive Keeper",
     "description": "synchronize ledger caption"
   },
   "no_account_found_on_ledger_error": {
@@ -3718,15 +3566,15 @@
     "description": "portfolio section, loading accounts"
   },
   "all_ledger_accounts_already_imported": {
-    "message": "Semua akun Ledger Anda telah terhubung ke Keychain",
+    "message": "Semua akun Ledger Anda telah terhubung ke Hive Keeper",
     "description": "while synchronizing ledger"
   },
   "add_accounts_from_ledger_sucessful": {
-    "message": "Semua akun Ledger  berhasil terhubung ke Keychain",
+    "message": "Semua akun Ledger  berhasil terhubung ke Hive Keeper",
     "description": "Synchronize Ledger success message"
   },
   "add_key_from_ledger_sucessful": {
-    "message": "Kunci sudah terhubung ke Keychain. Tutup tab ini. ",
+    "message": "Kunci sudah terhubung ke Hive Keeper. Tutup tab ini. ",
     "description": "Synchronize Ledger success message"
   },
   "popup_html_ledger_unknown_error": {
@@ -3734,7 +3582,7 @@
     "description": "Ledger unknown error"
   },
   "add_key_from_ledger_caption": {
-    "message": "Tautkan Ledger ke Keychain agar bisa memakai kunci ini.",
+    "message": "Tautkan Ledger ke Hive Keeper agar bisa memakai kunci ini.",
     "description": "Ledger add key"
   },
   "ledger_discover_key": {
@@ -3744,22 +3592,6 @@
   "popup_html_token_swaps": {
     "message": "Tukar",
     "description": "Token swaps"
-  },
-  "html_popup_swaps_slipperage": {
-    "message": "Slippage",
-    "description": "Token swaps : Slippage"
-  },
-  "html_popup_swaps_process_swap": {
-    "message": "Tukar",
-    "description": "Token swaps : process"
-  },
-  "html_popup_swaps_final_price": {
-    "message": "≈ $1 $2",
-    "description": "Token swaps : process"
-  },
-  "html_popup_swaps_slippage_definition": {
-    "message": "Kami pastikan swap menghasilkan lebih dari estimasi minus slippage. Jika dibatalkan, dana  akan dikembalikan dan bisa dalam token berbeda.Catatan: beberapa swaps memerlukan beberapa operasi dan dana bisa dikembalikan dalam token yang berbeda.",
-    "description": "Token swaps : process"
   },
   "local": {
     "message": "local",
@@ -3802,7 +3634,7 @@
     "description": "link button"
   },
   "ledger_link_device_caption": {
-    "message": "Tautkan perangkat ke browser untuk menggunakan Keychain.",
+    "message": "Tautkan perangkat ke browser untuk menggunakan Hive Keeper.",
     "description": "link device caption"
   },
   "ledger_link_device_linked": {
@@ -3818,7 +3650,7 @@
     "description": "link device error"
   },
   "portfolio": {
-    "message": "Keychain Portfolio",
+    "message": "Hive Keeper Portfolio",
     "description": "portfolio button click"
   },
   "portfolio_total_value_usd": {
@@ -3860,50 +3692,6 @@
   "broadcast_error_transaction_expired": {
     "message": "Transaksi ini sudah kedaluwarsa. Pastikan waktu perangkat Anda sesuai dan tersinkron secara online.",
     "description": "transaction expireed error"
-  },
-  "html_popup_swap_token_confirm_title": {
-    "message": "Konfirmasi swap token",
-    "description": "Confirm token swap"
-  },
-  "html_popup_swap_token_confirm_message": {
-    "message": "Penukaran token dimulai. Status penukaran tersedia di menu riwayat. ",
-    "description": "confirm token swap message"
-  },
-  "html_popup_swap_swap_id": {
-    "message": "Swap ID",
-    "description": "token swap"
-  },
-  "html_popup_swap_swap_from": {
-    "message": "Menukar dari ",
-    "description": "token swap"
-  },
-  "html_popup_swap_swap_to": {
-    "message": "Menukar ke",
-    "description": "token swap"
-  },
-  "html_popup_swap_swap_amount": {
-    "message": "Estimasi penukaran",
-    "description": "token swap"
-  },
-  "html_popup_swap_swap_expected_amount": {
-    "message": "Jumlah Estimasi",
-    "description": "token swap"
-  },
-  "html_popup_swap_swap_slipperage": {
-    "message": "Slippage",
-    "description": "token swap"
-  },
-  "html_popup_swap_sending_token_to_swap_account": {
-    "message": "Mengirim $1 ke @$2",
-    "description": "token swap"
-  },
-  "html_popup_swap_sending_token_successful": {
-    "message": "Swap dalam proses! Terima kasih telah menggunakan Keychain!",
-    "description": "token swap"
-  },
-  "html_popup_swap_error_sending_token": {
-    "message": "Gagal mengirim token ke @$1.",
-    "description": "token swap general error message"
   },
   "local_accounts": {
     "message": "local accounts",
@@ -3962,8 +3750,8 @@
     "description": "History swap empty"
   },
   "swap_under_maintenance": {
-    "message": "Fitur Swap Keychain dalam pemeliharaan, coba lagi nanti",
-    "description": "Keychain swap under maintenance"
+    "message": "Fitur Swap Hive Keeper dalam pemeliharaan, coba lagi nanti",
+    "description": "Hive Keeper swap under maintenance"
   },
   "swap_start_end_token_should_be_different": {
     "message": "Pilih dua token yang berbeda",
@@ -3978,7 +3766,7 @@
     "description": "Minimum slippage error"
   },
   "swap_caption": {
-    "message": "Keychain membandingkan berbagai penyedia untuk memberi Anda harga terbaik.",
+    "message": "Hive Keeper membandingkan berbagai penyedia untuk memberi Anda harga terbaik.",
     "description": "Caption"
   },
   "swap_no_token": {
@@ -4020,10 +3808,6 @@
   "swap_server_unavailable": {
     "message": "Server swap sedang tidak tersedia, silakan coba lagi nanti.",
     "description": "Swap server not responding error"
-  },
-  "bgd_ops_swap_start_success": {
-    "message": "Swap berhasil! Token akan segera dikirim.",
-    "description": "Success on swap request"
   },
   "service_unavailable_message": {
     "message": "Saat ini layanan sedang mengalami gangguan. Kami mohon maaf atas ketidaknyamanannya dan sedang berusaha memperbaikinya.",
@@ -4122,7 +3906,7 @@
     "description": "Message container success title"
   },
   "accept_terms_and_condition": {
-    "message": "Saya telah membaca dan menyetujui <a target='__blank' href='https://hive-keychain.com/#/terms'>Persyaratan Layanan</a> Hive Keychain serta<a target='__blank' href='https://hive-keychain.com/#/privacy'>Kebijakan Privasi</a>",
+    "message": "Saya telah membaca dan menyetujui <a target='__blank' href='https://github.com/ecency/browser-extension'>Persyaratan Layanan</a> Hive Keeper serta<a target='__blank' href='https://github.com/ecency/browser-extension'>Kebijakan Privasi</a>",
     "description": "Accept terms and conditions text"
   },
   "delete_label": {
@@ -4217,17 +4001,9 @@
     "message": "Pembatalan unstake token gagal",
     "description": "Loading message unstake"
   },
-  "popup_html_multisig": {
-    "message": "Multisig",
-    "description": "Multisig menu item"
-  },
   "min_chrome_version": {
     "message": "Harap perbarui browser Chromium Anda ke versi 116 atau yang lebih baru, untuk dapat menggunakan fitur multisig",
     "description": "When enabling multisig on old browsers"
-  },
-  "popup_html_multisig_intro": {
-    "message": "Aktifkan Hive Multisig untuk menerima permintaan multisig pada akun ini.\nPelajari lebih lanjut tentang multisig di <a href='https://peakd.com/utopian-io/@stoodkev/how-to-set-up-and-use-multisignature-accounts-on-steem-blockchain' target='__blank'>blog ini.</a>\nUntuk mengubah akun Anda menjadi multisig, gunakan <a href='https://multisig.hive-keychain.com/' target='__blank'>dApp Hive Multisig.</a>\nFitur ini bersifat lanjutan, gunakan hanya jika Anda memahami risikonya.",
-    "description": "Multisig page intro"
   },
   "popup_html_enable_multisig": {
     "message": "Aktifkan multisig",
@@ -4241,69 +4017,9 @@
     "message": "Aktifkan posting key multisig",
     "description": "Multisig page enable posting key multisig"
   },
-  "multisig_dialog_accept_tx": {
-    "message": "Terima",
-    "description": "accept transaction coming from multisig"
-  },
-  "multisig_dialog_reject_tx": {
-    "message": "Tolak",
-    "description": "Reject transaction coming from multisig"
-  },
-  "multisig_dialog_accept_reject_tx_caption": {
-    "message": "Anda menerima permintaan tanda tangan.",
-    "description": "Reject transaction coming from multisig"
-  },
-  "multisig_dialog_transaction_signed_successfully": {
-    "message": "Transaksi Anda telah ditandatangani. Anda akan diberi tahu saat transaksi tersebut disiarkan.",
-    "description": "Reject transaction coming from multisig"
-  },
-  "multisig_dialog_transaction_broadcasted": {
-    "message": "Transaksi berhasil disiarkan",
-    "description": "Reject transaction coming from multisig"
-  },
   "multisig": {
     "message": "Multisig",
     "description": "Multisig"
-  },
-  "multisig_tx": {
-    "message": "Transaksi",
-    "description": "Multisig transaction"
-  },
-  "multisig_initiator": {
-    "message": "Inisiator",
-    "description": "Multisig transaction initiator"
-  },
-  "multisig_requested_signer_username": {
-    "message": "Pihak penanda tangan",
-    "description": "Multisig transaction requested signer"
-  },
-  "multisig_requested_signer_public_key": {
-    "message": "Public Keys yang diminta",
-    "description": "Multisig transaction requested signer"
-  },
-  "multisig_key_is_ledger_hint": {
-    "message": "Kunci Anda menggunakan Ledger. Kunci ini tidak kompatibel dengan versi Multisig kami.",
-    "description": "Explanation of why Ledger cannot work with multisig"
-  },
-  "multisig_processing_tx_through_multisig_server": {
-    "message": "Transaksi Anda akan diproses menggunakan server multisig",
-    "description": "Using multisig to process transaction"
-  },
-  "multisig_transaction_sent_to_signers": {
-    "message": "Transaksi Anda berhasil dikirim ke calon penanda tangan. Anda akan diberi tahu saat transaksi tersebut disiarkan.",
-    "description": "Tx sent to multisig backend success message"
-  },
-  "multisig_disclaimer_message": {
-    "message": "Multisig terdeteksi: Transaksi ini akan dikirim ke layanan Hive Multisig",
-    "description": "Message to inform user that multisig will be used"
-  },
-  "multisig_transmitting_to_multisig": {
-    "message": "Mengirim transaksi yang dikodekan ke server Multisig dan Pihak penanda tangan",
-    "description": "Message to inform user transmiting to multisig backend"
-  },
-  "multisig_transmitting_to_2fa": {
-    "message": "Mengirim transaksi yang dikodekan ke server Multisig dan bot 2FA",
-    "description": "Message to inform user transmiting to multisig backend"
   },
   "swap_multisig_transaction_sent_to_signers": {
     "message": "Transaksi Anda berhasil dikirim ke calon penanda tangan. Anda akan menerima notifikasi saat transaksi disiarkan. Setelah disiarkan, pertukaran Anda akan diproses.",
@@ -4349,181 +4065,9 @@
     "message": "Hapus Kriteria",
     "description": "Delete criteria"
   },
-  "notification_recurrent_transfer": {
-    "message": "@$1 memulai transfer berkala $2 ke @$3 (eksekusi $4 setiap $5 jam)",
-    "description": "Notification recurrent transfer"
-  },
-  "notification_follow": {
-    "message": "@$1 mulai mengikuti @$2",
-    "description": "Notification follow"
-  },
-  "notification_unfollow": {
-    "message": "@$1 berhenti mengikuti @$2",
-    "description": "Notification unfollow"
-  },
-  "notification_reblog": {
-    "message": "@$1 me-reblog postingan @$2 {link}",
-    "description": "Notification reblog"
-  },
-  "notification_unreblog": {
-    "message": "@$1 membatalkan reblog postingan @$2 {link}",
-    "description": "Notification unreblog"
-  },
-  "notification_account_update": {
-    "message": "Pengaturan notifikasi @$1 telah diperbarui",
-    "description": "Notification account updated"
-  },
-  "notification_mention": {
-    "message": "@$1 menyebutkan @$2 di {link}",
-    "description": "Notification mentioned"
-  },
-  "notification_answer": {
-    "message": "$1 membalas ke {link}",
-    "description": "Notification reply"
-  },
-  "notification_account_witness_proxy": {
-    "message": "@$1 telah menetapkan @$2 sebagai proxy",
-    "description": "Notification witness proxy"
-  },
-  "notification_account_witness_vote": {
-    "message": "@$1 telah memilih @$2 sebagai witness",
-    "description": "Notification witness proxy"
-  },
-  "notification_account_witness_unvote": {
-    "message": "@$1 telah membatalkan pemungutan suara @$2 sebagai witness",
-    "description": "Notification witness proxy"
-  },
-  "notification_delegation": {
-    "message": "@$1 mendelegasikan $2 ke @$3",
-    "description": "notification delegation hp"
-  },
-  "notification_cancel_delegation": {
-    "message": "@$1 telah membatalkan delegasi ke @$2",
-    "description": "notification cancel delegation hp"
-  },
-  "notification_requested_account_recovery": {
-    "message": "@$1 telah meminta pemulihan ke @$2",
-    "description": "notification recovery request"
-  },
-  "notification_recovered_account": {
-    "message": "@$1 telah dipulihkan",
-    "description": "Notification accouht recovered"
-  },
-  "notification_set_power_down_route": {
-    "message": "Rute power down telah diubah dari @$1 menjadi @$2",
-    "description": "Notification set power down route"
-  },
-  "notification_fill_convert": {
-    "message": "@$1 telah menyelesaikan konversi: $2 menjadi $3",
-    "description": "Notification fill convert"
-  },
-  "notification_author_reward": {
-    "message": "@$1 telah menerima $2, $3, $4 sebagai reward penulis untuk {link}",
-    "description": "Notification author reward"
-  },
-  "notification_comment_reward": {
-    "message": "@$1 telah menerima $2 sebagai reward komentar untuk {link}",
-    "description": "Notification comment reward"
-  },
-  "notification_hbd_interest": {
-    "message": "@$1 menerima $2 sebagai bunga",
-    "description": "Notification HBD interest received"
-  },
-  "notification_fill_power_down": {
-    "message": "@$1 menerima $2 sebagai bagian dari power down",
-    "description": "Notification power down received"
-  },
-  "notification_fill_power_down_other_account": {
-    "message": "@$1 menerima $2 sebagai bagian dari power down @$3",
-    "description": "Notification power down received"
-  },
-  "notification_changed_recovery_account": {
-    "message": "Akun pemulihan @$1 telah diubah dari @$2 menjadi @$3",
-    "description": "Notification for changed recovery account"
-  },
-  "notification_producer_reward": {
-    "message": "@$1 menerima $2 sebagai hadiah produsen",
-    "description": "Notification for producer rewards"
-  },
-  "notification_curation_reward": {
-    "message": "@$1 telah menerima $2 sebagai reward kurasi untuk {link}",
-    "description": "Notification for curation rewards"
-  },
-  "notification_failed_recurrent_transfer": {
-    "message": "Transfer berkala $1 dari @$2 ke @$3 gagal!",
-    "description": "Notification for failed recurrent transfer"
-  },
-  "notification_fill_collateralized_convert_request": {
-    "message": "@$1 telah menyelesaikan konversi: $2 menjadi $3",
-    "description": "Notification collateralized convert request"
-  },
-  "notification_fill_transfer_from_savings": {
-    "message": "@$1 menyelesaikan penarikan savings sebesar $2",
-    "description": "Fill withdraw savings notification"
-  },
-  "notification_fill_transfer_from_savings_from_other_account": {
-    "message": "@$1 menyelesaikan penarikan dari savings sebesar $2 hingga @$3",
-    "description": "Fill withdraw savings notification"
-  },
-  "notification_returned_vesting_delegation": {
-    "message": "Pembatalan delegasi @$1 selesai. $2 kembali tersedia.",
-    "description": "Notification for when HP is avalable after undelegating"
-  },
-  "notification_comment_benefactor_reward": {
-    "message": "@$1 telah menerima $2, $3, $4 sebagai reward benefaktor komentar untuk {link}",
-    "description": "Notification author reward"
-  },
-  "notification_fill_order": {
-    "message": "@$1 telah memenuhi pesanan dari @$2 di pasar Membeli $3 seharga $4",
-    "description": "Notification fill order"
-  },
-  "notification_change_recovery_account": {
-    "message": "@$1 telah memenuhi pesanan dari @$2 di pasar. Membeli $3 seharga $4",
-    "description": "Notification change recovery account"
-  },
-  "notification_vote": {
-    "message": "@$1 telah memilih {link}",
-    "description": "Notification for vote"
-  },
-  "notification_clear_config": {
-    "message": "Bersihkan Konfigurasi",
-    "description": "clear config notification"
-  },
-  "notification_set_all_as_read": {
-    "message": "Tandai semua sebagai telah dibaca",
-    "description": "Set all notifications as read"
-  },
-  "notification_setting_all_as_read": {
-    "message": "Tandai semua notifikasi sebagai telah dibaca",
-    "description": "Set all notifications as read"
-  },
-  "notification_settings_advanced_settings": {
-    "message": "Buka pengaturan lanjutan",
-    "description": "Open advanced settings"
-  },
-  "notification_settings_select_all": {
-    "message": "Pilih semua",
-    "description": "Select all criterias"
-  },
-  "notification_settings_nothing_has_changed": {
-    "message": "Tidak ada perubahan yang terdeteksi",
-    "description": "Select all criterias"
-  },
   "portfolio_fetch_progress": {
     "message": "Mengambil data... $1/$2... Saat ini mengambil @$",
     "description": "Portfolio fetching message"
-  },
-  "multisig_bot_two_fa_code": {
-    "message": "@$1 OTP:",
-    "description": "Two fa code label"
-  },
-  "multisig_bot_two_fa_codes": {
-    "message": "Kode 2FA",
-    "description": "Two fa code label"
-  },
-  "notification_confirm_save": {
-    "message": "Apakah Anda yakin ingin menyimpan perubahan ini?",
-    "description": "Notification save changes message"
   },
   "export_transactions_fetching_error": {
     "message": "Terjadi kendala saat memuat transaksi Anda.Silakan ulangi beberapa saat lagi",
@@ -4542,7 +4086,7 @@
     "description": "Transaction metadata"
   },
   "popup_html_proposal_vote": {
-    "message": "Support pengembangan Hive Keychain",
+    "message": "Support pengembangan Hive Keeper",
     "description": "Proposal vote"
   },
   "error_otp_not_verified": {

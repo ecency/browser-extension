@@ -63,15 +63,4 @@ describe('settings-main-page.component tests:\n', () => {
       });
     }
   });
-  it('Must open a new window when clicking PeakD link', async () => {
-    const spy = jest.spyOn(chrome.tabs, 'create');
-    await act(async () => {
-      await userEvent.click(
-        document.querySelector(
-          '.link-panel .network-icon',
-        ) as HTMLElement,
-      );
-    });
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
 });

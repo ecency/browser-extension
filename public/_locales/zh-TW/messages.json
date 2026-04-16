@@ -1,15 +1,11 @@
 {
   "keychain": {
-    "message": "Hive Keychain",
+    "message": "Hive Keeper",
     "description": "Extension name, night not need to translate it."
   },
   "description": {
     "message": "安全 Hive 錢包擴充",
     "description": "Extension description, as shown in the store."
-  },
-  "popup_html_wrong_key": {
-    "message": "錯誤的密鑰。 請使用 $1",
-    "description": "while using wrong private key"
   },
   "common_yes": {
     "message": "是",
@@ -107,16 +103,16 @@
     "description": "text after clicking forgot password"
   },
   "popup_html_clear_all_data_desc": {
-    "message": "通過確認，您的所有數據都將遺失。 請確保您的密鑰保存在Keychain之外",
+    "message": "通過確認，您的所有數據都將遺失。 請確保您的密鑰保存在Hive Keeper之外",
     "description": "description of clear all data confirm page"
   },
   "popup_html_vm": {
     "message": "Mana投票",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_rc": {
     "message": "資源積分",
-    "description": "on Keychain popup main page"
+    "description": "on Hive Keeper popup main page"
   },
   "popup_html_send": {
     "message": "發送$1",
@@ -188,7 +184,7 @@
     "description": "Import one key"
   },
   "popup_html_import_success": {
-    "message": "導入成功！<br><br>請選擇您要與Hive Keychain一起儲存的金鑰：",
+    "message": "導入成功！<br><br>請選擇您要與Hive Keeper一起儲存的金鑰：",
     "description": "When adding an account via master key"
   },
   "popup_html_posting": {
@@ -243,10 +239,6 @@
     "message": "自動鎖定",
     "description": "on settings page"
   },
-  "popup_html_keychainify": {
-    "message": "Keychainify",
-    "description": "on settings page"
-  },
   "popup_html_import_export_settings": {
     "message": "匯入/匯出設定",
     "description": "on settings page"
@@ -264,7 +256,7 @@
     "description": "on settings page"
   },
   "popup_html_about": {
-    "message": "關於Hive Keychain",
+    "message": "關於Hive Keeper",
     "description": "on settings page"
   },
   "popup_html_clear": {
@@ -276,7 +268,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_default_info": {
-    "message": "手动锁定Keychain。",
+    "message": "手动锁定Hive Keeper。",
     "description": "on autolock settings"
   },
   "popup_html_al_locked_title": {
@@ -284,7 +276,7 @@
     "description": "on autolock settings"
   },
   "popup_html_al_locked_info": {
-    "message": "装置锁定时自动锁定Keychain。",
+    "message": "装置锁定时自动锁定Hive Keeper。",
     "description": "on autolock settings"
   },
   "popup_html_al_idle_title": {
@@ -292,20 +284,8 @@
     "description": "on autolock settings"
   },
   "popup_html_al_idle_info": {
-    "message": "在浏览器窗口閒置指定的分钟数後，自动锁定Keychain。",
+    "message": "在浏览器窗口閒置指定的分钟数後，自动锁定Hive Keeper。",
     "description": "on autolock settings"
-  },
-  "popup_html_keychainify_text": {
-    "message": "此功能允許您在點擊網頁上支援的連結或直接在瀏覽器標籤頁中存取 URL 時觸發 Keychain 操作。 目前支持以下 Hivesigner 連結：轉讓、委託、自定義 JSON、見證代理和投票。",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_title": {
-    "message": "啟用Keychainify",
-    "description": "on keychainify settings"
-  },
-  "popup_html_enable_keychainify_info": {
-    "message": "啟用後，當您點擊支援的連結時，此功能將開啟Keychain彈出視窗。",
-    "description": "on keychainify settings"
   },
   "popup_html_import": {
     "message": "匯入",
@@ -320,15 +300,15 @@
     "description": "on import / export settings"
   },
   "popup_html_about_text": {
-    "message": "Hive Keychain 團隊由開發人員<a href=\"https://peakd.com/@stoodkev\" target=\"_blank\">@stoodkev</a>和 Hive 見證人，包括 3 個全職開發人員帶領。我們還受益於 Splinterlands 的創意總監 <a href=\"https://peakd.com/@nateaguila\" target=\"_blank\">@nateaguila</a> 和許多其他社區成員的幫助。<br>< br>該項目目前由去中心化 Hive 基金 (DHF) 資助，最初的想法和資金是由 <a href=\"https://peakd.com/@aggroed\" target=\"_blank\">@aggroed</a> 和 <a href=\"https://peakd.com/@yabapmatt\" target=\"_blank\">@yabapmatt</a>(見證人)透過他們共同經營的 Splinterlands，這是一款基於區塊鏈的可收藏集換式卡牌遊戲建立在 Hive 區塊鏈。請務必查看 <a href=\"https://splinterlands.io\" target=\"_blank\">https://splinterlands.io</a>!<br/><br/>有關更多我們的產品訊息(瀏覽器擴展和行動應用程式)，請訪問我們的<a href='https://hive-keychain.com' target='__blank'>登錄頁面</a>。",
+    "message": "Hive Keeper 是由 Ecency 維護的 Hive Keychain 分支。感謝原 Hive Keychain 貢獻者和 Hive 社區的工作。更多資訊請造訪我們的 <a href='https://github.com/ecency/browser-extension' target='__blank'>GitHub 倉庫</a>。",
     "description": "on about keychain"
   },
   "popup_html_delete_account": {
-    "message": "從Keychain中移除",
+    "message": "從Hive Keeper中移除",
     "description": "on manage accounts"
   },
   "popup_html_delete_account_confirmation_message": {
-    "message": "您即將從Keychain中刪除 @$1。 如果不重新導入您的密鑰，將無法撤消。 請確認繼續。",
+    "message": "您即將從Hive Keeper中刪除 @$1。 如果不重新導入您的密鑰，將無法撤消。 請確認繼續。",
     "description": "on manage accounts"
   },
   "popup_html_show_qr": {
@@ -865,7 +845,7 @@
     "message": "數據<span class ='small'>（點擊以顯示）</span>"
   },
   "dialog_header_unlock": {
-    "message": "解鎖Keychain",
+    "message": "解鎖Hive Keeper",
     "description": "When website request a transaction but keychain is locked"
   },
   "dialog_header_error": {
@@ -1004,7 +984,7 @@
     "description": "when user didnt create a wallet yet"
   },
   "bgd_init_no_wallet_explained": {
-    "message": "為了能夠使用 Hive Keychain，請設定您的錢包。 點擊瀏覽器右上角的 Hive keychain標誌(它可能隱藏在擴展清單中)，然後設定您的密碼並導入您的帳號。",
+    "message": "為了能夠使用 Hive Keeper，請設定您的錢包。 點擊瀏覽器右上角的 Hive keychain標誌(它可能隱藏在擴展清單中)，然後設定您的密碼並導入您的帳號。",
     "description": "when user didnt create a wallet yet"
   },
   "bgd_lifecycle_request_canceled": {
@@ -1039,22 +1019,22 @@
     "message": "錢包已上鎖！"
   },
   "bgd_auth_locked_desc": {
-    "message": "目前網站正在嘗試向 Hive Keychain 瀏覽器擴充功能發送請求。 請在下面輸入密碼以解鎖錢包並繼續。"
+    "message": "目前網站正在嘗試向 Hive Keeper 瀏覽器擴充功能發送請求。 請在下面輸入密碼以解鎖錢包並繼續。"
   },
   "bgd_auth_canceled": {
     "message": "用戶已取消請求。"
   },
   "bgd_auth_transfer_no_active": {
-    "message": "目前網站正嘗試使用活躍金鑰向帳戶 @$1 的 Hive Keychain 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
+    "message": "目前網站正嘗試使用活躍金鑰向帳戶 @$1 的 Hive Keeper 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
   },
   "bgd_auth_transfer_no_memo": {
-    "message": "目前網站正嘗試使用備註金鑰向帳戶 @$1 的 Hive Keychain 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
+    "message": "目前網站正嘗試使用備註金鑰向帳戶 @$1 的 Hive Keeper 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
   },
   "bgd_auth_no_account": {
-    "message": "目前網站正嘗試 Hive Keychain 瀏覽器擴充功能發送請求，該帳戶@$1尚未新增到錢包。"
+    "message": "目前網站正嘗試 Hive Keeper 瀏覽器擴充功能發送請求，該帳戶@$1尚未新增到錢包。"
   },
   "bgd_auth_no_key": {
-    "message": "目前網站正嘗試使用 $2 金鑰向帳戶 @$1 的 Hive Keychain 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
+    "message": "目前網站正嘗試使用 $2 金鑰向帳戶 @$1 的 Hive Keeper 瀏覽器擴充功能發送轉移請求，該鑰尚未新增到錢包中。"
   },
   "bgd_ops_witness_voted": {
     "message": "成功投票通過@$1作為見證人。"
@@ -1087,7 +1067,7 @@
     "message": "此帳號使用者名不存在。"
   },
   "bgd_ops_add_account": {
-    "message": "已成功將帳號 @$1 添加到Keychain。"
+    "message": "已成功將帳號 @$1 添加到Hive Keeper。"
   },
   "bgd_ops_transfer_success": {
     "message": "已成功將$1 $2從@$3轉移到@$4。"
@@ -1215,7 +1195,7 @@
     "description": "Text when adding new method."
   },
   "popup_html_auth_text": {
-    "message": "通過指定對具有權限的帳戶添加新帳戶，該帳戶已經保存在 Hive Keychain 中。",
+    "message": "通過指定對具有權限的帳戶添加新帳戶，該帳戶已經保存在 Hive Keeper 中。",
     "description": "On Add new account => via auth"
   },
   "popup_html_auth_placeholder_username_auth": {
@@ -1223,7 +1203,7 @@
     "description": "The placeholder for the authorized account that will use its keys for this account."
   },
   "popup_no_auth_account": {
-    "message": "請在 Hive Keychain 串中保存 @$1，以將其用作授權帳戶。"
+    "message": "請在 Hive Keeper 串中保存 @$1，以將其用作授權帳戶。"
   },
   "popup_accounts_no_auth": {
     "message": "@$1 的權限不超過 @$2。",
@@ -1234,7 +1214,7 @@
     "description": "Title of import keys popup"
   },
   "import_html_text": {
-    "message": "使用 .kc file 從另一個 Keychain 實際輸入密鑰。<br/><br/> 您需要在兩個實際上使用相同的主密碼來解密密鑰。"
+    "message": "使用 .kc file 從另一個 Hive Keeper 實際輸入密鑰。<br/><br/> 您需要在兩個實際上使用相同的主密碼來解密密鑰。"
   },
   "import_html_success": {
     "message": "您已成功輸入密鑰！"
@@ -1246,7 +1226,7 @@
     "message": "匯入設定值"
   },
   "import_permissions_html_text": {
-    "message": "使用 .kc.json 檔案從另一個 Keychain 實例匯入您的設定。"
+    "message": "使用 .kc.json 檔案從另一個 Hive Keeper 實例匯入您的設定。"
   },
   "bgd_auth_no_active": {
     "message": "沒有擁有有效權限的帳戶。"
@@ -1266,14 +1246,6 @@
   "popup_warning_exchange_wallet": {
     "message": "警告：此交易所禁止存款/取款。",
     "description": "When wallet is disabled on exchange."
-  },
-  "popup_html_buy_hive": {
-    "message": "購買 HIVE",
-    "description": "When clicking on the Hive arrow menu"
-  },
-  "popup_html_buy_hbd": {
-    "message": "購買HBD",
-    "description": "When clicking on the Hbd arrow menu"
   },
   "popup_html_convert_hbd": {
     "message": "轉換 HBD",
@@ -1351,18 +1323,6 @@
     "message": "$1儲蓄",
     "description": "Saving page title"
   },
-  "popup_html_buy_intro": {
-    "message": "選擇您最喜歡的方式，快速輕鬆地購買 $1。 Keychain 不會對交易收取任何額外費用。",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_swap_title": {
-    "message": "快速交易",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
-  "popup_html_buy_exchanges_title": {
-    "message": "傳統交易所",
-    "description": "When accessing the buy HIVE/HBD page"
-  },
   "dialog_keys": {
     "message": "私密金鑰",
     "description": "When adding an account by request"
@@ -1372,7 +1332,7 @@
     "description": "When adding an account by request"
   },
   "dialog_header_register": {
-    "message": "歡迎來到Keychain",
+    "message": "歡迎來到Hive Keeper",
     "description": "When registering from request"
   },
   "popup_html_automated_intro": {
@@ -1396,11 +1356,11 @@
     "description": "When on automated tasks page"
   },
   "popup_html_proposal_request": {
-    "message": "支援 Keychain 開發提案",
+    "message": "支援 Hive Keeper 開發提案",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_kc_proposal_vote_successful": {
-    "message": "投票成功！ 感謝您通過我們的 DHF 提案支援 Keychain 開發",
+    "message": "投票成功！ 感謝您通過我們的 DHF 提案支援 Hive Keeper 開發",
     "description": "When user doesnt vote for proposal"
   },
   "popup_html_proposal_vote_successful": {
@@ -1739,10 +1699,6 @@
     "message": "投票@stoodkev 作為見證人",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_made_with_love_by_stoodkev": {
-    "message": "Keychain Team 用 ❤ 製作",
-    "description": "Footer"
-  },
   "html_popup_vote_stoodkev_witness_error_30_votes": {
     "message": "您已經為 30 位證人投票。 請在為@stoodkev 投票之前刪除一個",
     "description": "Error message when vote for stoodkev as witness with 30 votes"
@@ -1900,7 +1856,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "被管理投票壓得喘不過氣來？ 將@keychain 設置為代理以自動關注 Keychain 團隊見證和提案投票。 您可以隨時從管理清單中更改此設置。",
+    "message": "被管理投票壓得喘不過氣來？ 將@keychain 設置為代理以自動關注 Hive Keeper 團隊見證和提案投票。 您可以隨時從管理清單中更改此設置。",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {
