@@ -3,7 +3,6 @@ import {
   TransactionOptionsMetadata,
 } from '@interfaces/keys.interface';
 import { loadUserTokens } from '@popup/hive/actions/token.actions';
-import { NotificationsComponent } from '@popup/hive/pages/app-container/home/notifications/notifications.component';
 import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
 import {
   addCaptionToLoading,
@@ -175,9 +174,6 @@ const TopBar = ({
         dataTestId="top-bar-refresh-icon"
       />
       <div className="spacer"></div>
-      {activeAccount.name && globalProperties.globals && (
-        <NotificationsComponent />
-      )}
       {hasRewardToClaim && (
         <SVGIcon
           icon={SVGIcons.TOP_BAR_CLAIM_REWARDS_BTN}
