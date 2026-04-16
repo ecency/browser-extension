@@ -1,13 +1,6 @@
-import {
-  PrivateKeyType,
-  TransactionOptions,
-  TransactionOptionsMetadata,
-} from '@interfaces/keys.interface';
+import { TransactionOptions } from '@interfaces/keys.interface';
 import { Witness } from '@interfaces/witness.interface';
-import { KeysUtils } from '@popup/hive/utils/keys.utils';
-import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
 import {
-  addCaptionToLoading,
   addToLoadingList,
   removeFromLoadingList,
 } from '@popup/multichain/actions/loading.actions';
@@ -15,10 +8,8 @@ import {
   setErrorMessage,
   setSuccessMessage,
 } from '@popup/multichain/actions/message.actions';
-import { closeModal, openModal } from '@popup/multichain/actions/modal.actions';
 import { RootState } from '@popup/multichain/store';
 import FlatList from 'flatlist-react';
-import { KeychainKeyTypes, KeychainKeyTypesLC } from 'hive-keychain-commons';
 import React, { useEffect, useState } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 import 'react-tabs/style/react-tabs.scss';
@@ -26,7 +17,6 @@ import { CheckboxPanelComponent } from 'src/common-ui/checkbox/checkbox-panel/ch
 import { SVGIcons } from 'src/common-ui/icons.enum';
 import { InputType } from 'src/common-ui/input/input-type.enum';
 import InputComponent from 'src/common-ui/input/input.component';
-import { MetadataPopup } from 'src/common-ui/metadata-popup/metadata-popup.component';
 import { SVGIcon } from 'src/common-ui/svg-icon/svg-icon.component';
 import { refreshActiveAccount } from 'src/popup/hive/actions/active-account.actions';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
@@ -51,9 +41,6 @@ const WitnessTab = ({
   setErrorMessage,
   setSuccessMessage,
   refreshActiveAccount,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 }: PropsFromRedux & WitnessTabProps) => {
   const [displayVotedOnly, setDisplayVotedOnly] = useState(false);
   const [hideNonActive, setHideNonActive] = useState(true);
@@ -63,25 +50,10 @@ const WitnessTab = ({
   const [votedWitnesses, setVotedWitnesses] = useState<string[]>([]);
 
   const [usingProxy, setUsingProxy] = useState<boolean>(false);
-  const [keyType, setKeyType] = useState<PrivateKeyType>();
 
   useEffect(() => {
     init();
   }, []);
-
-  useEffect(() => {
-    if (activeAccount) {
-      setKeyType(
-        KeysUtils.getKeyType(
-          activeAccount.keys.active!,
-          activeAccount.keys.activePubkey!,
-          activeAccount.account,
-          activeAccount.account,
-          KeychainKeyTypesLC.active,
-        ),
-      );
-    }
-  }, [activeAccount]);
 
   const init = async () => {
     setRemainingVotes(
@@ -150,11 +122,7 @@ const WitnessTab = ({
         removeFromLoadingList('html_popup_confirm_transaction_operation');
         refreshActiveAccount();
         if (success) {
-          if (success.isUsingMultisig) {
-            setSuccessMessage('multisig_transaction_sent_to_signers');
-          } else {
-            setSuccessMessage('popup_success_unvote_wit', [`${witness.name}`]);
-          }
+          setSuccessMessage('popup_success_unvote_wit', [`${witness.name}`]);
         } else {
           setErrorMessage('popup_error_unvote_wit', [`${witness.name}`]);
         }
@@ -179,11 +147,7 @@ const WitnessTab = ({
         removeFromLoadingList('html_popup_confirm_transaction_operation');
         refreshActiveAccount();
         if (success) {
-          if (success.isUsingMultisig) {
-            setSuccessMessage('multisig_transaction_sent_to_signers');
-          } else {
-            setSuccessMessage('popup_success_wit', [`${witness.name}`]);
-          }
+          setSuccessMessage('popup_success_wit', [`${witness.name}`]);
         } else {
           setErrorMessage('popup_error_wit', [`${witness.name}`]);
         }
@@ -200,38 +164,7 @@ const WitnessTab = ({
     if (usingProxy) {
       return;
     }
-
-    if (keyType === PrivateKeyType.MULTISIG) {
-      const twoFaAccounts = await MultisigUtils.get2FAAccounts(
-        activeAccount.account,
-        KeychainKeyTypes.active,
-      );
-
-      let initialMetadata = {} as TransactionOptionsMetadata;
-      for (const account of twoFaAccounts) {
-        if (!initialMetadata.twoFACodes) initialMetadata.twoFACodes = {};
-        initialMetadata.twoFACodes[account] = '';
-      }
-
-      if (twoFaAccounts.length > 0) {
-        openModal({
-          title: 'popup_html_transaction_metadata',
-          children: (
-            <MetadataPopup
-              initialMetadata={initialMetadata}
-              onSubmit={(metadata: TransactionOptionsMetadata) => {
-                addCaptionToLoading('multisig_transmitting_to_2fa');
-                processClick(witness, { metaData: metadata });
-                closeModal();
-              }}
-              onCancel={() => closeModal()}
-            />
-          ),
-        });
-      }
-    } else {
-      processClick(witness);
-    }
+    processClick(witness);
   };
 
   const renderWitnessItem = (witness: Witness) => {
@@ -390,9 +323,6 @@ const connector = connect(mapStateToProps, {
   setErrorMessage,
   setSuccessMessage,
   refreshActiveAccount,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

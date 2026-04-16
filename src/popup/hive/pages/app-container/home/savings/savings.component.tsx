@@ -309,16 +309,12 @@ const SavingsPage = ({
               form.username,
               activeAccount,
             );
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else {
-              setSuccessMessage(
-                watch('type') === SavingOperationType.DEPOSIT
-                  ? 'popup_html_deposit_success'
-                  : 'popup_html_withdraw_success',
-                [stringifiedAmount],
-              );
-            }
+            setSuccessMessage(
+              watch('type') === SavingOperationType.DEPOSIT
+                ? 'popup_html_deposit_success'
+                : 'popup_html_withdraw_success',
+              [stringifiedAmount],
+            );
           } else {
             setErrorMessage(
               watch('type') === SavingOperationType.DEPOSIT

@@ -110,51 +110,9 @@ const isKeyActiveOrPosting = async (key: Key, account: ExtendedAccount) => {
   }
 };
 
-const isUsingMultisig = (
-  key: Key,
-  transactionAccount: ExtendedAccount,
-  initiatorAccountName: string,
-  method: KeychainKeyTypesLC,
-): boolean => {
-  const publicKey = KeysUtils.getPublicKeyFromPrivateKeyString(
-    key?.toString()!,
-  );
-  switch (method) {
-    case KeychainKeyTypesLC.active: {
-      const accAuth = transactionAccount.active.account_auths.find(
-        ([auth, w]) => auth === initiatorAccountName,
-      );
-      const keyAuth = transactionAccount.active.key_auths.find(
-        ([keyAuth, w]) => keyAuth === publicKey,
-      );
-      if (
-        (accAuth && accAuth[1] < transactionAccount.active.weight_threshold) ||
-        (keyAuth && keyAuth[1] < transactionAccount.active.weight_threshold)
-      ) {
-        return true;
-      }
-      return false;
-    }
-    case KeychainKeyTypesLC.posting:
-      {
-        const accAuth = transactionAccount.posting.account_auths.find(
-          ([auth, w]) => auth === initiatorAccountName,
-        );
-        const keyAuth = transactionAccount.posting.key_auths.find(
-          ([keyAuth, w]) => keyAuth === publicKey,
-        );
-        if (
-          (accAuth &&
-            accAuth[1] < transactionAccount.posting.weight_threshold) ||
-          (keyAuth && keyAuth[1] < transactionAccount.posting.weight_threshold)
-        ) {
-          return true;
-        }
-      }
-      return false;
-  }
-
-  return true;
+// Multisig support has been removed; this stub is kept for API compatibility.
+const isUsingMultisig = (..._args: any[]): boolean => {
+  return false;
 };
 
 const getKeyReferences = (keys: string[]) => {
@@ -164,23 +122,9 @@ const getKeyReferences = (keys: string[]) => {
 const getKeyType = (
   privateKey: Key,
   publicKey?: Key,
-  transactionAccount?: ExtendedAccount,
-  initiatorAccount?: ExtendedAccount,
-  method?: KeychainKeyTypesLC,
+  ..._unused: any[]
 ): PrivateKeyType => {
-  if (
-    transactionAccount &&
-    initiatorAccount &&
-    method &&
-    KeysUtils.isUsingMultisig(
-      privateKey,
-      transactionAccount,
-      initiatorAccount.name,
-      method,
-    )
-  ) {
-    return PrivateKeyType.MULTISIG;
-  } else if ((privateKey?.toString() ?? '').startsWith('#')) {
+  if ((privateKey?.toString() ?? '').startsWith('#')) {
     return PrivateKeyType.LEDGER;
   } else if ((publicKey?.toString() ?? '').startsWith('@')) {
     return PrivateKeyType.AUTHORIZED_ACCOUNT;

@@ -253,10 +253,7 @@ const TokensTransfer = ({
             options,
           );
 
-          if (transactionStatus.isUsingMultisig) {
-            navigateTo(Screen.HOME_PAGE, true);
-            setSuccessMessage('multisig_transaction_sent_to_signers');
-          } else if (transactionStatus.broadcasted) {
+          if (transactionStatus.broadcasted) {
             addToLoadingList('html_popup_confirm_transaction_operation');
             removeFromLoadingList('html_popup_transfer_token_operation');
 

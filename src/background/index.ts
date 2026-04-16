@@ -4,7 +4,6 @@ import AutolockModule from '@background/autolock.module';
 import ClaimModule from '@background/claim.module';
 import { KeylessKeychainModule } from '@background/keyless-keychain.module';
 import LocalStorageModule from '@background/local-storage.module';
-import { MultisigModule } from '@background/multisig.module';
 import init from '@background/requests/init';
 import { performOperation } from '@background/requests/operations';
 import { RequestsHandler } from '@background/requests/request-handler';
@@ -46,7 +45,6 @@ Object.assign(global, { contextType: 'service_worker' });
       LocalStorageKeyEnum.AUTOLOCK,
     ),
   );
-  MultisigModule.start();
 })();
 
 /* istanbul ignore next */

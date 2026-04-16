@@ -104,9 +104,7 @@ const IncomingOutgoing = ({
             options,
           );
           if (success) {
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else setSuccessMessage('popup_html_cancel_delegation_successful');
+            setSuccessMessage('popup_html_cancel_delegation_successful');
             await refreshDelegations();
             goBack();
           } else {
@@ -182,9 +180,7 @@ const IncomingOutgoing = ({
             options,
           );
           if (success) {
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else setSuccessMessage('popup_html_delegation_successful');
+            setSuccessMessage('popup_html_delegation_successful');
             await refreshDelegations();
             goBack();
           } else {

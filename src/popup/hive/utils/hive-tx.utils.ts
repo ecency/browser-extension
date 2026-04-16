@@ -1,8 +1,6 @@
 import { KeychainApi } from '@api/keychain';
-import { BackgroundMessage } from '@background/background-message.interface';
-import { MultisigModule } from '@background/multisig.module';
 import Hive from '@engrave/ledger-app-hive';
-import type { ExtendedAccount, Operation, Transaction } from '@hiveio/dhive';
+import type { Operation, Transaction } from '@hiveio/dhive';
 import {
   HiveTxBroadcastErrorResponse,
   HiveTxBroadcastResult,
@@ -10,14 +8,7 @@ import {
   TransactionResult,
 } from '@interfaces/hive-tx.interface';
 import { Key, TransactionOptions } from '@interfaces/keys.interface';
-import { MultisigRequestSignatures } from '@interfaces/multisig.interface';
 import { Rpc } from '@interfaces/rpc.interface';
-import AccountUtils from '@popup/hive/utils/account.utils';
-import HiveUtils from '@popup/hive/utils/hive.utils';
-import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
-import { BackgroundCommand } from '@reference-data/background-message-key.enum';
-import { VaultKey } from '@reference-data/vault-message-key.enum';
-import { KeychainKeyTypes, KeychainKeyTypesLC } from 'hive-keychain-commons';
 import {
   Transaction as HiveTransaction,
   config as HiveTxConfig,
@@ -31,7 +22,6 @@ import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
 import { AsyncUtils } from 'src/utils/async.utils';
 import { LedgerUtils } from 'src/utils/ledger.utils';
 import Logger from 'src/utils/logger.utils';
-import VaultUtils from 'src/utils/vault.utils';
 
 const MINUTE = 60;
 
@@ -54,21 +44,13 @@ const sendOperation = async (
     options,
   );
   if (transactionResult) {
-    if (transactionResult.isUsingMultisig) {
-      return {
-        id: transactionResult.tx_id,
-        tx_id: transactionResult.tx_id,
-        isUsingMultisig: true,
-      };
-    } else {
-      return {
-        id: transactionResult.tx_id,
-        tx_id: transactionResult.tx_id,
-        confirmed: confirmation
-          ? await confirmTransaction(transactionResult.tx_id)
-          : false,
-      } as TransactionResult;
-    }
+    return {
+      id: transactionResult.tx_id,
+      tx_id: transactionResult.tx_id,
+      confirmed: confirmation
+        ? await confirmTransaction(transactionResult.tx_id)
+        : false,
+    } as TransactionResult;
   } else {
     return null;
   }
@@ -98,82 +80,7 @@ const createSignAndBroadcastTransaction = async (
     Config.transactions.expirationTimeInMinutes * MINUTE,
   );
 
-  const username = MultisigUtils.getUsernameFromTransaction(transaction);
-  const transactionAccount = await AccountUtils.getExtendedAccount(
-    username!.toString(),
-  );
-
-  const localAccount = (
-    await AccountUtils.getAccountsFromLocalStorage(
-      await VaultUtils.getValueFromVault(VaultKey.__MK),
-    )
-  ).find(
-    (account) => account.keys.posting === key || account.keys.active === key,
-  );
-  const initiatorAccount = await AccountUtils.getExtendedAccount(
-    localAccount?.name!,
-  );
-  const method = await KeysUtils.isKeyActiveOrPosting(key, initiatorAccount);
-
-  const isUsingMultisig = await KeysUtils.isUsingMultisig(
-    key,
-    transactionAccount,
-    initiatorAccount.name,
-    method.toLowerCase() as KeychainKeyTypesLC,
-  );
-  if (isUsingMultisig) {
-    const hardforkVersion = await HiveUtils.getHardforkVersion();
-    Logger.log(`hardforkVersion => ${hardforkVersion}`);
-    transaction = await hiveTransaction.create(
-      operations,
-      hardforkVersion >= 28
-        ? Config.transactions.multisigExpirationTimeInMinutesForHardfork28 *
-            MINUTE
-        : Config.transactions.multisigExpirationTimeInMinutes * MINUTE,
-    );
-    const signedTransaction = await signTransaction(transaction, key);
-    if (!signedTransaction) {
-      throw new Error('html_popup_error_while_signing_transaction');
-    }
-    let response: any;
-    try {
-      if (document) {
-        response = await useMultisig(
-          transaction,
-          key,
-          initiatorAccount,
-          transactionAccount,
-          method,
-          signedTransaction?.signatures[0],
-          options,
-        );
-        return {
-          status: response as string,
-          tx_id: '',
-          isUsingMultisig: true,
-        } as HiveTxBroadcastResult;
-      }
-    } catch (err) {
-      response = await useMultisigThroughBackgroundOnly(
-        transaction,
-        key,
-        initiatorAccount,
-        transactionAccount,
-        method,
-        signedTransaction?.signatures[0],
-        options,
-      );
-      if (response.error) {
-        throw new KeychainError(response.error.message);
-      } else {
-        return {
-          status: 'ok' as string,
-          tx_id: response,
-          isUsingMultisig: true,
-        } as HiveTxBroadcastResult;
-      }
-    }
-  } else if (KeysUtils.isUsingLedger(key)) {
+  if (KeysUtils.isUsingLedger(key)) {
     let hashSignPolicy;
     try {
       hashSignPolicy = (await LedgerUtils.getSettings()).hashSignPolicy;
@@ -361,69 +268,6 @@ const switchToWorkingRpc = async (method: string, error: any) => {
   throw new Error(
     `Error while retrieving data from ${method} : ${JSON.stringify(error)}`,
   );
-};
-
-const useMultisigThroughBackgroundOnly = async (
-  transaction: Transaction,
-  key: Key,
-  initiatorAccount: ExtendedAccount,
-  transactionAccount: ExtendedAccount,
-  method: KeychainKeyTypes,
-  signature: string,
-  options?: TransactionOptions,
-) => {
-  return MultisigModule.requestSignatures(
-    {
-      transaction: transaction,
-      key: key,
-      initiatorAccount: initiatorAccount,
-      transactionAccount: transactionAccount,
-      method: method,
-      signature: signature,
-      options: options,
-    } as MultisigRequestSignatures,
-    false,
-  );
-};
-
-const useMultisig = async (
-  transaction: Transaction,
-  key: Key,
-  initiatorAccount: ExtendedAccount,
-  transactionAccount: ExtendedAccount,
-  method: KeychainKeyTypes,
-  signature: string,
-  options?: TransactionOptions,
-) => {
-  return new Promise((resolve, reject) => {
-    const handleResponseFromBackground = (
-      backgroundMessage: BackgroundMessage,
-      sender: chrome.runtime.MessageSender,
-      sendResp: (response?: any) => void,
-    ) => {
-      if (
-        backgroundMessage.command ===
-        BackgroundCommand.MULTISIG_REQUEST_SIGNATURES_RESPONSE
-      ) {
-        chrome.runtime.onMessage.removeListener(handleResponseFromBackground);
-        resolve(backgroundMessage.value);
-      }
-    };
-    chrome.runtime.onMessage.addListener(handleResponseFromBackground);
-
-    chrome.runtime.sendMessage({
-      command: BackgroundCommand.MULTISIG_REQUEST_SIGNATURES,
-      value: {
-        transaction: transaction,
-        key: key,
-        initiatorAccount: initiatorAccount,
-        transactionAccount: transactionAccount,
-        method: method,
-        signature: signature,
-        options: options,
-      } as MultisigRequestSignatures,
-    } as BackgroundMessage);
-  });
 };
 
 const getTransaction = async (txId: string) => {

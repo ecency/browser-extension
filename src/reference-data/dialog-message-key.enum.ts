@@ -15,8 +15,3 @@ export enum DialogCommand {
   ADD_ACCOUNT = 'ADD_ACCOUNT',
   PING = 'PING',
 }
-
-export enum MultisigDialogCommand {
-  READY_MULTISIG = 'multisigReady',
-  MULTISIG_SEND_DATA_TO_POPUP = 'MULTISIG_SEND_DATA_TO_POPUP',
-}

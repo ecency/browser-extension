@@ -112,13 +112,9 @@ const RcIncomingOutgoingDelegationItem = ({
 
         if (success) {
           navigateTo(Screen.HOME_PAGE, true);
-          if (success.isUsingMultisig) {
-            setSuccessMessage('multisig_transaction_sent_to_signers');
-          } else {
-            setSuccessMessage('popup_html_cancel_rc_delegation_successful', [
-              `@${rcDelegation.delegatee}`,
-            ]);
-          }
+          setSuccessMessage('popup_html_cancel_rc_delegation_successful', [
+            `@${rcDelegation.delegatee}`,
+          ]);
         } else {
           setErrorMessage('popup_html_cancel_rc_delegation_failed');
         }

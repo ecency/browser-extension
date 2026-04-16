@@ -1,15 +1,6 @@
+import { KeychainKeyTypesLC } from '@interfaces/keychain.interface';
+import { TransactionOptions } from '@interfaces/keys.interface';
 import {
-  KeychainKeyTypes,
-  KeychainKeyTypesLC,
-} from '@interfaces/keychain.interface';
-import {
-  PrivateKeyType,
-  TransactionOptions,
-  TransactionOptionsMetadata,
-} from '@interfaces/keys.interface';
-import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
-import {
-  addCaptionToLoading,
   addToLoadingList,
   removeFromLoadingList,
 } from '@popup/multichain/actions/loading.actions';
@@ -17,18 +8,15 @@ import {
   setErrorMessage,
   setSuccessMessage,
 } from '@popup/multichain/actions/message.actions';
-import { closeModal, openModal } from '@popup/multichain/actions/modal.actions';
 import { RootState } from '@popup/multichain/store';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 import 'react-tabs/style/react-tabs.scss';
 import { OperationButtonComponent } from 'src/common-ui/button/operation-button.component';
 import { SVGIcons } from 'src/common-ui/icons.enum';
 import { InputType } from 'src/common-ui/input/input-type.enum';
 import InputComponent from 'src/common-ui/input/input.component';
-import { MetadataPopup } from 'src/common-ui/metadata-popup/metadata-popup.component';
 import { refreshActiveAccount } from 'src/popup/hive/actions/active-account.actions';
-import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
 import ProxyUtils from 'src/popup/hive/utils/proxy.utils';
 
 const ProxyTab = ({
@@ -38,29 +26,11 @@ const ProxyTab = ({
   setSuccessMessage,
   addToLoadingList,
   removeFromLoadingList,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 }: PropsFromRedux) => {
   const [proxyUsername, setProxyUsername] = useState('');
-  const [keyType, setKeyType] = useState<PrivateKeyType>();
-
-  useEffect(() => {
-    if (activeAccount) {
-      setKeyType(
-        KeysUtils.getKeyType(
-          activeAccount.keys.active!,
-          activeAccount.keys.activePubkey!,
-          activeAccount.account,
-          activeAccount.account,
-          KeychainKeyTypesLC.active,
-        ),
-      );
-    }
-  }, [activeAccount]);
 
   const processSetAsProxy = async (options?: TransactionOptions) => {
-    addToLoadingList('popup_html_setting_proxy', keyType);
+    addToLoadingList('popup_html_setting_proxy');
     try {
       const success = await ProxyUtils.setAsProxy(
         proxyUsername,
@@ -69,12 +39,8 @@ const ProxyTab = ({
         options,
       );
       if (success) {
-        if (success.isUsingMultisig) {
-          setSuccessMessage('multisig_transaction_sent_to_signers');
-        } else {
-          setSuccessMessage('popup_success_proxy', [proxyUsername]);
-          refreshActiveAccount();
-        }
+        setSuccessMessage('popup_success_proxy', [proxyUsername]);
+        refreshActiveAccount();
       } else {
         setErrorMessage('html_popup_set_as_proxy_error');
       }
@@ -89,40 +55,11 @@ const ProxyTab = ({
     if (!activeAccount.keys.active) {
       setErrorMessage('html_popup_proxy_requires_active_key');
     }
-    if (keyType === PrivateKeyType.MULTISIG) {
-      const twoFaAccounts = await MultisigUtils.get2FAAccounts(
-        activeAccount.account,
-        KeychainKeyTypes.active,
-      );
-
-      let initialMetadata = {} as TransactionOptionsMetadata;
-      for (const account of twoFaAccounts) {
-        if (!initialMetadata.twoFACodes) initialMetadata.twoFACodes = {};
-        initialMetadata.twoFACodes[account] = '';
-      }
-      if (twoFaAccounts.length > 0) {
-        openModal({
-          title: 'popup_html_transaction_metadata',
-          children: (
-            <MetadataPopup
-              initialMetadata={initialMetadata}
-              onSubmit={(metadata: TransactionOptionsMetadata) => {
-                addCaptionToLoading('multisig_transmitting_to_2fa');
-                processSetAsProxy({ metaData: metadata });
-                closeModal();
-              }}
-              onCancel={() => closeModal()}
-            />
-          ),
-        });
-      }
-    } else {
-      processSetAsProxy();
-    }
+    processSetAsProxy();
   };
 
   const processRemoveProxy = async (options?: TransactionOptions) => {
-    addToLoadingList('popup_html_clearing_proxy', keyType);
+    addToLoadingList('popup_html_clearing_proxy');
     try {
       const success = await ProxyUtils.removeProxy(
         activeAccount.name!,
@@ -130,12 +67,8 @@ const ProxyTab = ({
         options,
       );
       if (success) {
-        if (success.isUsingMultisig) {
-          setSuccessMessage('multisig_transaction_sent_to_signers');
-        } else {
-          refreshActiveAccount();
-          setSuccessMessage('bgd_ops_unproxy', [`@${proxyUsername}`]);
-        }
+        refreshActiveAccount();
+        setSuccessMessage('bgd_ops_unproxy', [`@${proxyUsername}`]);
       } else {
         setErrorMessage('html_popup_clear_proxy_error');
       }
@@ -150,36 +83,7 @@ const ProxyTab = ({
     if (!activeAccount.keys.active) {
       setErrorMessage('html_popup_proxy_requires_active_key');
     }
-    if (keyType === PrivateKeyType.MULTISIG) {
-      const twoFaAccounts = await MultisigUtils.get2FAAccounts(
-        activeAccount.account,
-        KeychainKeyTypes.active,
-      );
-
-      let initialMetadata = {} as TransactionOptionsMetadata;
-      for (const account of twoFaAccounts) {
-        if (!initialMetadata.twoFACodes) initialMetadata.twoFACodes = {};
-        initialMetadata.twoFACodes[account] = '';
-      }
-      if (twoFaAccounts.length > 0) {
-        openModal({
-          title: 'popup_html_transaction_metadata',
-          children: (
-            <MetadataPopup
-              initialMetadata={initialMetadata}
-              onSubmit={(metadata: TransactionOptionsMetadata) => {
-                addCaptionToLoading('multisig_transmitting_to_2fa');
-                processSetAsProxy({ metaData: metadata });
-                closeModal();
-              }}
-              onCancel={() => closeModal()}
-            />
-          ),
-        });
-      }
-    } else {
-      processRemoveProxy();
-    }
+    processRemoveProxy();
   };
 
   return (
@@ -245,9 +149,6 @@ const connector = connect(mapStateToProps, {
   setSuccessMessage,
   addToLoadingList,
   removeFromLoadingList,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

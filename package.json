@@ -94,7 +94,6 @@
     "resolve-cwd": "3.0.0",
     "sass": "1.65.1",
     "scss-tokenizer": "0.4.3",
-    "socket.io-client": "4.8.1",
     "sscjs": "github:hive-keychain/sscjs",
     "url-loader": "4.1.1",
     "valid-url": "1.0.9",

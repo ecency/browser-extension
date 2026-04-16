@@ -46,11 +46,7 @@ const ProxySuggestion = ({
         activeAccount.keys.active!,
       );
       if (success) {
-        if (success.isUsingMultisig) {
-          setSuccessMessage('multisig_transaction_sent_to_signers');
-        } else {
-          setSuccessMessage('popup_success_proxy', ['keychain']);
-        }
+        setSuccessMessage('popup_success_proxy', ['keychain']);
         refreshActiveAccount();
         handleClose();
       } else {

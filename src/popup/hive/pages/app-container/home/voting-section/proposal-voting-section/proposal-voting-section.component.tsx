@@ -1,24 +1,14 @@
-import {
-  KeychainKeyTypes,
-  KeychainKeyTypesLC,
-} from '@interfaces/keychain.interface';
-import {
-  TransactionOptions,
-  TransactionOptionsMetadata,
-} from '@interfaces/keys.interface';
-import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
-import { addCaptionToLoading } from '@popup/multichain/actions/loading.actions';
+import { KeychainKeyTypesLC } from '@interfaces/keychain.interface';
+import { TransactionOptions } from '@interfaces/keys.interface';
 import {
   setErrorMessage,
   setSuccessMessage,
 } from '@popup/multichain/actions/message.actions';
-import { closeModal, openModal } from '@popup/multichain/actions/modal.actions';
 import { RootState } from '@popup/multichain/store';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import React, { useEffect, useState } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 import { OperationButtonComponent } from 'src/common-ui/button/operation-button.component';
-import { MetadataPopup } from 'src/common-ui/metadata-popup/metadata-popup.component';
 import { PopupContainer } from 'src/common-ui/popup-container/popup-container.component';
 import Config from 'src/config';
 import ProposalUtils from 'src/popup/hive/utils/proposal.utils';
@@ -31,9 +21,6 @@ const ProposalVotingSection = ({
   globalProperties,
   setSuccessMessage,
   setErrorMessage,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 }: PropsFromRedux) => {
   const [hasVoted, sethasVoted] = useState(true);
   const [forceClosed, setForcedClosed] = useState(false);
@@ -72,36 +59,7 @@ const ProposalVotingSection = ({
 
   const handleVoteForProposalClicked = async () => {
     setForcedClosed(true);
-
-    const twoFaAccounts = await MultisigUtils.get2FAAccounts(
-      activeAccount.account,
-      KeychainKeyTypes.active,
-    );
-
-    let initialMetadata = {} as TransactionOptionsMetadata;
-    for (const account of twoFaAccounts) {
-      if (!initialMetadata.twoFACodes) initialMetadata.twoFACodes = {};
-      initialMetadata.twoFACodes[account] = '';
-    }
-
-    if (twoFaAccounts.length > 0) {
-      openModal({
-        title: 'popup_html_transaction_metadata',
-        children: (
-          <MetadataPopup
-            initialMetadata={initialMetadata}
-            onSubmit={(metadata: TransactionOptionsMetadata) => {
-              addCaptionToLoading('multisig_transmitting_to_2fa');
-              processVote({ metaData: metadata });
-              closeModal();
-            }}
-            onCancel={() => closeModal()}
-          />
-        ),
-      });
-    } else {
-      processVote();
-    }
+    processVote();
   };
 
   const processVote = async (options?: TransactionOptions) => {
@@ -111,9 +69,7 @@ const ProposalVotingSection = ({
       options,
     );
     if (success) {
-      if (success.isUsingMultisig) {
-        setSuccessMessage('multisig_transaction_sent_to_signers');
-      } else setSuccessMessage('popup_html_kc_proposal_vote_successful');
+      setSuccessMessage('popup_html_kc_proposal_vote_successful');
     } else {
       setErrorMessage('popup_html_proposal_vote_fail');
     }
@@ -214,9 +170,6 @@ const mapStateToProps = (state: RootState) => {
 const connector = connect(mapStateToProps, {
   setSuccessMessage,
   setErrorMessage,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

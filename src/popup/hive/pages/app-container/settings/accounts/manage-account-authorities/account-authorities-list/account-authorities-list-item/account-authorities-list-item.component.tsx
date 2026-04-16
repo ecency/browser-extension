@@ -86,12 +86,7 @@ const AccountAuthoritiesListItem = ({
           );
           if (success) {
             goBack();
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else
-              setSuccessMessage(
-                'popup_html_remove_account_authority_successful',
-              );
+            setSuccessMessage('popup_html_remove_account_authority_successful');
           } else {
             setErrorMessage('popup_html_remove_account_authority_fail');
           }

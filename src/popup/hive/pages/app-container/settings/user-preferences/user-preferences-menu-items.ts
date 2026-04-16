@@ -23,11 +23,6 @@ const UserPreferencesMenuItems = (
       nextScreen: Screen.SETTINGS_FAVORITE_ACCOUNTS,
     },
     {
-      label: 'popup_html_multisig',
-      icon: SVGIcons.MENU_USER_PREFERENCES_MULTISIG,
-      nextScreen: Screen.SETTINGS_MULTISIG,
-    },
-    {
       label: 'popup_html_export_transactions',
       icon: SVGIcons.MENU_ACCOUNTS_EXPORT,
       nextScreen: Screen.SETTINGS_EXPORT_TRANSACTIONS,

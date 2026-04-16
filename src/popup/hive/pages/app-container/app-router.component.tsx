@@ -5,7 +5,6 @@ import { ExportAccountsSubMenuComponent } from '@popup/hive/pages/app-container/
 import { ExportedAccountsQRComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/exported-accounts-qr/exported-accounts-qr.component';
 import { HelpSubMenuComponent } from '@popup/hive/pages/app-container/settings/help-sub-menu/help-sub-menu.component';
 import { ExportTransactionsComponent } from '@popup/hive/pages/app-container/settings/user-preferences/export-transactions/export-transactions.component';
-import { MultisigComponent } from '@popup/hive/pages/app-container/settings/user-preferences/multisig/multisig.component';
 import { RootState } from '@popup/multichain/store';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
@@ -165,8 +164,6 @@ const AppRouter = ({
         return <AutomatedTasksComponent />;
       case Screen.SETTINGS_FAVORITE_ACCOUNTS:
         return <FavoriteAccountsComponent />;
-      case Screen.SETTINGS_MULTISIG:
-        return <MultisigComponent />;
       case Screen.SETTINGS_ABOUT:
         return <AboutPageComponent />;
       case Screen.SETTINGS_HELP:

@@ -31,16 +31,9 @@ const Config = {
   },
   transactions: {
     expirationTimeInMinutes: 10,
-    multisigExpirationTimeInMinutes: 60,
-    multisigExpirationTimeInMinutesForHardfork28: 24 * 60,
   },
   witnesses: {
     feedWarningLimitInHours: 5,
-  },
-  multisig: {
-    baseURL:
-      process.env.MULTISIG_BACKEND_SERVER ||
-      'https://api-multisig.hive-keychain.com',
   },
   keyless: {
     host: process.env.KEYLESS_HOST || 'https://hive-auth.arcange.eu/',

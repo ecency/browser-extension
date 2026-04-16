@@ -274,9 +274,7 @@ const Delegations = ({
               activeAccount,
             );
 
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else setSuccessMessage('popup_html_delegation_successful');
+            setSuccessMessage('popup_html_delegation_successful');
           } else {
             setErrorMessage('popup_html_delegation_fail');
           }
@@ -330,9 +328,7 @@ const Delegations = ({
               activeAccount,
             );
 
-            if (success.isUsingMultisig) {
-              setSuccessMessage('multisig_transaction_sent_to_signers');
-            } else setSuccessMessage('popup_html_cancel_delegation_successful');
+            setSuccessMessage('popup_html_cancel_delegation_successful');
           } else {
             setErrorMessage('popup_html_cancel_delegation_fail');
           }

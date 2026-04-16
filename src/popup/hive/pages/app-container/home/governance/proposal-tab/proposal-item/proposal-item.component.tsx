@@ -1,13 +1,6 @@
-import {
-  PrivateKeyType,
-  TransactionOptions,
-  TransactionOptionsMetadata,
-} from '@interfaces/keys.interface';
+import { TransactionOptions } from '@interfaces/keys.interface';
 import { Proposal } from '@interfaces/proposal.interface';
-import { KeysUtils } from '@popup/hive/utils/keys.utils';
-import { MultisigUtils } from '@popup/hive/utils/multisig.utils';
 import {
-  addCaptionToLoading,
   addToLoadingList,
   removeFromLoadingList,
 } from '@popup/multichain/actions/loading.actions';
@@ -15,15 +8,12 @@ import {
   setErrorMessage,
   setSuccessMessage,
 } from '@popup/multichain/actions/message.actions';
-import { closeModal, openModal } from '@popup/multichain/actions/modal.actions';
 import { RootState } from '@popup/multichain/store';
-import { KeychainKeyTypes, KeychainKeyTypesLC } from 'hive-keychain-commons';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 import { CustomTooltip } from 'src/common-ui/custom-tooltip/custom-tooltip.component';
 import { SVGIcons } from 'src/common-ui/icons.enum';
-import { MetadataPopup } from 'src/common-ui/metadata-popup/metadata-popup.component';
 import { SVGIcon } from 'src/common-ui/svg-icon/svg-icon.component';
 import ProposalUtils from 'src/popup/hive/utils/proposal.utils';
 import ProxyUtils from 'src/popup/hive/utils/proxy.utils';
@@ -42,31 +32,13 @@ const ProposalItem = ({
   setSuccessMessage,
   activeAccount,
   onVoteUnvoteSuccessful,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 }: PropsFromRedux) => {
   const [isExpandablePanelOpened, setExpandablePanelOpened] = useState(false);
   const [usingProxy, setUsingProxy] = useState(false);
-  const [keyType, setKeyType] = useState<PrivateKeyType>();
 
   useEffect(() => {
     init();
   }, []);
-
-  useEffect(() => {
-    if (activeAccount) {
-      setKeyType(
-        KeysUtils.getKeyType(
-          activeAccount.keys.active!,
-          activeAccount.keys.activePubkey!,
-          activeAccount.account,
-          activeAccount.account,
-          KeychainKeyTypesLC.active,
-        ),
-      );
-    }
-  }, [activeAccount]);
 
   const init = async () => {
     let proxy = await ProxyUtils.findUserProxy(activeAccount.account);
@@ -94,12 +66,8 @@ const ProposalItem = ({
         options,
       );
       if (success) {
-        if (success.isUsingMultisig) {
-          setSuccessMessage('multisig_transaction_sent_to_signers');
-        } else {
-          onVoteUnvoteSuccessful();
-          setSuccessMessage('popup_html_proposal_unvote_successful');
-        }
+        onVoteUnvoteSuccessful();
+        setSuccessMessage('popup_html_proposal_unvote_successful');
       } else {
         setErrorMessage('popup_html_proposal_unvote_fail');
       }
@@ -113,12 +81,8 @@ const ProposalItem = ({
         options,
       );
       if (success) {
-        if (success.isUsingMultisig) {
-          setSuccessMessage('multisig_transaction_sent_to_signers');
-        } else {
-          setSuccessMessage('popup_html_proposal_vote_successful');
-          onVoteUnvoteSuccessful();
-        }
+        setSuccessMessage('popup_html_proposal_vote_successful');
+        onVoteUnvoteSuccessful();
       } else {
         setErrorMessage('popup_html_proposal_vote_fail');
       }
@@ -130,38 +94,7 @@ const ProposalItem = ({
     if (usingProxy) {
       return;
     }
-
-    if (keyType === PrivateKeyType.MULTISIG) {
-      const twoFaAccounts = await MultisigUtils.get2FAAccounts(
-        activeAccount.account,
-        KeychainKeyTypes.active,
-      );
-
-      let initialMetadata = {} as TransactionOptionsMetadata;
-      for (const account of twoFaAccounts) {
-        if (!initialMetadata.twoFACodes) initialMetadata.twoFACodes = {};
-        initialMetadata.twoFACodes[account] = '';
-      }
-
-      if (twoFaAccounts.length > 0) {
-        openModal({
-          title: 'popup_html_transaction_metadata',
-          children: (
-            <MetadataPopup
-              initialMetadata={initialMetadata}
-              onSubmit={(metadata: TransactionOptionsMetadata) => {
-                addCaptionToLoading('multisig_transmitting_to_2fa');
-                processToggleSupport(proposal, { metaData: metadata });
-                closeModal();
-              }}
-              onCancel={() => closeModal()}
-            />
-          ),
-        });
-      }
-    } else {
-      processToggleSupport(proposal);
-    }
+    processToggleSupport(proposal);
   };
 
   return (
@@ -290,9 +223,6 @@ const connector = connect(mapStateToProps, {
   removeFromLoadingList,
   setErrorMessage,
   setSuccessMessage,
-  addCaptionToLoading,
-  openModal,
-  closeModal,
 });
 type PropsFromRedux = ConnectedProps<typeof connector> & ProposalItemProps;
 
