@@ -1,17 +1,14 @@
 import { BackgroundMessage } from '@background/background-message.interface';
 import { ActionButton } from '@interfaces/action-button.interface';
 import { Autolock, AutoLockType } from '@interfaces/autolock.interface';
-import { EvmAppComponent } from '@popup/evm/evm-app.component';
 import { setIsLedgerSupported } from '@popup/hive/actions/app-status.actions';
 import { HiveAppComponent } from '@popup/hive/hive-app.component';
 import { setHasFinishedSignup } from '@popup/multichain/actions/has-finished-signup.actions';
 import { resetMessage } from '@popup/multichain/actions/message.actions';
 import { setMk } from '@popup/multichain/actions/mk.actions';
 import { ModalProperties } from '@popup/multichain/interfaces/modal.interface';
-import { Chain } from '@popup/multichain/multichain.context';
 import { SignInRouterComponent } from '@popup/multichain/pages/sign-in/sign-in-router.component';
 import { SignUpComponent } from '@popup/multichain/pages/sign-up/sign-up.component';
-import { SignUpScreen } from '@popup/multichain/sign-up.context';
 import { RootState } from '@popup/multichain/store';
 import { BackgroundCommand } from '@reference-data/background-message-key.enum';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
@@ -26,11 +23,9 @@ import LocalStorageUtils from 'src/utils/localStorage.utils';
 import PopupUtils from 'src/utils/popup.utils';
 import VaultUtils from 'src/utils/vault.utils';
 
-type Props = { screen: SignUpScreen; selectedChain?: Chain };
+type Props = {};
 
 const ChainRouter = ({
-  screen,
-  selectedChain,
   message,
   mk,
   setMk,
@@ -104,14 +99,7 @@ const ChainRouter = ({
         return <SignInRouterComponent />;
       }
     } else {
-      switch (selectedChain) {
-        case Chain.HIVE:
-          return <HiveAppComponent />;
-        case Chain.EVM:
-          return <EvmAppComponent />;
-        default:
-          return <HiveAppComponent />;
-      }
+      return <HiveAppComponent />;
     }
   };
 

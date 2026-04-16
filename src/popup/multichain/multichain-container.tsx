@@ -257,10 +257,10 @@ export const MultichainContainer = () => {
   );
 };
 
-const ChainComponent = ({ chain }: { theme: Theme; chain?: Chain }) => {
+const ChainComponent = (_: { theme: Theme; chain?: Chain }) => {
   return (
     <Provider store={store}>
-      {<ChainRouter screen={screen} selectedChain={chain} />}
+      <ChainRouter />
     </Provider>
   );
 };
