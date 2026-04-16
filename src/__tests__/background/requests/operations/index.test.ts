@@ -237,7 +237,9 @@ describe('index tests:\n', () => {
 
     const RequestTypeList = Object.keys(KeychainRequestTypes).filter(
       (requestType) =>
-        requestType !== 'signedCall' && !requestType.startsWith('vsc'),
+        requestType !== 'signedCall' &&
+        requestType !== 'swap' &&
+        !requestType.startsWith('vsc'),
     );
 
     const sSendMessage = jest

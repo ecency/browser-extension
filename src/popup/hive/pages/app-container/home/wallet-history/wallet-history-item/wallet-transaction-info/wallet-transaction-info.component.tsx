@@ -41,7 +41,6 @@ import { EscrowTransferTransactionComponent } from 'src/popup/hive/pages/app-con
 import { FillCollateralizedConvertTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/fill-collateralized-convert-transaction/fill-collateralized-convert-transaction.component';
 import { FillConvertTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/fill-convert-transaction/fill-convert-transaction.component';
 import { FillRecurrentTransferTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/fill-recurrent-transfer-transaction/fill-recurrent-transfer-transaction.component';
-import { FillWithdrawSavingsTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/fill-withdraw-savings-transaction copy/fill-withdraw-savings-transaction.component';
 import { PowerDownTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/power-down-transaction/power-down-transaction.component';
 import { PowerUpTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/power-up-transaction/power-up-transaction.component';
 import { ReceivedInterestsTransactionComponent } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history-item/wallet-transaction-info/wallet-transaction-types/received-interests-transaction/received-interests-transaction.component';
@@ -114,8 +113,8 @@ const WalletTransactionInfo = ({
             );
           case 'fill_transfer_from_savings':
             return (
-              <FillWithdrawSavingsTransactionComponent
-                transaction={transaction as StartWithdrawSavings}
+              <WithdrawSavingsTransactionComponent
+                transaction={transaction as WithdrawSavings}
               />
             );
         }
