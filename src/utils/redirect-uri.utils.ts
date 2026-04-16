@@ -13,7 +13,7 @@ const isLocalhostHostname = (hostname: string) => {
   return LOCALHOST_HOSTNAMES.has(hostname);
 };
 
-const isRedirectUriAcceptable = (
+export const isRedirectUriAcceptable = (
   redirectUri: string,
   _requesterUrl: string,
   options: RedirectUriValidationOptions = {},
@@ -47,9 +47,4 @@ const isRedirectUriAcceptable = (
   return true;
 };
 
-const KeychainifyUtils = {
-  isRedirectUriAcceptable,
-};
-
-export default KeychainifyUtils;
 export type { RedirectUriValidationOptions };

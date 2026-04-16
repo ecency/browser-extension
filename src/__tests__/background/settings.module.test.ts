@@ -79,6 +79,6 @@ describe('settings.module tests:\n', () => {
       command: BackgroundCommand.IMPORT_SETTINGS_CALLBACK,
       value: 'html_popup_import_settings_successful',
     });
-    expect(sSaveValueInLocalStorage).toHaveBeenCalledTimes(9);
+    expect(sSaveValueInLocalStorage).toHaveBeenCalledTimes(8);
   });
 });

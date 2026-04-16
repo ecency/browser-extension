@@ -10,7 +10,6 @@ export interface Settings {
   autolock?: AutoLockType;
   claimAccounts?: LocalStorageClaimItem;
   claimRewards?: LocalStorageClaimItem;
-  keychainify_enabled?: boolean;
   no_confirm?: NoConfirm;
   rpc?: Rpc[];
   transfer_to?: FavoriteUserItems;

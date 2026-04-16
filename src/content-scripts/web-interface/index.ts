@@ -19,16 +19,22 @@ if (window.chrome) {
 
 let req: KeychainRequest | null = null;
 
-// Injecting Keychain
+// Hydration-safe extension detection for dApps — avoids SSR/Next.js
+// hydration issues by setting the marker at most once per page.
+if (!(window as any).hive_extension) {
+  (window as any).hive_extension = true;
+  window.dispatchEvent(new Event('hive-loaded'));
+}
 
+// Injecting the page-level `window.hive` API
 const setupInjection = () => {
   try {
     var scriptTag = document.createElement('script');
-    scriptTag.src = chrome.runtime.getURL('./hive_keychain.js');
+    scriptTag.src = chrome.runtime.getURL('./hive.js');
     var container = document.head || document.documentElement;
     container.insertBefore(scriptTag, container.children[0]);
   } catch (e) {
-    Logger.error('Hive Keychain injection failed.', e);
+    Logger.error('Hive injection failed.', e);
   }
 };
 setupInjection();
@@ -36,7 +42,7 @@ setupInjection();
 document.addEventListener('swHandshake_hive', () => {
   window.postMessage(
     {
-      type: 'hive_keychain_handshake',
+      type: 'hive_handshake',
     },
     window.location.origin,
   );

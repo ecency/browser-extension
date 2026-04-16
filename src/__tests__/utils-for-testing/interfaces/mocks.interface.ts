@@ -134,7 +134,6 @@ export interface CustomDataFromLocalStorage {
   customHideSuggestionProxy?: { [key: string]: boolean };
   customFavoriteUsers?: { [key: string]: string[] };
   customHiddenTokenList?: string[];
-  customKeychainifyEnabled?: boolean;
 }
 
 export interface MocksOverwrite {

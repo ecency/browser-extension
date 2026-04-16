@@ -8,7 +8,7 @@ import {
   sendRequestToBackground,
   sendResponse,
 } from 'src/content-scripts/web-interface/response.logic';
-import KeychainifyUtils from 'src/utils/keychainify.utils';
+import * as RedirectUriUtils from 'src/utils/redirect-uri.utils';
 
 describe('response.logic tests:\n', () => {
   const prevReq = {
@@ -100,7 +100,7 @@ describe('response.logic tests:\n', () => {
   describe('sendResponse cases:\n', () => {
     it('Must post a message when redirect_uri is rejected', () => {
       jest
-        .spyOn(KeychainifyUtils, 'isRedirectUriAcceptable')
+        .spyOn(RedirectUriUtils, 'isRedirectUriAcceptable')
         .mockReturnValue(false);
       const sPostMessage = jest
         .spyOn(window, 'postMessage')
@@ -121,7 +121,7 @@ describe('response.logic tests:\n', () => {
 
       expect(sPostMessage).toHaveBeenCalledWith(
         {
-          type: 'hive_keychain_response',
+          type: 'hive_response',
           response,
         },
         window.location.origin,

@@ -25,11 +25,6 @@ const getAdvancedSettingsMenuItems = (isLedgerSupported: boolean) => {
       nextScreen: Screen.SETTINGS_CHANGE_PASSWORD,
     },
     {
-      label: 'popup_html_keychainify',
-      icon: SVGIcons.MENU_ADVANCED_SETTINGS_KEYCHAINIFY,
-      nextScreen: Screen.SETTINGS_KEYCHAINIFY,
-    },
-    {
       label: 'ledger_link_ledger_device',
       icon: SVGIcons.MENU_ADVANCED_SETTINGS_LINK_LEDGER_DEVICE,
       action: async () => {

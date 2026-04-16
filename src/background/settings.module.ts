@@ -79,13 +79,6 @@ const sendBackImportedFileContent = async (fileContent: any) => {
         );
       }
 
-      if (importedSettings.keychainify_enabled) {
-        await LocalStorageUtils.saveValueInLocalStorage(
-          LocalStorageKeyEnum.KEYCHAINIFY_ENABLED,
-          importedSettings.keychainify_enabled,
-        );
-      }
-
       if (importedSettings.no_confirm) {
         let existingNoConfirm: NoConfirm =
           await LocalStorageUtils.getValueFromLocalStorage(

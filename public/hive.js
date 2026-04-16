@@ -1,7 +1,7 @@
 /**
- * Use the `hive_keychain` methods listed below to issue requests to the Hive blockchain.
+ * Use the `hive` methods listed below to issue requests to the Hive blockchain.
  */
-var hive_keychain = {
+var hive = {
   current_id: 1,
   requests: {},
   handshake_callback: null,
@@ -22,7 +22,7 @@ var hive_keychain = {
   /**
    * This function is called to verify that the user has a certain authority over an account, by requesting to decode a message
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * const message = username + Date.now();
    * keychain.requestEncodeMessage(username, myUsername, message, 'Memo', (response) => {
    *   if (response.success) {
@@ -51,7 +51,7 @@ var hive_keychain = {
   /**
    * This function is called to allow encoding a message with multiple receivers. This is used in the case of multisig
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * const message = username + Date.now();
    * keychain.requestEncodeMessage(username, [pubKey1, pubKey2], message, 'Memo', (response) => {
    *   if (response.success) {
@@ -86,7 +86,7 @@ var hive_keychain = {
   /**
    * This function is called to verify that the user has a certain authority over an account, by requesting to decode a message
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestVerifyKey('stoodkev', encodedMessage, 'Posting', (response) => {
    *   if (response.success === true) {
    *     const decodedMessage = response.result;
@@ -132,7 +132,7 @@ var hive_keychain = {
    * Requests to add account authority over another account. For more information about multisig, please read https://peakd.com/utopian-io/@stoodkev/how-to-set-up-and-use-multisignature-accounts-on-steem-blockchain
    * @example
    * // Gives @stoodkev active authority with weight 2 to `account`
-   * const keychain = window.hive_keychain
+   * const keychain = window.hive
    * keychain.requestAddAccountAuthority(account, 'stoodkev', 'Active', 2, (response) => {
    *   console.log(response);
    * });
@@ -168,7 +168,7 @@ var hive_keychain = {
    * Requests to remove an account authority over another account. For more information about multisig, please read https://peakd.com/utopian-io/@stoodkev/how-to-set-up-and-use-multisignature-accounts-on-steem-blockchain
    * @example
    * // Removes @stoodkev's active authority from `account`
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestRemoveAccountAuthority(account, 'stoodkev', 'Active', (response) => {
    *   console.log(response);
    * });
@@ -200,7 +200,7 @@ var hive_keychain = {
   /**
    * Requests to add a new key authority to an account. For more information about multisig, please read https://peakd.com/utopian-io/@stoodkev/how-to-set-up-and-use-multisignature-accounts-on-steem-blockchain
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestAddKeyAuthority(username, publicKey, 'Memo', 1, (response) => {
    *   console.log(response);
    * });
@@ -235,7 +235,7 @@ var hive_keychain = {
   /**
    * Requests to remove a key to an account. For more information about multisig, please read https://peakd.com/utopian-io/@stoodkev/how-to-set-up-and-use-multisignature-accounts-on-steem-blockchain
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestRemoveKeyAuthority(username, publicKey, 'Memo', (response) => {
    *   console.log(response);
    * });
@@ -266,7 +266,7 @@ var hive_keychain = {
   /**
    * Generic broadcast request
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestBroadcast('npfedwards', [
    *   [
    *     'account_witness_vote',
@@ -304,7 +304,7 @@ var hive_keychain = {
    * import dhive from '@hiveio/dhive';
    *
    * const client = new dhive.Client(['https://api.hive.blog', 'https://anyx.io', 'https://api.openhive.network']);
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    *
    * const props = await client.database.getDynamicGlobalProperties();
    * const headBlockNumber = props.head_block_number;
@@ -369,7 +369,7 @@ var hive_keychain = {
   /**
    * Requests to broadcast a blog post/comment
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestPost('stoodkev', 'Hello World!', '## This is a blog post \
    * \
    * And this is some text', 'Blog', null, {format:'markdown',description:'A blog post',tags:['Blog']},'hello-world', {"author":"stoodkev","permlink":"hi","max_accepted_payout":"100000.000 SBD","percent_steem_dollars":10000,"allow_votes":true,"allow_curation_rewards":true,"extensions":[[0,{"beneficiaries":[{"account":"yabapmatt","weight":1000},{"account":"steemplus-pay","weight":500}]}]]}, (response) => {
@@ -417,7 +417,7 @@ var hive_keychain = {
    * Requests a vote
    * @example
    * // Upvote with 50% weight
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestVote('npfedwards', 'hello-world', 'stoodkev', 5000, (response) => {
    *   console.log(response);
    * });
@@ -443,7 +443,7 @@ var hive_keychain = {
   /**
    * Requests a custom JSON broadcast
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestCustomJson(null, 'sm_market_rent', 'Active', JSON.stringify({items:["9292cd44ccaef8b73a607949cc787f1679ede10b-93"],currency:"DEC",days:1}), 'Rent 1 card on Splinterlands', (response) => {
    *   console.log(response);
    * });
@@ -478,7 +478,7 @@ var hive_keychain = {
   /**
    * Requests a transfer
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestTransfer(username, toUsername, amount.toFixed(3),'','HIVE',(response) => {
    *   console.log(response)
    * }, true);
@@ -517,7 +517,7 @@ var hive_keychain = {
   /**
    * Requests a savings operation (deposit or withdraw)
    * @example
-   * const keychain = window.hive_keychain;
+   * const keychain = window.hive;
    * keychain.requestSavingsOperation(username, toUsername, '1.000', 'HBD', 'deposit', 'test memo', (response) => {
    *   console.log(response);
    * });
@@ -561,8 +561,8 @@ var hive_keychain = {
   /**
    * Requests a token transfer
    * @example
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestSendToken(username, toUsername, amount.toFixed(3), memo, 'DEC', (response) => {
    *     console.log(response);
    *   });
@@ -601,8 +601,8 @@ var hive_keychain = {
   /**
    * Requests a delegation broadcast
    * @example
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestDelegation(null, 'stoodkev', '1.000', 'HP', (response) => {
    *     console.log(response);
    *   });
@@ -639,8 +639,8 @@ var hive_keychain = {
    * Requests a witness vote broadcast
    * @example
    * // Unvote our witness vote for @stoodkev
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestWitnessVote(null, 'stoodkev', false, (response) => {
    *     console.log(response);
    *   });
@@ -667,8 +667,8 @@ var hive_keychain = {
    * Select an account as proxy
    * @example
    * // Let @stoodkev use our voting power in governance votes
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestProxy(null, 'stoodkev', (response) => {
    *     console.log(response);
    *   });
@@ -677,8 +677,8 @@ var hive_keychain = {
    * }
    * @example
    * // Remove voting proxy
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestProxy(null, '', (response) => {
    *     console.log(response);
    *   });
@@ -703,8 +703,8 @@ var hive_keychain = {
    * Request a power up
    * @example
    * // Power up 5 HP
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestPowerUp(username, username, '5.000', (response) => {
    *     console.log(response);
    *   });
@@ -731,8 +731,8 @@ var hive_keychain = {
    * Request a power down
    * @example
    * // Power down 5 HP
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestPowerDown(username, '5.000', (response) => {
    *     console.log(response);
    *   });
@@ -792,8 +792,8 @@ var hive_keychain = {
   /**
    * Request the creation of a DHF proposal
    * @example
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestCreateProposal('keychain', 'keychain', 'Hive Keychain development', 'hive-keychain-proposal-dhf-ran717', '10.000', '2022-03-22', '2023-03-21', JSON.stringify([]), (response) => {
    *     console.log(response);
    *   });
@@ -841,8 +841,8 @@ var hive_keychain = {
   /**
    * Request the removal of a DHF proposal
    * @example
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestRemoveProposal(username, JSON.stringify([216]), JSON.stringify([]), (response) => {
    *     console.log(response);
    *   });
@@ -876,8 +876,8 @@ var hive_keychain = {
    * Vote/Unvote a DHF proposal
    * @example
    * // Approve a proposal
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestUpdateProposalVote(username, JSON.stringify([216]), true, JSON.stringify([]), (response) => {
    *     console.log(response);
    *   });
@@ -886,8 +886,8 @@ var hive_keychain = {
    * }
    * @example
    * // Unapprove a proposal
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestUpdateProposalVote(username, JSON.stringify([216]), false, JSON.stringify([]), (response) => {
    *     console.log(response);
    *   });
@@ -923,9 +923,9 @@ var hive_keychain = {
   /**
    * Add a new account to Keychain
    * @example
-   * if (window.hive_keychain) {
+   * if (window.hive) {
    *   const postingKey = '...';
-   *   const keychain = window.hive_keychain;
+   *   const keychain = window.hive;
    *   keychain.requestConversion(username, {
    *     posting: postingKey
    *   }, (response) => {
@@ -951,8 +951,8 @@ var hive_keychain = {
    * Request currency conversion
    * @example
    * // Convert 5 HIVE to HBD
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestConversion(username, '5.000', true, (response) => {
    *     console.log(response);
    *   });
@@ -981,8 +981,8 @@ var hive_keychain = {
    * Request recurrent transfer
    * @example
    * // Let's send @stoodkev 5 HIVE a day
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
+   * if (window.hive) {
+   *   const keychain = window.hive;
    *   keychain.requestConversion(null, 'stoodkev', '5.000', 'HIVE', memo, 24, 7, (response) => {
    *     console.log(response);
    *   });
@@ -1028,60 +1028,6 @@ var hive_keychain = {
     this.dispatchCustomEvent('swRequest_hive', request, callback);
   },
 
-  /**
-   * Request swap
-   * @example
-   * // Let's swap 5 HIVE to DEC
-   * // Estimated steps can be obtained via KeychainSDK.swaps.getEstimation()
-   *
-   * if (window.hive_keychain) {
-   *   const keychain = window.hive_keychain;
-   *   keychain.requestSwap('keychain', 'HIVE', 'DEC', 5, 1, estimatedSteps, (response) => {
-   *     console.log(response);
-   *   });
-   * } else {
-   *   alert('You do not have hive keychain installed');
-   * }
-   * @param {String} [username=null] Hive account to perform the request
-   * @param {String} startToken Incoming token
-   * @param {String} endToken Outgoing token
-   * @param {number} amount Amount of tokens to be swapped
-   * @param {number} slippage Max slippage
-   * @param {Object} steps Steps returned by KeychainSDK.swaps.getEstimation(), of type IStep[]
-   * @param {requestCallback} callback Function that handles Keychain's response to the request
-   * @param {String} [rpc=null] Override user's RPC settings
-   * @param {string} [partnerUsername=null] Partner Hive account hosting the widget
-   * @param {number} [partnerFee=null] Fee received when executing & hosting a Keychain Swap. 0 - 1%
-  
-   */
-  requestSwap: function (
-    username,
-    startToken,
-    endToken,
-    amount,
-    slippage,
-    steps,
-    callback,
-    rpc,
-    partnerUsername,
-    partnerFee,
-  ) {
-    const request = {
-      type: 'swap',
-      username,
-      startToken,
-      endToken,
-      amount,
-      slippage,
-      steps,
-      partnerUsername,
-      partnerFee,
-      rpc,
-    };
-
-    this.dispatchCustomEvent('swRequest_hive', request, callback);
-  },
-
   // Send the customEvent
   dispatchCustomEvent: function (name, data, callback) {
     this.requests[this.current_id] = callback;
@@ -1106,20 +1052,20 @@ window.addEventListener(
     // We only accept messages from ourselves
     if (event.source != window) return;
 
-    if (event.data.type && event.data.type == 'hive_keychain_response') {
+    if (event.data.type && event.data.type == 'hive_response') {
       const response = event.data.response;
       if (response && response.request_id) {
-        if (hive_keychain.requests[response.request_id]) {
-          hive_keychain.requests[response.request_id](response);
-          delete hive_keychain.requests[response.request_id];
+        if (hive.requests[response.request_id]) {
+          hive.requests[response.request_id](response);
+          delete hive.requests[response.request_id];
         }
       }
     } else if (
       event.data.type &&
-      event.data.type == 'hive_keychain_handshake'
+      event.data.type == 'hive_handshake'
     ) {
-      if (hive_keychain.handshake_callback) {
-        hive_keychain.handshake_callback();
+      if (hive.handshake_callback) {
+        hive.handshake_callback();
       }
     }
   },

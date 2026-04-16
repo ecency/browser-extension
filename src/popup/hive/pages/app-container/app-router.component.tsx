@@ -45,7 +45,6 @@ import { AutoLockComponent } from 'src/popup/hive/pages/app-container/settings/a
 import { ChangePasswordComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/change-password/change-password.component';
 import { ClearAllDataComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/clear-all-data/clear-all-data.component';
 import { ImportExportPreferencesComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/import-export-preferences/import-export-preferences.component';
-import { KeychainifyComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/keychainify/keychainify.component';
 import { RpcNodesComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/rpc-nodes/rpc-nodes.component';
 import { ShortcutsComponent } from 'src/popup/hive/pages/app-container/settings/advanced-settings/shortcuts/shortcuts.component';
 import { SettingsMainPageComponent } from 'src/popup/hive/pages/app-container/settings/settings-main-page/settings-main-page.component';
@@ -146,8 +145,6 @@ const AppRouter = ({
         return <RpcNodesComponent />;
       case Screen.SETTINGS_AUTO_LOCK:
         return <AutoLockComponent />;
-      case Screen.SETTINGS_KEYCHAINIFY:
-        return <KeychainifyComponent />;
       case Screen.SETTINGS_CLEAR_ALL_DATA:
         return <ClearAllDataComponent />;
       case Screen.SETTINGS_IMPORT_EXPORT:

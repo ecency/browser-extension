@@ -22,10 +22,6 @@ const dataTestIdCheckbox = {
     preFix: 'checkbox-auto-lock-',
   },
 
-  keychainify: {
-    checkbox: 'checkbox-keychainify',
-  },
-
   rpcNodes: {
     select: {
       automaticMode: 'checkbox-rpc-nodes-automatic-mode',

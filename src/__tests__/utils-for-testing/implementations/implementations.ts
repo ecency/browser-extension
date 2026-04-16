@@ -69,10 +69,6 @@ const getValuefromLS = async (...args: any[]): Promise<any> => {
       return customData.hasOwnProperty('customRpcList')
         ? customData.customRpcList
         : [];
-    case LocalStorageKeyEnum.KEYCHAINIFY_ENABLED:
-      return customData.hasOwnProperty('customKeychainifyEnabled')
-        ? customData.customKeychainifyEnabled
-        : true;
     case LocalStorageKeyEnum.RPC_LIST:
       return customData.hasOwnProperty('customsRpcs')
         ? customData.customsRpcs

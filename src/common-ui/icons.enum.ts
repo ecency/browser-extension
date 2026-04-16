@@ -69,7 +69,6 @@ export enum SVGIcons {
   MENU_ADVANCED_SETTINGS_CHANGE_PASSWORD = 'menu/advanced-settings/change-password',
   MENU_ADVANCED_SETTINGS_CLEAR_ALL = 'menu/advanced-settings/clear-all',
   MENU_ADVANCED_SETTINGS_IMPORT_EXPORT = 'menu/advanced-settings/import-export-settings',
-  MENU_ADVANCED_SETTINGS_KEYCHAINIFY = 'menu/advanced-settings/keychainify',
   MENU_ADVANCED_SETTINGS_LINK_LEDGER_DEVICE = 'menu/advanced-settings/link-ledger-device',
   MENU_ADVANCED_SETTINGS_RPC_NODE = 'menu/advanced-settings/rpc-nodes',
   MENU_ADVANCED_SETTINGS_SHORTCUTS = 'menu/advanced-settings/shortcuts',
@@ -213,7 +212,6 @@ export const Icons = {
   ADD_ACCOUNT: SVGIcons.MENU_ACCOUNTS_ADD_ACCOUNT,
   ADD_CIRCLE: SVGIcons.GLOBAL_ADD_CIRCLE,
   PASSWORD: SVGIcons.MENU_ADVANCED_SETTINGS_CHANGE_PASSWORD,
-  LINK: SVGIcons.MENU_ADVANCED_SETTINGS_KEYCHAINIFY,
   ARROW_UP: SVGIcons.SELECT_ARROW_UP,
   RC: SVGIcons.RESOURCE_ITEM_RC,
 } as const;

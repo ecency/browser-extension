@@ -36,7 +36,6 @@ const dataTestIdComponent = {
     rpcNodes: 'rpc-nodes-page',
     autoLock: 'auto-lock-page',
     changePassword: 'change-password-page',
-    link: 'keychainify-page',
     importExport: 'import-export-preferences-page',
     clearAllData: 'clear-all-data-page',
   },

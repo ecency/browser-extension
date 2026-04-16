@@ -4,7 +4,6 @@ export enum LocalStorageKeyEnum {
   CURRENT_RPC = 'current_rpc',
   ACTIVE_ACCOUNT_NAME = 'active_account_name',
   FAVORITE_USERS = 'transfer_to',
-  KEYCHAINIFY_ENABLED = 'keychainify_enabled',
   CLAIM_REWARDS = 'claimRewards',
   CLAIM_ACCOUNTS = 'claimAccounts',
   CLAIM_SAVINGS = 'claimSavings',

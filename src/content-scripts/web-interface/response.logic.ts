@@ -3,7 +3,7 @@ import {
   KeychainRequest,
   RequestResponse,
 } from 'src/interfaces/keychain.interface';
-import KeychainifyUtils from 'src/utils/keychainify.utils';
+import { isRedirectUriAcceptable } from 'src/utils/redirect-uri.utils';
 
 export const cancelPreviousRequest = (prevReq: KeychainRequest) => {
   const response = {
@@ -48,16 +48,13 @@ export const sendIncompleteDataResponse = (
 export const sendResponse = (response: RequestResponse) => {
   if (
     response.data.redirect_uri &&
-    KeychainifyUtils.isRedirectUriAcceptable(
-      response.data.redirect_uri,
-      window.location.href,
-    )
+    isRedirectUriAcceptable(response.data.redirect_uri, window.location.href)
   ) {
     window.location.href = response.data.redirect_uri;
   } else {
     window.postMessage(
       {
-        type: 'hive_keychain_response',
+        type: 'hive_response',
         response,
       },
       window.location.origin,

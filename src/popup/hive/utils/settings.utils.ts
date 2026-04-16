@@ -11,7 +11,6 @@ const exportSettings = async () => {
     LocalStorageKeyEnum.NO_CONFIRM,
     LocalStorageKeyEnum.FAVORITE_USERS,
     LocalStorageKeyEnum.RPC_LIST,
-    LocalStorageKeyEnum.KEYCHAINIFY_ENABLED,
     LocalStorageKeyEnum.CURRENT_RPC,
     LocalStorageKeyEnum.SWITCH_RPC_AUTO,
 
