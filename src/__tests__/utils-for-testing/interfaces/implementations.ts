@@ -10,8 +10,6 @@ export interface KeyChainApiGetCustomData {
   phishingAccounts?: string[];
   extensionVersion?: WhatsNewContent;
   delegators?: any;
-  /** `hive/ecosystem/dapps` KeychainApi mock payload */
-  ecosystemDapps?: any[];
 }
 
 export interface FindSmartContractsHive {

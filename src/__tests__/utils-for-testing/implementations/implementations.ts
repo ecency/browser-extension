@@ -170,10 +170,6 @@ const keychainApiGet = async (
       );
     case urlToGet.includes('hive/delegators/'):
       return customData?.delegators ?? delegations.delegators;
-    case urlToGet === 'hive/ecosystem/dapps':
-      return (
-        customData?.ecosystemDapps ?? [{ category: 'social', dapps: [] }]
-      );
     default:
       return 'Please check on default cases as not found condition ->/implementations/...';
   }

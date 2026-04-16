@@ -1,5 +1,4 @@
 import { KeylessKeychainComponent } from '@popup/hive/pages/add-account/keyless-keychain/keyless-keychain.component';
-import { EcosystemComponent } from '@popup/hive/pages/app-container/home/ecosystem/ecosystem.component';
 import { TokenPendingUnstakePage } from '@popup/hive/pages/app-container/home/tokens/token-pending-unstacking/token-pending-unstacking.component';
 import { PendingRecurrentTransfersPageComponent } from '@popup/hive/pages/app-container/home/transfer-fund/recurrent-transfers/recurrent-transfers.component';
 import { ExportAccountsSubMenuComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/export-accounts-sub-menu.component';
@@ -182,8 +181,6 @@ const AppRouter = ({
         return <CreateAccountStepTwoComponent />;
       case Screen.SETTINGS_ANALYTICS:
         return <AnalyticsComponent />;
-      case Screen.CHAINS:
-        return <EcosystemComponent />;
       default:
         return null;
     }
