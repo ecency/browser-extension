@@ -1,4 +1,3 @@
-import { KeychainApi } from '@api/keychain';
 import {
   DynamicGlobalProperties,
   ExtendedAccount,
@@ -25,13 +24,14 @@ import delegations from 'src/__tests__/utils-for-testing/data/delegations';
 import dynamic from 'src/__tests__/utils-for-testing/data/dynamic.hive';
 import tokenHistory from 'src/__tests__/utils-for-testing/data/history/transactions/tokens/token-history';
 import mk from 'src/__tests__/utils-for-testing/data/mk';
+import phishing from 'src/__tests__/utils-for-testing/data/phishing';
 import fake_RC from 'src/__tests__/utils-for-testing/data/rc';
 import rpc from 'src/__tests__/utils-for-testing/data/rpc';
 import tokenMarket from 'src/__tests__/utils-for-testing/data/tokens/token-market';
 import tokensList from 'src/__tests__/utils-for-testing/data/tokens/tokens-list';
 import tokensUser from 'src/__tests__/utils-for-testing/data/tokens/tokens-user';
+import witness from 'src/__tests__/utils-for-testing/data/witness';
 import mocksImplementation from 'src/__tests__/utils-for-testing/implementations/implementations';
-import { KeyChainApiGetCustomData } from 'src/__tests__/utils-for-testing/interfaces/implementations';
 import {
   CustomDataFromLocalStorage,
   GetManifest,
@@ -44,6 +44,7 @@ import { DelegationUtils } from 'src/popup/hive/utils/delegation.utils';
 import { DynamicGlobalPropertiesUtils } from 'src/popup/hive/utils/dynamic-global-properties.utils';
 import { GovernanceUtils } from 'src/popup/hive/utils/governance.utils';
 import { HiveEngineUtils } from 'src/popup/hive/utils/hive-engine.utils';
+import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import HiveUtils from 'src/popup/hive/utils/hive.utils';
 import MkUtils from 'src/popup/hive/utils/mk.utils';
 import ProposalUtils from 'src/popup/hive/utils/proposal.utils';
@@ -56,6 +57,7 @@ import TransactionUtils from 'src/popup/hive/utils/transaction.utils';
 import { LedgerUtils } from 'src/utils/ledger.utils';
 import { AsyncUtils } from 'src/utils/async.utils';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
+import PhishingUtils from 'src/utils/phishing.utils';
 import PopupUtils from 'src/utils/popup.utils';
 
 const manifestFile = {
@@ -137,6 +139,7 @@ export interface TestsAppLoadingValues {
     };
     HiveEngineUtils?: { getTokenHistory?: TokenTransaction[] };
     DelegationUtils?: {
+      getDelegators?: any[] | null;
       getDelegatees?: VestingDelegation[];
       getPendingOutgoingUndelegation?: [];
     };
@@ -166,12 +169,6 @@ export interface TestsAppLoadingValues {
           getManifest?: GetManifest;
         };
       };
-    };
-  };
-  apiRelated?: {
-    KeychainApi?: {
-      get?: jest.Mock;
-      customData?: KeyChainApiGetCustomData;
     };
   };
   localStorageRelated?: {
@@ -417,6 +414,15 @@ const set = (params?: {
         tokenHistory.leoToken,
     )
     .mockResolvedValueOnce([]);
+  DelegationUtils.getDelegators = jest
+    .fn()
+    .mockResolvedValue(
+      params?.app?.accountsRelated?.DelegationUtils?.hasOwnProperty(
+        'getDelegators',
+      )
+        ? params!.app!.accountsRelated!.DelegationUtils!.getDelegators
+        : delegations.delegators,
+    );
   DelegationUtils.getDelegatees = jest
     .fn()
     .mockResolvedValue(
@@ -510,19 +516,27 @@ const set = (params?: {
   //////////
 
   //////////
-  //API related
-  //Note: For now it is only passing customData IF no need to change the get implementation.
-  KeychainApi.get =
-    params?.app?.apiRelated?.KeychainApi?.get ??
-    jest
-      .fn()
-      .mockImplementation((...args: any[]) =>
-        mocksImplementation.keychainApiGet(
-          args[0],
-          params?.app?.apiRelated?.KeychainApi?.customData,
-        ),
-      );
-  ///////////
+  //Phishing related (PhishingUtils.getPhishingAccounts now uses fetch
+  //against the openhive watchmen list; default to the bundled fixture).
+  PhishingUtils.getPhishingAccounts = jest
+    .fn()
+    .mockResolvedValue(phishing.accounts);
+  //////////
+
+  //////////
+  //HiveTxUtils default getData mock — replaces the legacy
+  //api.hive-keychain.com hive/v2/witnesses-ranks endpoint with the
+  //condenser_api.get_witnesses_by_vote RPC call. Individual tests can
+  //still re-mock HiveTxUtils.getData to override the behaviour.
+  HiveTxUtils.getData = jest
+    .fn()
+    .mockImplementation(async (method: string) => {
+      if (method === 'condenser_api.get_witnesses_by_vote') {
+        return witness.ranking;
+      }
+      return undefined;
+    });
+  //////////
 
   //////////
   //Ledger Related

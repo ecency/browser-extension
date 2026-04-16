@@ -1,4 +1,3 @@
-import { KeychainApi } from '@api/keychain';
 import {
   KeychainRequestTypes,
   RequestId,
@@ -11,6 +10,7 @@ import mk from 'src/__tests__/utils-for-testing/data/mk';
 import objects from 'src/__tests__/utils-for-testing/helpers/objects';
 import * as TransferCheckModule from 'src/dialog/hooks/transfer-check';
 import Transfer from 'src/dialog/pages/requests/transfer';
+import PhishingUtils from 'src/utils/phishing.utils';
 
 describe('transfer-check.ts tests:\n', () => {
   const data = {
@@ -35,7 +35,7 @@ describe('transfer-check.ts tests:\n', () => {
         TransferCheckModule,
         'useTransferCheck',
       );
-      jest.spyOn(KeychainApi, 'get').mockResolvedValue([]);
+      jest.spyOn(PhishingUtils, 'getPhishingAccounts').mockResolvedValue([]);
       render(
         <Transfer data={data} domain={'domain'} tab={0} rpc={DefaultRpcs[1]} />,
       );
@@ -50,7 +50,9 @@ describe('transfer-check.ts tests:\n', () => {
         TransferCheckModule,
         'useTransferCheck',
       );
-      jest.spyOn(KeychainApi, 'get').mockResolvedValue(['bittrex']);
+      jest
+        .spyOn(PhishingUtils, 'getPhishingAccounts')
+        .mockResolvedValue(['bittrex']);
       const clonedData = objects.clone(data) as RequestTransfer & RequestId;
       clonedData.to = 'bittrex';
       clonedData.memo = 'Hi there bittrex!';

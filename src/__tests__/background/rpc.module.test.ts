@@ -1,8 +1,8 @@
-import { KeychainApi } from '@api/keychain';
 import RPCModule from '@background/rpc.module';
 import { DefaultRpcs } from '@reference-data/default-rpc.list';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import { config as HiveTxConfig } from 'hive-tx';
+import Config from 'src/config';
 import mocksImplementation from 'src/__tests__/utils-for-testing/implementations/implementations';
 import { CustomDataFromLocalStorage } from 'src/__tests__/utils-for-testing/interfaces/mocks.interface';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
@@ -50,13 +50,8 @@ describe('rpc.module tests:\n', () => {
     RPCModule.getActiveRpc = jest
       .fn()
       .mockResolvedValue({ uri: 'DEFAULT', chainId: '1' });
-    KeychainApi.get = jest.fn().mockResolvedValue({
-      rpc: {
-        uri: 'https://default',
-      },
-    });
     await RPCModule.init();
-    expect(HiveTxConfig.node).toEqual({ uri: 'https://default' });
+    expect(HiveTxConfig.node).toEqual(Config.rpc.DEFAULT.uri);
   });
 
   it('Must set uri', async () => {

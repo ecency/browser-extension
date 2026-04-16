@@ -1,12 +1,18 @@
-import { KeychainApi } from '@api/keychain';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
 import Logger from 'src/utils/logger.utils';
 
+// CoinGecko returns the same shape the legacy api.hive-keychain.com proxy
+// used to return — { bitcoin, hive, hive_dollar } each with `usd` and
+// optional `usd_24h_change`.
+const COINGECKO_PRICE_URL =
+  'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,hive,hive_dollar&vs_currencies=usd&include_24hr_change=true';
+
 const getPrices = async () => {
   let prices;
   try {
-    prices = await KeychainApi.get('hive/v2/price');
+    const res = await fetch(COINGECKO_PRICE_URL, { cache: 'no-cache' });
+    prices = res.ok ? await res.json() : null;
     if (prices) {
       await LocalStorageUtils.saveValueInLocalStorage(
         LocalStorageKeyEnum.LAST_PRICE,

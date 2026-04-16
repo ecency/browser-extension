@@ -1,21 +1,52 @@
-import { KeychainApi } from '@api/keychain';
 import type { DelegateVestingSharesOperation } from '@hiveio/dhive';
 import {
   Delegator,
   PendingOutgoingUndelegation,
 } from '@interfaces/delegations.interface';
 import { Key, TransactionOptions } from '@interfaces/keys.interface';
+import { config as HiveTxConfig } from 'hive-tx';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
+import Logger from 'src/utils/logger.utils';
 
-const getDelegators = async (name: string) => {
-  const delegators = (await KeychainApi.get(
-    `hive/delegators/${name}`,
-  )) as Delegator[];
-  return delegators
-    ? delegators
-        .filter((e) => e.vesting_shares !== 0)
-        .sort((a, b) => b.vesting_shares - a.vesting_shares)
-    : null;
+interface BalanceApiIncomingDelegation {
+  delegator: string;
+  amount: string | number;
+  block_num?: number;
+}
+
+const VESTS_PER_RAW = 1_000_000;
+
+// hive-mainnet's balance-api exposes incoming/outgoing delegations from
+// an indexer node. Replaces the legacy api.hive-keychain.com
+// hive/delegators/{username} endpoint.
+const getDelegators = async (name: string): Promise<Delegator[] | null> => {
+  try {
+    const baseUrl = (HiveTxConfig.node || 'https://api.hive.blog').replace(
+      /\/$/,
+      '',
+    );
+    const res = await fetch(
+      `${baseUrl}/balance-api/accounts/${encodeURIComponent(name)}/delegations`,
+      { cache: 'no-cache' },
+    );
+    if (!res.ok) return null;
+    const body = (await res.json()) as {
+      incoming_delegations?: BalanceApiIncomingDelegation[];
+    };
+    const incoming = body.incoming_delegations ?? [];
+    return incoming
+      .map((d) => ({
+        delegator: d.delegator,
+        // amount is stringified raw vests (1 VESTS = 1e6 raw)
+        vesting_shares: Number(d.amount) / VESTS_PER_RAW,
+        delegation_date: '',
+      }))
+      .filter((d) => d.vesting_shares !== 0)
+      .sort((a, b) => b.vesting_shares - a.vesting_shares);
+  } catch (err) {
+    Logger.error('Failed to fetch incoming delegators', err);
+    return null;
+  }
 };
 
 const getDelegatees = async (name: string) => {

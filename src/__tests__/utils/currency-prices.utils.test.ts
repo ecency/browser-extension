@@ -1,26 +1,31 @@
-import { KeychainApi } from '@api/keychain';
 import CurrencyPricesUtils from '@hiveapp/utils/currency-prices.utils';
 import bittrexData from 'src/__tests__/utils-for-testing/data/bittrex-data/bittrex-data';
 import mocksImplementation from 'src/__tests__/utils-for-testing/implementations/implementations';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
 
 describe('currency-prices-utils tests', () => {
+  const originalFetch = global.fetch;
   afterEach(() => {
     jest.restoreAllMocks();
+    global.fetch = originalFetch;
   });
   afterAll(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
+    global.fetch = originalFetch;
   });
 
   describe('getPrices tests:\n', () => {
-    test('Must get prices from Hive API', async () => {
+    test('Must get prices from CoinGecko', async () => {
       const mockedApiReply = {
         bitcoin: { usd: 79999, usd_24h_change: -9.025204931469629 },
         hive: { usd: 0.638871, usd_24h_change: -13.100842677149227 },
         hive_dollar: { usd: 0.972868, usd_24h_change: -0.6982597522799386 },
       };
-      KeychainApi.get = jest.fn().mockResolvedValueOnce(mockedApiReply);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockedApiReply,
+      } as any);
       const result = await CurrencyPricesUtils.getPrices();
       expect(result).toEqual(mockedApiReply);
     });
@@ -30,7 +35,7 @@ describe('currency-prices-utils tests', () => {
         hive: { usd: 0.5 },
         hive_dollar: { usd: 1 },
       };
-      KeychainApi.get = jest
+      global.fetch = jest
         .fn()
         .mockRejectedValueOnce(new Error('Network Failed'));
       jest

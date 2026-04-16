@@ -1,4 +1,3 @@
-import { KeychainApi } from '@api/keychain';
 import Hive, { Settings } from '@engrave/ledger-app-hive';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import { KeysUtils } from '@popup/hive/utils/keys.utils';
@@ -14,6 +13,7 @@ import {
   Transaction as HiveTransaction,
   config as HiveTxConfig,
 } from 'hive-tx';
+import Config from 'src/config';
 import accounts from 'src/__tests__/utils-for-testing/data/accounts';
 import mk from 'src/__tests__/utils-for-testing/data/mk';
 import userData from 'src/__tests__/utils-for-testing/data/user-data';
@@ -108,12 +108,9 @@ describe('hive-tx.utils.ts tests:\n', () => {
   });
 
   describe('setRpc cases:\n', () => {
-    it('Must set Rpc from KeychainApi', async () => {
-      jest
-        .spyOn(KeychainApi, 'get')
-        .mockResolvedValue({ rpc: DefaultRpcs[1].uri });
+    it('Must set bundled default Rpc when uri is DEFAULT', async () => {
       await HiveTxUtils.setRpc({ uri: 'DEFAULT', testnet: false });
-      expect(HiveTxConfig.node).toEqual(DefaultRpcs[1].uri);
+      expect(HiveTxConfig.node).toEqual(Config.rpc.DEFAULT.uri);
     });
 
     it('Must set Rpc', async () => {

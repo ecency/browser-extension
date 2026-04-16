@@ -1,11 +1,6 @@
 import { AutoLockType } from '@interfaces/autolock.interface';
 import { NoConfirm } from '@interfaces/no-confirm.interface';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
-import currencies from 'src/__tests__/utils-for-testing/data/currencies';
-import delegations from 'src/__tests__/utils-for-testing/data/delegations';
-import phishing from 'src/__tests__/utils-for-testing/data/phishing';
-import witness from 'src/__tests__/utils-for-testing/data/witness';
-import { KeyChainApiGetCustomData } from 'src/__tests__/utils-for-testing/interfaces/implementations';
 import { CustomDataFromLocalStorage } from 'src/__tests__/utils-for-testing/interfaces/mocks.interface';
 import { DEFAULT_FILTER } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history.component';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
@@ -128,35 +123,6 @@ const i18nGetMessageCustom = (message: string, options?: string[]) => {
   }
   return message; // + ' check as not found on jsonFile.';
 };
-/**
- * Note:
- *  witnessRanking: witness Ranking.
- * currenciesPrices: CurrencyPricesUtils.getPrices.
- * rpc: HiveUtils.setRpc.
- * phishingAccounts: getPhishingAccounts.
- * delegators: HiveUtils.getDelegators.
- */
-const keychainApiGet = async (
-  urlToGet: string,
-  customData?: KeyChainApiGetCustomData,
-): Promise<any> => {
-  // console.log({ customData });
-  switch (true) {
-    case urlToGet === 'hive/v2/witnesses-ranks':
-      return customData?.witnessRanking ?? witness.ranking;
-    case urlToGet === 'hive/v2/price':
-      return customData?.currenciesPrices ?? currencies.prices;
-    case urlToGet === 'hive/rpc':
-      return customData?.rpc ?? { rpc: 'https://api.hive.blog' };
-    case urlToGet === 'hive/phishingAccounts':
-      return customData?.phishingAccounts ?? phishing.accounts;
-    case urlToGet.includes('hive/delegators/'):
-      return customData?.delegators ?? delegations.delegators;
-    default:
-      return 'Please check on default cases as not found condition ->/implementations/...';
-  }
-};
-
 const hiveTxUtils = {
   getData: (toUse: {
     conversionRequests?: any;
@@ -204,7 +170,6 @@ const mocksImplementation = {
   getValuefromLS,
   i18nGetMessage,
   i18nGetMessageCustom,
-  keychainApiGet,
   manifestFile,
   hiveTxUtils,
   mockFetch,

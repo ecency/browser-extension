@@ -1,12 +1,5 @@
 import { Theme } from '@popup/theme.context';
-import { KeychainApi } from '@api/keychain';
 import { ColorsUtils } from 'src/utils/colors.utils';
-
-jest.mock('@api/keychain', () => ({
-  KeychainApi: {
-    get: jest.fn(),
-  },
-}));
 
 describe('colors.utils', () => {
   const originalCreateElement = document.createElement.bind(document);
@@ -17,17 +10,14 @@ describe('colors.utils', () => {
   });
 
   describe('getBackgroundColorFromBackend', () => {
-    it('concatenates backend color with theme opacity after downloadColors', async () => {
-      (KeychainApi.get as jest.Mock).mockResolvedValueOnce({
-        MYTOKEN: 'AABBCC',
-      });
+    it('returns the placeholder color since downloadColors is a no-op', async () => {
       await ColorsUtils.downloadColors();
-      expect(ColorsUtils.getBackgroundColorFromBackend('MYTOKEN', Theme.LIGHT)).toBe(
-        'AABBCC2b',
-      );
-      expect(ColorsUtils.getBackgroundColorFromBackend('MYTOKEN', Theme.DARK)).toBe(
-        'AABBCC33',
-      );
+      expect(
+        ColorsUtils.getBackgroundColorFromBackend('MYTOKEN', Theme.LIGHT),
+      ).toBe('00FFFFFF');
+      expect(
+        ColorsUtils.getBackgroundColorFromBackend('MYTOKEN', Theme.DARK),
+      ).toBe('00FFFFFF');
     });
   });
 

@@ -14,7 +14,6 @@ import {
 } from '@interfaces/tokens.interface';
 import { Transaction } from '@interfaces/transaction.interface';
 import { OverwriteMock } from 'src/__tests__/utils-for-testing/enums/enums';
-import { KeyChainApiGetCustomData } from 'src/__tests__/utils-for-testing/interfaces/implementations';
 import { WalletHistoryFilter } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history.component';
 
 export interface MocksApp {
@@ -61,10 +60,6 @@ export interface MocksProposal {
   voteForKeychainProposal?: boolean;
   isRequestingProposalVotes?: boolean;
 }
-export interface MocksKeyChainApi {
-  customData?: KeyChainApiGetCustomData;
-}
-
 export interface GetManifest {
   version: string;
   name: string;
@@ -100,7 +95,6 @@ export interface MocksToUse {
   tokens?: MocksTokens;
   proposal?: MocksProposal;
   chromeRunTime?: MocksChromeRunTime;
-  keyChainApiGet?: KeyChainApiGetCustomData;
   survey?: MocksSurvey;
   convertions?: MocksConvertionRequests;
   governance?: MocksGovernance;

@@ -1,14 +1,15 @@
-import { KeychainApi } from '@api/keychain';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import { config as HiveTxConfig } from 'hive-tx';
+import Config from 'src/config';
 import { Rpc } from 'src/interfaces/rpc.interface';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
+
+const resolveDefaultUri = () => Config.rpc.DEFAULT.uri;
 
 const init = async () => {
   const rpc = await RPCModule.getActiveRpc();
   if (!rpc || rpc.uri === 'DEFAULT') {
-    const res = await KeychainApi.get('hive/rpc');
-    HiveTxConfig.node = res?.rpc;
+    HiveTxConfig.node = resolveDefaultUri();
   } else {
     HiveTxConfig.node = rpc.uri;
     if (rpc.chainId) {
@@ -19,7 +20,7 @@ const init = async () => {
 
 const setActiveRpc = async (rpc: Rpc) => {
   if (!rpc || rpc.uri === 'DEFAULT') {
-    HiveTxConfig.node = (await KeychainApi.get('hive/rpc')).rpc;
+    HiveTxConfig.node = resolveDefaultUri();
   } else {
     HiveTxConfig.node = rpc.uri;
     if (rpc.chainId) {

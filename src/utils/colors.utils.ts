@@ -1,8 +1,6 @@
-import { KeychainApi } from '@api/keychain';
 import { Theme, ThemeOpacity } from '@popup/theme.context';
 
 let imgColors: any = {};
-let loaded = false;
 const componentToHex = (c: any) => {
   var hex = c.toString(16);
   return hex.length == 1 ? '0' + hex : hex;
@@ -22,14 +20,17 @@ const getBackgroundColor = (src: string) => {
   return getBackgroundColorFromImage(img);
 };
 
+// The legacy api.hive-keychain.com hive/tokensBackgroundColors index is
+// no longer used. Token color lookup falls back to client-side image
+// sampling via getBackgroundColor().
 const downloadColors = async () => {
-  if (loaded) return;
-  imgColors = await KeychainApi.get('hive/tokensBackgroundColors');
-  loaded = true;
+  imgColors = {};
 };
 
 const getBackgroundColorFromBackend = (symbol: string, theme: Theme) => {
-  return imgColors ? imgColors[symbol] + ThemeOpacity[theme] : '00FFFFFF';
+  return imgColors[symbol]
+    ? imgColors[symbol] + ThemeOpacity[theme]
+    : '00FFFFFF';
 };
 
 const getBackgroundColorFromImage = (img: HTMLImageElement) => {

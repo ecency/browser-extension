@@ -1,10 +1,11 @@
-import { KeychainApi } from '@api/keychain';
 import { ConversionUtils } from '@hiveapp/utils/conversion.utils';
 import { DelegationUtils } from '@hiveapp/utils/delegation.utils';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import HiveUtils from '@hiveapp/utils/hive.utils';
 import { ExtendedAccount } from '@hiveio/dhive';
 import { Rpc } from '@interfaces/rpc.interface';
+import { config as HiveTxConfig } from 'hive-tx';
+import Config from 'src/config';
 import accounts from 'src/__tests__/utils-for-testing/data/accounts';
 import conversions from 'src/__tests__/utils-for-testing/data/conversions';
 import delegations from 'src/__tests__/utils-for-testing/data/delegations';
@@ -30,16 +31,13 @@ describe('hive.utils tests:\n', () => {
 
   describe('setRpc tests:\n', () => {
     it('Nust set default uri', async () => {
-      const returnedUriValue = 'https://ValueFromHive/rpc/api';
-      KeychainApi.get = jest
-        .fn()
-        .mockResolvedValueOnce({ data: { rpc: returnedUriValue } });
       const fakeRpc: Rpc = {
         uri: 'DEFAULT',
         testnet: true,
       };
       const result = await HiveTxUtils.setRpc(fakeRpc);
       expect(result).toBeUndefined();
+      expect(HiveTxConfig.node).toEqual(Config.rpc.DEFAULT.uri);
     });
   });
 

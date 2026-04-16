@@ -1,4 +1,3 @@
-import { KeychainApi } from '@api/keychain';
 import type {
   AccountWitnessVoteOperation,
   WitnessUpdateOperation,
@@ -171,23 +170,23 @@ const getWitnessInfo = async (
   globalProperties: GlobalProperties,
   currencyPrices: CurrencyPrices,
 ): Promise<WitnessInfo> => {
-  let resultFromAPI, resultFromBlockchain;
-  [resultFromAPI, resultFromBlockchain] = await Promise.all([
-    await KeychainApi.get(`hive/witness/${username}`),
+  // votes_count was previously sourced from api.hive-keychain.com's
+  // off-chain index. It's not exposed by core RPC; surface 0 until a
+  // self-hosted index (or a hive-engine equivalent) is available.
+  let resultFromBlockchain = (
     await HiveTxUtils.getData('database_api.find_witnesses', {
       owners: [username],
-    }),
-  ]);
-  resultFromBlockchain = resultFromBlockchain.witnesses[0];
+    })
+  ).witnesses[0];
 
   const lastFeedUpdate = `${resultFromBlockchain.last_hbd_exchange_update}Z`;
 
   const witnessInfo: WitnessInfo = {
     username: resultFromBlockchain.owner,
-    votesCount: resultFromAPI.votes_count,
+    votesCount: 0,
     voteValueInHP: FormatUtils.nFormatter(
       FormatUtils.toHP(
-        (Number(resultFromAPI.votes) / 1000000).toString(),
+        (Number(resultFromBlockchain.votes) / 1000000).toString(),
         globalProperties.globals,
       ),
       3,
@@ -214,34 +213,27 @@ const getWitnessInfo = async (
       maximumBlockSize: resultFromBlockchain.props.maximum_block_size,
       hbdInterestRate: resultFromBlockchain.props.hbd_interest_rate / 100,
     },
+    // Reward stats were sourced from api.hive-keychain.com's off-chain
+    // index. Surface zeros until a self-hosted equivalent is wired in.
     rewards: {
-      lastMonthValue: resultFromAPI.lastMonthValue,
-      lastMonthInHP: FormatUtils.toFormattedHP(
-        resultFromAPI.lastMonthValue,
-        globalProperties.globals!,
-      ),
+      lastMonthValue: 0,
+      lastMonthInHP: FormatUtils.toFormattedHP(0, globalProperties.globals!),
       lastMonthInUSD: FormatUtils.getUSDFromVests(
-        resultFromAPI.lastMonthValue,
+        0,
         globalProperties,
         currencyPrices,
       ),
-      lastWeekValue: resultFromAPI.lastWeekValue,
-      lastWeekInHP: FormatUtils.toFormattedHP(
-        resultFromAPI.lastWeekValue,
-        globalProperties.globals!,
-      ),
+      lastWeekValue: 0,
+      lastWeekInHP: FormatUtils.toFormattedHP(0, globalProperties.globals!),
       lastWeekInUSD: FormatUtils.getUSDFromVests(
-        resultFromAPI.lastWeekValue,
+        0,
         globalProperties,
         currencyPrices,
       ),
-      lastYearValue: resultFromAPI.lastYearValue,
-      lastYearInHP: FormatUtils.toFormattedHP(
-        resultFromAPI.lastYearValue,
-        globalProperties.globals!,
-      ),
+      lastYearValue: 0,
+      lastYearInHP: FormatUtils.toFormattedHP(0, globalProperties.globals!),
       lastYearInUSD: FormatUtils.getUSDFromVests(
-        resultFromAPI.lastYearValue,
+        0,
         globalProperties,
         currencyPrices,
       ),

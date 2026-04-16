@@ -1,4 +1,3 @@
-import { KeychainApi } from '@api/keychain';
 import { Witness } from '@interfaces/witness.interface';
 import { setErrorMessage } from '@popup/multichain/actions/message.actions';
 import { setTitleContainerProperties } from '@popup/multichain/actions/title-container.actions';
@@ -12,6 +11,7 @@ import { MyWitnessTabComponent } from 'src/popup/hive/pages/app-container/home/g
 import { ProposalTabComponent } from 'src/popup/hive/pages/app-container/home/governance/proposal-tab/proposal-tab.component';
 import { ProxyTabComponent } from 'src/popup/hive/pages/app-container/home/governance/proxy-tab/proxy-tab.component';
 import { WitnessTabComponent } from 'src/popup/hive/pages/app-container/home/governance/witness-tab/witness-tab.component';
+import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import { Screen } from 'src/reference-data/screen.enum';
 
 const Governance = ({
@@ -32,11 +32,21 @@ const Governance = ({
   }, []);
 
   const init = async () => {
-    let requestResult;
-    requestResult = await KeychainApi.get('hive/v2/witnesses-ranks');
-    const ranking: Witness[] = requestResult;
+    let ranking: Witness[] = [];
     let hasError = false;
-    if (!requestResult || requestResult.length === 0) {
+    try {
+      // Fetch the top 100 witnesses ordered by vote weight directly from RPC.
+      // Replaces the legacy api.hive-keychain.com hive/v2/witnesses-ranks
+      // off-chain index.
+      const result = await HiveTxUtils.getData(
+        'condenser_api.get_witnesses_by_vote',
+        ['', 100],
+      );
+      ranking = (result || []) as Witness[];
+    } catch (err) {
+      ranking = [];
+    }
+    if (!ranking.length) {
       hasError = true;
       setErrorMessage('popup_html_error_retrieving_witness_ranking');
     }

@@ -27,11 +27,9 @@ describe('delegations.component tests:\n', () => {
         initialStates.iniStateAs.defaultExistent,
         {
           app: {
-            apiRelated: {
-              KeychainApi: {
-                customData: {
-                  delegators: { data: '' },
-                },
+            accountsRelated: {
+              DelegationUtils: {
+                getDelegators: null,
               },
             },
           },

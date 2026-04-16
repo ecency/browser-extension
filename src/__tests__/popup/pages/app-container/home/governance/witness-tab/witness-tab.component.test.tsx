@@ -17,6 +17,7 @@ import witness from 'src/__tests__/utils-for-testing/data/witness';
 import reactTestingLibrary from 'src/__tests__/utils-for-testing/react-testing-library-render/react-testing-library-render-functions';
 import { Icons } from 'src/common-ui/icons.enum';
 import { HiveAppComponent } from 'src/popup/hive/hive-app.component';
+import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 
 describe('witness tab:\n', () => {
   afterEach(() => {
@@ -36,16 +37,20 @@ describe('witness tab:\n', () => {
                 getExtendedAccount: { ...accounts.extended, proxy: '' },
               },
             },
-            apiRelated: {
-              KeychainApi: {
-                customData: {
-                  witnessRanking: witness.rankingWInactive,
-                },
-              },
-            },
           },
         },
       );
+      // Override the LoadingValuesConfiguration default (which returns the
+      // smaller `witness.ranking` fixture) with the rankingWInactive list
+      // used by these tests.
+      HiveTxUtils.getData = jest
+        .fn()
+        .mockImplementation(async (method: string) => {
+          if (method === 'condenser_api.get_witnesses_by_vote') {
+            return witness.rankingWInactive;
+          }
+          return [];
+        });
       await act(async () => {
         await userEvent.click(screen.getByTestId(dataTestIdButton.menu));
         await userEvent.click(
@@ -261,16 +266,21 @@ describe('witness tab:\n', () => {
                 getExtendedAccount: { ...accounts.extended, proxy: '' },
               },
             },
-            apiRelated: {
-              KeychainApi: {
-                customData: {
-                  witnessRanking: '',
-                },
-              },
-            },
           },
         },
       );
+      // Override after renderWithConfiguration since LoadingValuesConfiguration.set
+      // installs a default HiveTxUtils.getData mock that returns the witness
+      // ranking. We re-mock here so the governance component's init() observes
+      // an empty ranking and renders the error path.
+      HiveTxUtils.getData = jest
+        .fn()
+        .mockImplementation(async (method: string) => {
+          if (method === 'condenser_api.get_witnesses_by_vote') {
+            return [];
+          }
+          return [];
+        });
       await act(async () => {
         await userEvent.click(screen.getByTestId(dataTestIdButton.menu));
         await userEvent.click(

@@ -1,32 +1,54 @@
-import { KeychainApi } from '@api/keychain';
 import { DelegationUtils } from '@hiveapp/utils/delegation.utils';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import delegations from 'src/__tests__/utils-for-testing/data/delegations';
 import mk from 'src/__tests__/utils-for-testing/data/mk';
 
 describe('delegation.utils.ts tests:/n', () => {
+  const originalFetch = global.fetch;
+  // The production util maps the balance-api `amount` (raw vests as a string)
+  // to `vesting_shares` by dividing by 1_000_000. To preserve the existing
+  // delegators fixture exactly, we synthesize the API response from it.
+  const toBalanceApiResponse = (delegators: typeof delegations.delegators) => ({
+    incoming_delegations: delegators.map((d) => ({
+      delegator: d.delegator,
+      amount: String(Math.round((d.vesting_shares as number) * 1_000_000)),
+    })),
+  });
+  const expectedFromFixture = delegations.delegators.map((d) => ({
+    delegator: d.delegator,
+    vesting_shares:
+      Math.round((d.vesting_shares as number) * 1_000_000) / 1_000_000,
+    delegation_date: '',
+  }));
+
   afterEach(() => {
     jest.clearAllMocks();
+    global.fetch = originalFetch;
   });
   describe('getDelegators cases:\n', () => {
     it('Must return delegator list', async () => {
-      KeychainApi.get = jest.fn().mockResolvedValue(delegations.delegators);
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: async () => toBalanceApiResponse(delegations.delegators),
+      } as any);
       expect(await DelegationUtils.getDelegators(mk.user.one)).toEqual(
-        delegations.delegators,
+        expectedFromFixture,
       );
     });
 
     it('Must return delegator list removing 0 shares records', async () => {
-      KeychainApi.get = jest.fn().mockResolvedValue([
-        ...delegations.delegators,
-        {
-          delegation_date: '2017-08-09T15:30:36.000Z',
-          delegator: 'quentin',
-          vesting_shares: 0,
-        },
-      ]);
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          incoming_delegations: [
+            ...toBalanceApiResponse(delegations.delegators)
+              .incoming_delegations,
+            { delegator: 'quentin', amount: '0' },
+          ],
+        }),
+      } as any);
       expect(await DelegationUtils.getDelegators(mk.user.one)).toEqual(
-        delegations.delegators,
+        expectedFromFixture,
       );
     });
   });
