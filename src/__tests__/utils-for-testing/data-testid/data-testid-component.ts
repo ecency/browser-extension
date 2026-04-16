@@ -53,7 +53,6 @@ const dataTestIdComponent = {
     authorizedOperations: `${Icons.AUTHORIZED_OPERATIONS}-page`,
     automatedTasks: `${Icons.AUTOMATED_TASKS}-page`,
   },
-  whatsNew: 'whats-new-component',
 };
 
 export default dataTestIdComponent;

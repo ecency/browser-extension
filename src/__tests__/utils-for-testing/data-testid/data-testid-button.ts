@@ -96,12 +96,6 @@ const dataTestIdButton = {
   rpcNodes: {
     addRpc: 'button-add-rpc',
   },
-  whatsNew: {
-    button: {
-      lastPage: 'button-last-page',
-      nextPage: 'button-next-page',
-    },
-  },
 };
 
 export default dataTestIdButton;

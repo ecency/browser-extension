@@ -84,7 +84,6 @@ export enum SVGIcons {
   MENU_HELP = 'menu/help',
 
   MENU_SUPPORT = 'menu/help/support',
-  MENU_TUTORIAL = 'menu/help/tutorial',
 
   MENU_USER_PREFERENCES_DETACH_EXTENSION = 'menu/user-preferences/detach',
   MENU_USER_PREFERENCES = 'menu/user-preferences',

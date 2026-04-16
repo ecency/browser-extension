@@ -5,7 +5,7 @@ import { Keys, PrivateKeyType } from '@interfaces/keys.interface';
 import { PrivateKey } from 'hive-tx';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
-import type { WrongKeysOnUser } from 'src/popup/hive/pages/app-container/wrong-key-popup/wrong-key-popup.component';
+import type { WrongKeysOnUser } from 'src/popup/hive/utils/keys.utils';
 import userData from 'src/__tests__/utils-for-testing/data/user-data';
 
 /** Same derivation as `KeysUtils` (hive-tx); avoids brittle hard-coded STM strings across Jest/jsdom. */

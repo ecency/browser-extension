@@ -8,7 +8,6 @@ import witness from 'src/__tests__/utils-for-testing/data/witness';
 import { KeyChainApiGetCustomData } from 'src/__tests__/utils-for-testing/interfaces/implementations';
 import { CustomDataFromLocalStorage } from 'src/__tests__/utils-for-testing/interfaces/mocks.interface';
 import { DEFAULT_FILTER } from 'src/popup/hive/pages/app-container/home/wallet-history/wallet-history.component';
-import { WhatsNewContent } from 'src/popup/hive/pages/app-container/whats-new/whats-new.interface';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 
 const manifestFile = {
@@ -139,7 +138,6 @@ const i18nGetMessageCustom = (message: string, options?: string[]) => {
  * currenciesPrices: CurrencyPricesUtils.getPrices.
  * rpc: HiveUtils.setRpc.
  * phishingAccounts: getPhishingAccounts.
- * extensionVersion: VersionLogUtils.getLastVersion.
  * delegators: HiveUtils.getDelegators.
  */
 const keychainApiGet = async (
@@ -156,18 +154,6 @@ const keychainApiGet = async (
       return customData?.rpc ?? { rpc: 'https://api.hive.blog' };
     case urlToGet === 'hive/phishingAccounts':
       return customData?.phishingAccounts ?? phishing.accounts;
-    case urlToGet === 'hive/last-extension-version':
-    case urlToGet === 'last-extension-version':
-    case urlToGet.includes('last-extension-version'):
-      return (
-        customData?.extensionVersion ??
-        ({
-          version: manifestFile.chromium.version, //by default same version as current
-          //name: manifestFile.chromium.name,
-          features: {},
-          url: 'https://hive-keychain.com',
-        } as WhatsNewContent)
-      );
     case urlToGet.includes('hive/delegators/'):
       return customData?.delegators ?? delegations.delegators;
     default:

@@ -10,13 +10,6 @@ const HelpSubMenuItems: MenuItem[] = [
       chrome.tabs.create({ url: Config.social.discord });
     },
   },
-  {
-    label: 'popup_html_tutorial',
-    icon: SVGIcons.MENU_TUTORIAL,
-    action: () => {
-      chrome.tabs.create({ url: `${Config.tutorial.baseUrl}/#/extension` });
-    },
-  },
 ];
 
 export default HelpSubMenuItems;

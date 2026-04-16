@@ -51,7 +51,6 @@ import ProxyUtils from 'src/popup/hive/utils/proxy.utils';
 import { RcDelegationsUtils } from 'src/popup/hive/utils/rc-delegations.utils';
 import { RewardsUtils } from 'src/popup/hive/utils/rewards.utils';
 import RpcUtils from 'src/popup/hive/utils/rpc.utils';
-import { SurveyUtils } from 'src/popup/hive/utils/survey.utils';
 import TokensUtils from 'src/popup/hive/utils/tokens.utils';
 import TransactionUtils from 'src/popup/hive/utils/transaction.utils';
 import { LedgerUtils } from 'src/utils/ledger.utils';
@@ -154,10 +153,6 @@ export interface TestsAppLoadingValues {
     };
   };
   popupsRelated?: {
-    SurveyUtils?: {
-      getSurvey?: jest.Mock;
-      setCurrentAsSeen?: jest.Mock;
-    };
     GovernanceUtils?: {
       addToIgnoreRenewal?: jest.Mock;
       getGovernanceReminderList?: string[];
@@ -478,13 +473,7 @@ const set = (params?: {
   //////////
 
   /////////
-  //AppPopups related (including: survey, governance, whats'new)
-  SurveyUtils.getSurvey =
-    params?.app?.popupsRelated?.SurveyUtils?.getSurvey ??
-    jest.fn().mockResolvedValue(undefined);
-  SurveyUtils.setCurrentAsSeen =
-    params?.app?.popupsRelated?.SurveyUtils?.setCurrentAsSeen ??
-    jest.fn().mockImplementation(() => {});
+  //AppPopups related (governance only)
   GovernanceUtils.addToIgnoreRenewal =
     params?.app?.popupsRelated?.GovernanceUtils?.addToIgnoreRenewal ??
     jest.fn().mockImplementation(() => Promise.resolve(undefined));
