@@ -3,9 +3,6 @@
   "version": "3.15.3",
   "description": "Hive Keychain extension",
   "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
   "scripts": {
     "dev": "npm outdated; concurrently \"npm:dev:*\"",
     "dev:chromium": "webpack --config webpack/chromium/webpack.dev.js -w",
@@ -19,7 +16,6 @@
     "analyze:firefox": "npx webpack --profile --json > stats.json --config webpack/firefox/webpack.prod.js",
     "crowdin:pull": "crowdin download",
     "crowdin:push": "crowdin upload sources",
-    "doc": "documentation build public/hive_keychain.js -f md -c documentation/build/documentation.yml -o documentation/README.md",
     "test": "jest --verbose",
     "test:detect": "jest --verbose --detectOpenHandles",
     "test:watch": "jest --verbose --watch",
