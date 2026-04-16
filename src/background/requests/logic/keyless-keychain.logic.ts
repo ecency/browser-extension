@@ -35,8 +35,6 @@ export const keylessKeychainRequest = async (
     );
   } else if (request.type === KeychainRequestTypes.addAccount) {
     createAddAccountPopup(requestHandler, tab, request, domain);
-  } else if (request.type === KeychainRequestTypes.swap) {
-    createUnsupportedOperationPopup(requestHandler, tab, request, domain);
   } else if (request.type === KeychainRequestTypes.encodeWithKeys) {
     createUnsupportedOperationPopup(requestHandler, tab, request, domain);
   } else {

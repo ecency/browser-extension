@@ -17,7 +17,6 @@ export const anonymousRequests = [
   KeychainRequestTypes.convert,
   KeychainRequestTypes.recurrentTransfer,
   KeychainRequestTypes.updateProposalVote,
-  KeychainRequestTypes.swap,
 ];
 
 // Get the key needed for each type of transaction

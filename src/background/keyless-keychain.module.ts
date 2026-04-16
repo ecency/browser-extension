@@ -29,7 +29,6 @@ const handleOperation = async (
     case KeychainRequestTypes.decode:
       HiveAuthUtils.challengeRequest(requestHandler, request, domain, tab);
       break;
-    case KeychainRequestTypes.swap:
     case KeychainRequestTypes.encodeWithKeys:
       chrome.runtime.sendMessage({
         command: DialogCommand.ANSWER_REQUEST,

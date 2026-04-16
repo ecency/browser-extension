@@ -234,12 +234,6 @@ describe('index tests:\n', () => {
       .mockImplementation(() =>
         cbImplementation(KeychainRequestTypes.encodeWithKeys),
       );
-    const SwapOpModule = require('src/background/requests/operations/ops/swap.ts');
-    jest
-      .spyOn(SwapOpModule, 'broadcastSwap')
-      .mockImplementation(() =>
-        cbImplementation(KeychainRequestTypes.swap),
-      );
 
     const RequestTypeList = Object.keys(KeychainRequestTypes).filter(
       (requestType) =>

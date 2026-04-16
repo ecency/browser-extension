@@ -30,7 +30,6 @@ describe('requests.utils tests:\n', () => {
         KeychainRequestTypes.convert,
         KeychainRequestTypes.recurrentTransfer,
         KeychainRequestTypes.updateProposalVote,
-        KeychainRequestTypes.swap,
       ];
       anonymousRequestsExpected.forEach((request: any) => {
         if (showEachRequestIteration) {

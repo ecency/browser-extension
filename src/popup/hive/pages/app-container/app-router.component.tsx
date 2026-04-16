@@ -1,7 +1,5 @@
 import { KeylessKeychainComponent } from '@popup/hive/pages/add-account/keyless-keychain/keyless-keychain.component';
 import { EcosystemComponent } from '@popup/hive/pages/app-container/home/ecosystem/ecosystem.component';
-import { TokenSwapsHistoryComponent } from '@popup/hive/pages/app-container/home/swaps/token-swaps-history/token-swaps-history.component';
-import { TokenSwapsComponent } from '@popup/hive/pages/app-container/home/swaps/token-swaps/token-swaps.component';
 import { TokenPendingUnstakePage } from '@popup/hive/pages/app-container/home/tokens/token-pending-unstacking/token-pending-unstacking.component';
 import { PendingRecurrentTransfersPageComponent } from '@popup/hive/pages/app-container/home/transfer-fund/recurrent-transfers/recurrent-transfers.component';
 import { ExportAccountsSubMenuComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/export-accounts-sub-menu.component';
@@ -115,10 +113,6 @@ const AppRouter = ({
         return <TokenIncomingOutgoingPageComponent />;
       case Screen.TOKENS_FILTER:
         return <TokensFilterComponent />;
-      case Screen.TOKEN_SWAP_PAGE:
-        return <TokenSwapsComponent />;
-      case Screen.TOKENS_SWAP_HISTORY:
-        return <TokenSwapsHistoryComponent />;
       case Screen.TOKENS_PENDING_UNSTAKE:
         return <TokenPendingUnstakePage />;
 

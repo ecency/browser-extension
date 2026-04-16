@@ -91,29 +91,6 @@ describe('keylessKeychainRequest', () => {
     );
   });
 
-  it('answers with failure for unsupported swap when user is not anonymous', async () => {
-    (KeylessKeychainModule.getKeylessRegistrationInfo as jest.Mock).mockResolvedValue({
-      token: 'x',
-    });
-    const requestHandler = makeHandler();
-
-    await keylessKeychainRequest(
-      requestHandler,
-      tab,
-      { type: KeychainRequestTypes.swap, username: 'alice' } as any,
-      domain,
-    );
-    await flushAsyncPopups();
-
-    expect(createPopup).toHaveBeenCalled();
-    expect(sendMessage).toHaveBeenCalledWith(
-      expect.objectContaining({
-        command: expect.any(String),
-        msg: expect.objectContaining({ success: false }),
-      }),
-    );
-  });
-
   it('answers with failure for unsupported encodeWithKeys', async () => {
     (KeylessKeychainModule.getKeylessRegistrationInfo as jest.Mock).mockResolvedValue({
       token: 'x',

@@ -19,9 +19,4 @@ export const ActionButtonList: ActionButton[] = [
     icon: SVGIcons.BOTTOM_BAR_BUY,
     nextScreen: Screen.BUY_COINS_PAGE,
   },
-  {
-    label: 'html_popup_swaps_process_swap',
-    icon: SVGIcons.BOTTOM_BAR_SWAPS,
-    nextScreen: Screen.TOKEN_SWAP_PAGE,
-  },
 ];

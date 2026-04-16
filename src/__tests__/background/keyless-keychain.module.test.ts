@@ -142,7 +142,7 @@ describe('KeylessKeychainModule', () => {
       );
     });
 
-    it('answers with failure for unsupported swap / encodeWithKeys', async () => {
+    it('answers with failure for unsupported encodeWithKeys', async () => {
       (chrome.i18n.getMessage as jest.Mock).mockImplementation(
         (_key: string, subs?: string[]) =>
           subs ? `unsupported:${subs[0]}` : 'unsupported',
@@ -150,7 +150,7 @@ describe('KeylessKeychainModule', () => {
 
       await KeylessKeychainModule.handleOperation(
         handler,
-        { type: KeychainRequestTypes.swap } as any,
+        { type: KeychainRequestTypes.encodeWithKeys } as any,
         'd',
         2,
       );
