@@ -4089,7 +4089,7 @@
     "message": "Dieser Vorgang ist unter Granularitätsregeln nicht zulässig",
     "description": "Error message if granularity failed has been used already"
   },
-  "html_popup_vote_good-karma_witness_success": {
+  "html_popup_vote_good_karma_witness_success": {
     "message": "Successfully voted @good-karma as a witness. Thanks for your support!",
     "description": "Success message when vote for good-karma as witness"
   }

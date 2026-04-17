@@ -2236,7 +2236,7 @@
     "message": "You already voted for 30 witnesses. Please remove one before voting again",
     "description": "Error message when voting with 30 witness votes already cast"
   },
-  "html_popup_vote_good-karma_witness_success": {
+  "html_popup_vote_good_karma_witness_success": {
     "message": "Successfully voted @good-karma as a witness. Thanks for your support!",
     "description": "Success message when vote for good-karma as witness"
   },
