@@ -19,13 +19,8 @@ export const loadTokens = (): AppThunk => async (dispatch) => {
   try {
     tokens = await TokensUtils.getAllTokens();
   } catch (err: any) {
-    if (err.message.includes('timeout')) {
-      dispatch({
-        type: MultichainActionType.SET_MESSAGE,
-        payload: { key: 'html_popup_tokens_timeout', type: MessageType.ERROR },
-      });
-    }
-    throw err;
+    Logger.error('Failed to load Hive Engine tokens', err);
+    return;
   }
 
   const action: ActionPayload<Token[]> = {

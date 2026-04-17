@@ -42,7 +42,14 @@ const Governance = ({
         'condenser_api.get_witnesses_by_vote',
         ['', 100],
       );
-      ranking = (result || []) as Witness[];
+      ranking = (result || []).map((w: any, i: number) => ({
+        name: w.owner,
+        rank: String(i + 1),
+        active_rank: String(i + 1),
+        votes: w.votes,
+        signing_key: w.signing_key,
+        url: w.url,
+      })) as Witness[];
     } catch (err) {
       ranking = [];
     }
