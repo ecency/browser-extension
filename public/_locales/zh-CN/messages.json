@@ -2306,5 +2306,21 @@
   "popup_html_token_unstake_cooldown_disclaimer": {
     "message": "取消这个代币将需要 $1 天。",
     "description": "Token wallet information start canceling delegation out"
+  },
+  "popup_html_buy": {
+    "message": "Buy",
+    "description": "Buy button label"
+  },
+  "popup_html_swap": {
+    "message": "Swap",
+    "description": "Swap button label"
+  },
+  "popup_html_swap_coming_soon": {
+    "message": "Swap — Coming Soon",
+    "description": "Swap placeholder title"
+  },
+  "popup_html_buy_from_exchanges": {
+    "message": "Buy HIVE from these exchanges:",
+    "description": "Buy page subtitle"
   }
 }

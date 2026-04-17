@@ -7,6 +7,7 @@ import { ConnectedProps, connect } from 'react-redux';
 const EXCHANGES = [
   { name: 'Binance', url: 'https://www.binance.com/en/trade/HIVE_USDT' },
   { name: 'Upbit', url: 'https://upbit.com/exchange?code=CRIX.UPBIT.BTC-HIVE' },
+  { name: 'Bitget', url: 'https://www.bitget.com/spot/HIVEUSDT' },
   { name: 'Gate.io', url: 'https://www.gate.io/trade/HIVE_USDT' },
   { name: 'MEXC', url: 'https://www.mexc.com/exchange/HIVE_USDT' },
   { name: 'Probit', url: 'https://www.probit.com/app/exchange/HIVE-USDT' },

@@ -4112,5 +4112,21 @@
   "error_granularity": {
     "message": "This operation isn't allowed under granularity rules",
     "description": "Error message if granularity failed has been used already"
+  },
+  "popup_html_buy": {
+    "message": "Buy",
+    "description": "Buy button label"
+  },
+  "popup_html_swap": {
+    "message": "Swap",
+    "description": "Swap button label"
+  },
+  "popup_html_swap_coming_soon": {
+    "message": "Swap — Coming Soon",
+    "description": "Swap placeholder title"
+  },
+  "popup_html_buy_from_exchanges": {
+    "message": "Buy HIVE from these exchanges:",
+    "description": "Buy page subtitle"
   }
 }

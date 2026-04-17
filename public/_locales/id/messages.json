@@ -4092,5 +4092,21 @@
   "html_popup_vote_good_karma_witness_success": {
     "message": "Successfully voted @good-karma as a witness. Thanks for your support!",
     "description": "Success message when vote for good-karma as witness"
+  },
+  "popup_html_buy": {
+    "message": "Buy",
+    "description": "Buy button label"
+  },
+  "popup_html_swap": {
+    "message": "Swap",
+    "description": "Swap button label"
+  },
+  "popup_html_swap_coming_soon": {
+    "message": "Swap — Coming Soon",
+    "description": "Swap placeholder title"
+  },
+  "popup_html_buy_from_exchanges": {
+    "message": "Buy HIVE from these exchanges:",
+    "description": "Buy page subtitle"
   }
 }
