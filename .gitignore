@@ -10,4 +10,5 @@ coverage
 *.code-workspace
 _releases
 .notes
-*.zip
+*.zip.idea/
+.env
