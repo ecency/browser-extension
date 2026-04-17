@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { SVGIcons } from 'src/common-ui/icons.enum';
-import { SVGIcon } from 'src/common-ui/svg-icon/svg-icon.component';
 
 export const SplashscreenComponent = () => {
   return useMemo(() => {
@@ -10,7 +8,11 @@ export const SplashscreenComponent = () => {
           <div className="top"></div>
           <div className="bottom"></div>
         </div>
-        <SVGIcon className="logo" icon={SVGIcons.KEYCHAIN_LOGO_SPLASHSCREEN} />
+        <img
+          className="logo"
+          src="/assets/images/keeper-logo-200.png"
+          alt="Hive Keeper"
+        />
         <div className="loading-animation-container">
           <div className="ball first"></div>
           <div className="ball second"></div>

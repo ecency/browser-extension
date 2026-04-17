@@ -50,7 +50,11 @@ const SignIn = ({
 
   return (
     <div data-testid="sign-in-page" className="sign-in-page">
-      <SVGIcon className="logo-white" icon={SVGIcons.KEYCHAIN_FULL_LOGO} />
+      <img
+        className="logo-white"
+        src="/assets/images/keeper-logo-200.png"
+        alt="Hive Keeper"
+      />
       <div className="introduction-panel">
         <span className="introduction big first">
           {chrome.i18n.getMessage('popup_html_unlock1')}
