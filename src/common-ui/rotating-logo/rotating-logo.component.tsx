@@ -1,11 +1,10 @@
 import React from 'react';
-import { SVGIcons } from 'src/common-ui/icons.enum';
-import { SVGIcon } from 'src/common-ui/svg-icon/svg-icon.component';
 
 const RotatingLogoComponent = () => (
-  <SVGIcon
+  <img
     className="rotating-logo"
-    icon={SVGIcons.KEYCHAIN_LOGO_ROUND}
+    src="/assets/images/keeper-logo-200.png"
+    alt="Loading"
     data-testid="loading-logo"
   />
 );
