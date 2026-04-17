@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { AnimatedKeeper } from 'src/common-ui/animated-keeper/animated-keeper.component';
 
 export const SplashscreenComponent = () => {
   return useMemo(() => {
@@ -8,11 +9,7 @@ export const SplashscreenComponent = () => {
           <div className="top"></div>
           <div className="bottom"></div>
         </div>
-        <img
-          className="logo"
-          src="/assets/images/keeper-logo-200.png"
-          alt="Hive Keeper"
-        />
+        <AnimatedKeeper className="logo" width={120} height={120} />
         <div className="loading-animation-container">
           <div className="ball first"></div>
           <div className="ball second"></div>

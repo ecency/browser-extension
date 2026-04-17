@@ -1,3 +1,4 @@
+import { AnimatedKeeper } from 'src/common-ui/animated-keeper/animated-keeper.component';
 import { setErrorMessage } from '@popup/multichain/actions/message.actions';
 import { setMk } from '@popup/multichain/actions/mk.actions';
 import { navigateTo } from '@popup/multichain/actions/navigation.actions';
@@ -50,11 +51,7 @@ const SignIn = ({
 
   return (
     <div data-testid="sign-in-page" className="sign-in-page">
-      <img
-        className="logo-white"
-        src="/assets/images/keeper-logo-200.png"
-        alt="Hive Keeper"
-      />
+      <AnimatedKeeper className="logo-white" width={120} height={120} />
       <div className="introduction-panel">
         <span className="introduction big first">
           {chrome.i18n.getMessage('popup_html_unlock1')}
