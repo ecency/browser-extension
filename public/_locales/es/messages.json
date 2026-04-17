@@ -204,7 +204,7 @@
     "description": "When adding new account"
   },
   "popup_html_keyless_keychain": {
-    "message": "Keyless Keychain",
+    "message": "HiveAuth",
     "description": "Keyless keychain"
   },
   "popup_html_keyless_keychain_setup": {
@@ -1365,7 +1365,7 @@
   },
   "bgd_keyless_keychain_error": {
     "message": "Error del modo Keyless",
-    "description": "Keyless Keychain Error"
+    "description": "HiveAuth Error"
   },
   "bgd_init_no_wallet": {
     "message": "¡No hay billetera!",
@@ -1765,11 +1765,11 @@
     "description": "When registering from request"
   },
   "dialog_register_keyless_title": {
-    "message": "Registrar Keyless Keychain",
+    "message": "Registrar HiveAuth",
     "description": "When registering from request"
   },
   "dialog_header_keyless_username": {
-    "message": "Registrar Keyless Keychain",
+    "message": "Registrar HiveAuth",
     "description": "When registering from request"
   },
   "dialog_register_keyless_loading": {
@@ -1781,11 +1781,11 @@
     "description": "When registering to keyless keychain via HiveAuth"
   },
   "dialog_anonymous_keyless_content": {
-    "message": "Está a punto de realizar una operación Keyless anónima. Por favor, introduzca su nombre de usuario para registrar su Keyless Keychain.",
+    "message": "Está a punto de realizar una operación Keyless anónima. Por favor, introduzca su nombre de usuario para registrar su HiveAuth.",
     "description": "When registering from request"
   },
   "dialog_keyless_unsupported_operation": {
-    "message": "$1 no es compatible con Keyless Keychain.",
+    "message": "$1 no es compatible con HiveAuth.",
     "description": "When trying to perform an unsupported operation"
   },
   "dialog_keyless_username_required": {
@@ -3490,7 +3490,7 @@
     "description": "Message to remind user to accept transaction on his Ledger device"
   },
   "popup_html_setup_keyless_keychain": {
-    "message": "Keyless Keychain",
+    "message": "HiveAuth",
     "description": "Hive Keeper is in keyless mode and will use HiveAuth to request transactions to be signed on your mobile device"
   },
   "add_key_from_ledger": {

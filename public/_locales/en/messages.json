@@ -204,7 +204,7 @@
     "description": "When adding new account"
   },
   "popup_html_keyless_keychain": {
-    "message": "Keyless Keychain",
+    "message": "HiveAuth",
     "description": "Keyless keychain"
   },
   "popup_html_keyless_keychain_setup": {
@@ -1368,8 +1368,8 @@
     "description": "When requesting recurrent transfers"
   },
   "bgd_keyless_keychain_error": {
-    "message": "Keyless Keychain Error",
-    "description": "Keyless Keychain Error"
+    "message": "HiveAuth Error",
+    "description": "HiveAuth Error"
   },
   "bgd_init_no_wallet": {
     "message": "No wallet!",
@@ -1769,11 +1769,11 @@
     "description": "When registering from request"
   },
   "dialog_register_keyless_title": {
-    "message": "Register Keyless Keychain",
+    "message": "Register HiveAuth",
     "description": "When registering from request"
   },
   "dialog_header_keyless_username": {
-    "message": "Register Keyless Keychain",
+    "message": "Register HiveAuth",
     "description": "When registering from request"
   },
   "dialog_register_keyless_loading": {
@@ -3514,7 +3514,7 @@
     "description": "Message to remind user to accept transaction on his Ledger device"
   },
   "popup_html_setup_keyless_keychain": {
-    "message": "Keyless Keychain",
+    "message": "HiveAuth",
     "description": "Hive Keeper is in keyless mode and will use HiveAuth to request transactions to be signed on your mobile device"
   },
   "add_key_from_ledger": {
