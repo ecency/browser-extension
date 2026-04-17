@@ -12,7 +12,6 @@ import { EstimatedAccountValueSectionComponent } from 'src/popup/hive/pages/app-
 import { GovernanceRenewalComponent } from 'src/popup/hive/pages/app-container/home/governance-renewal/governance-renewal.component';
 import { ResourcesSectionComponent } from 'src/popup/hive/pages/app-container/home/resources-section/resources-section.component';
 import { TopBarComponent } from 'src/popup/hive/pages/app-container/home/top-bar/top-bar.component';
-import { ProposalVotingSectionComponent } from 'src/popup/hive/pages/app-container/home/voting-section/proposal-voting-section/proposal-voting-section.component';
 import { WalletInfoSectionComponent } from 'src/popup/hive/pages/app-container/home/wallet-info-section/wallet-info-section.component';
 import ActiveAccountUtils from 'src/popup/hive/utils/active-account.utils';
 import { GovernanceUtils } from 'src/popup/hive/utils/governance.utils';
@@ -59,7 +58,7 @@ const Home = ({
         <GovernanceRenewalComponent accountNames={governanceAccountsToExpire} />
       );
     }
-    return <ProposalVotingSectionComponent />;
+    return null;
   };
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {

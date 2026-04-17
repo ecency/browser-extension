@@ -8,48 +8,19 @@ import { Key, TransactionOptions } from '@interfaces/keys.interface';
 import { FundedOption, Proposal } from '@interfaces/proposal.interface';
 import { Asset } from 'hive-keychain-commons';
 import moment from 'moment';
-import Config from 'src/config';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import FormatUtils from 'src/utils/format.utils';
 
 const hasVotedForProposal = async (
   username: string,
-  proposalId?: number,
+  proposalId: number = 0,
 ): Promise<boolean> => {
   const listProposalVotes = await HiveTxUtils.getData(
     'condenser_api.list_proposal_votes',
-    [
-      [
-        proposalId !== undefined ? proposalId : Config.KEYCHAIN_PROPOSAL,
-        username,
-      ],
-      1,
-      'by_proposal_voter',
-      'ascending',
-      'all',
-    ],
+    [[proposalId, username], 1, 'by_proposal_voter', 'ascending', 'all'],
   );
   return listProposalVotes[0].voter === username;
-};
-/* istanbul ignore next */
-const voteForKeychainProposal = async (
-  username: string,
-  activeKey: Key,
-  options?: TransactionOptions,
-) => {
-  return await HiveTxUtils.sendOperation(
-    [
-      ProposalUtils.getUpdateProposalVoteOperation(
-        [Config.KEYCHAIN_PROPOSAL],
-        true,
-        username,
-      ),
-    ],
-    activeKey,
-    false,
-    options,
-  );
 };
 
 /* istanbul ignore next */
@@ -213,47 +184,12 @@ const getProposalList = async (
   return proposals;
 };
 
-const isRequestingProposalVotes = async (globals: DynamicGlobalProperties) => {
-  let dailyBudget = +(await ProposalUtils.getProposalDailyBudget());
-  const proposals = (
-    await HiveTxUtils.getData('condenser_api.list_proposals', [
-      [-1],
-      1000,
-      'by_total_votes',
-      'descending',
-      'votable',
-    ])
-  ).map((proposal: any) => {
-    const dailyPay = Asset.fromString(proposal.daily_pay);
-    let fundedOption = FundedOption.NOT_FUNDED;
-    if (dailyBudget > 0) {
-      dailyBudget -= dailyPay.amount;
-      if (dailyBudget >= 0) {
-        fundedOption = FundedOption.TOTALLY_FUNDED;
-      } else {
-        fundedOption = FundedOption.PARTIALLY_FUNDED;
-      }
-    }
-    proposal.fundedOption = fundedOption;
-    proposal.totalVotes = FormatUtils.toHP(
-      (parseFloat(proposal.total_votes) / 1000000).toString(),
-      globals,
-    );
-    return proposal;
-  });
-
-  const keychainProposal = proposals.find(
-    (proposal: any) => proposal.id === Config.KEYCHAIN_PROPOSAL,
-  );
-  const returnProposal = proposals.find(
-    (proposal: any) => proposal.fundedOption == FundedOption.PARTIALLY_FUNDED,
-  );
-
-  const voteDifference =
-    keychainProposal?.totalVotes - returnProposal?.totalVotes ||
-    Config.PROPOSAL_MIN_VOTE_DIFFERENCE_HIDE_POPUP;
-
-  return voteDifference < Config.PROPOSAL_MIN_VOTE_DIFFERENCE_HIDE_POPUP;
+// The proposal-vote popup and its shouldDisplay check have been removed.
+// isRequestingProposalVotes is kept as a no-op for test compatibility.
+const isRequestingProposalVotes = async (
+  _globals: DynamicGlobalProperties,
+) => {
+  return false;
 };
 
 /* istanbul ignore next */
@@ -392,7 +328,6 @@ const getRemoveProposalTransaction = (
 const ProposalUtils = {
   hasVotedForProposal,
   voteForProposal,
-  voteForKeychainProposal,
   getProposalList,
   unvoteProposal,
   isRequestingProposalVotes,
