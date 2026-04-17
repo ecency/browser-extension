@@ -123,11 +123,13 @@ const TopBar = ({
         onClick={() => navigateTo(Screen.SETTINGS_MAIN_PAGE)}
         className="button settings-button"
       />
-      <SVGIcon
+      <img
         className={`logo ${rotateLogo ? 'rotate' : ''}`}
-        icon={SVGIcons.TOP_BAR_KEYCHAIN_LOGO}
+        src="/assets/images/keeper-logo-64.png"
+        alt="Hive Keeper"
         onClick={refresh}
-        dataTestId="top-bar-refresh-icon"
+        data-testid="top-bar-refresh-icon"
+        style={{ cursor: 'pointer' }}
       />
       <div className="spacer"></div>
       {hasRewardToClaim && (
