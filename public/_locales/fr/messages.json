@@ -2334,5 +2334,17 @@
   "popup_html_buy_from_exchanges": {
     "message": "Buy HIVE from these exchanges:",
     "description": "Buy page subtitle"
+  },
+  "popup_html_swap_success": {
+    "message": "Swap order submitted successfully!",
+    "description": "Swap success message"
+  },
+  "popup_html_swap_new": {
+    "message": "New Swap",
+    "description": "Button to start a new swap"
+  },
+  "popup_html_cancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
   }
 }
