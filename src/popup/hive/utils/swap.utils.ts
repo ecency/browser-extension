@@ -73,9 +73,12 @@ const estimateHiveSwap = async (
     const effectiveRate = accumulated / amount;
     const slippage = Math.abs(effectiveRate - firstPrice) / firstPrice;
 
+    // Floor to 3 decimals — never promise more than the book provides
+    const toAmount = Math.floor(accumulated * 1000) / 1000;
+
     return {
       fromAmount: amount,
-      toAmount: parseFloat(accumulated.toFixed(3)),
+      toAmount,
       rate: parseFloat(effectiveRate.toFixed(6)),
       slippage: parseFloat((slippage * 100).toFixed(2)),
       method: 'hive',
@@ -86,13 +89,26 @@ const estimateHiveSwap = async (
   }
 };
 
+/**
+ * Builds a limit_order_create that fills instantly against the
+ * existing order book. Uses the estimated amount (already floor-rounded
+ * from the book walk) as min_to_receive so the order matches at
+ * or better than the estimated price.
+ *
+ * fill_or_kill=false: the order fills against existing book entries;
+ * any unfilled remainder sits as a pending order (auto-expires).
+ * In practice, if the estimate is correct the entire order fills
+ * immediately since the book has the required liquidity.
+ */
 const buildLimitOrderOperation = (
   username: string,
   sellingHive: boolean,
   sellAmount: number,
   receiveAmount: number,
 ) => {
-  const orderId = Math.floor(9e9 + Math.random() * 9e8);
+  const orderId = Math.floor(
+    9e9 + parseInt(Date.now().toString().slice(-8)),
+  );
   const expiration = new Date(
     Date.now() + 27 * 24 * 60 * 60 * 1000,
   ).toISOString().split('.')[0];
