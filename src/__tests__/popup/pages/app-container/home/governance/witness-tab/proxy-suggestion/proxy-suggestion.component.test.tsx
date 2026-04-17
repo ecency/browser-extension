@@ -82,7 +82,7 @@ describe('Proxy suggestion tests:\n', () => {
     expect(await screen.findByText('Error setting proxy')).toBeInTheDocument();
   });
 
-  it('Must set @keychain as proxy', async () => {
+  it('Must set @ecency as proxy', async () => {
     ProxyUtils.findUserProxy = jest.fn().mockResolvedValue(null);
     ProxyUtils.setAsProxy = jest.fn().mockResolvedValue({
       tx_id: 'tx_id',
@@ -101,7 +101,7 @@ describe('Proxy suggestion tests:\n', () => {
     });
     expect(
       await screen.findByText(
-        chrome.i18n.getMessage('popup_success_proxy', ['keychain']),
+        chrome.i18n.getMessage('popup_success_proxy', ['ecency']),
       ),
     ).toBeInTheDocument();
   });
@@ -121,7 +121,7 @@ describe('Proxy suggestion tests:\n', () => {
     });
     expect(
       await screen.findByText(
-        chrome.i18n.getMessage('popup_error_proxy', ['keychain']),
+        chrome.i18n.getMessage('popup_error_proxy', ['ecency']),
       ),
     ).toBeInTheDocument();
   });

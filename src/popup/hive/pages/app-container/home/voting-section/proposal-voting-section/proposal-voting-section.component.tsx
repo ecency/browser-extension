@@ -110,22 +110,15 @@ const ProposalVotingSection = ({
       <div className="popup-title">
         {chrome.i18n.getMessage('popup_html_proposal_vote')}
       </div>
-      <img
-        className="popup-icon"
-        src={
-          'https://images.hive.blog/0x0/https://files.peakd.com/file/peakd-hive/stoodkev/23wXG62TYT2yVFnmLB3hwg9hsL9jmEHYow667J1bVk1ebowRwEnNu3ckaHxHohcatE5v8.png'
-        }
-      />
       <div className="caption">
         <div>
-          Hive Keychain is developed thanks to our community support through the
+          Hive Keeper is developed thanks to our community support through the
           Decentralized Hive Fund.
         </div>
         <br />
         <div>
-          We need your help to continue our work on Hive Keychain Apps and
-          extensions. Please consider supporting our DHF proposal with your
-          vote.
+          We need your help to continue our work on Hive Keeper. Please
+          consider supporting our DHF proposal with your vote.
         </div>
         <br />
         <div>

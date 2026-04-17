@@ -58,7 +58,7 @@ const dataTestIdButton = {
       send: 'send-transfer',
     },
     voteProposal: 'vote-key-chain-proposal',
-    voteStoodkevWitness: 'vote-for-stoodkev-witness',
+    voteWitness: 'vote-for-witness',
     tokens: {
       preFix: 'token-button-operation-',
       transfer: {

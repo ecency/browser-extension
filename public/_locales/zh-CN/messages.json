@@ -1699,14 +1699,6 @@
     "message": "投票@stoodkev 作为见證人",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_vote_stoodkev_witness_error_30_votes": {
-    "message": "您已经为 30 位證人投票。 请在为@stoodkev 投票之前删除一个",
-    "description": "Error message when vote for stoodkev as witness with 30 votes"
-  },
-  "html_popup_vote_stoodkev_witness_success": {
-    "message": "成功投票给@stoodkev 作为见證人。 谢谢您的支持！",
-    "description": "Success message when vote for stoodkev as witness"
-  },
   "html_popup_conversion_operation": {
     "message": "转换",
     "description": "conversion operation"
@@ -1856,7 +1848,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "被管理投票压得喘不过气来？ 将@keychain 设置为代理以自动关注 Hive Keeper 团队见證和提案投票。 您可以随时从管理清单中更改此设置。",
+    "message": "被管理投票压得喘不过气来？ 将@ecency 设置为代理以自动关注 Hive Keeper 团队见證和提案投票。 您可以随时从管理清单中更改此设置。",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {

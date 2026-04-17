@@ -29,10 +29,10 @@ describe('witness-voting-section.component tests:\n', () => {
       });
     });
 
-    it('Must show vote-for-witness when user has not yet voted for stoodkev', async () => {
+    it('Must show vote-for-witness when user has not yet voted for good-karma', async () => {
       expect(
         await screen.findByTestId(
-          dataTestIdButton.operation.voteStoodkevWitness,
+          dataTestIdButton.operation.voteWitness,
         ),
       ).toBeInTheDocument();
     });
@@ -48,12 +48,12 @@ describe('witness-voting-section.component tests:\n', () => {
         .mockResolvedValue(undefined);
       await act(async () => {
         await userEvent.click(
-          screen.getByTestId(dataTestIdButton.operation.voteStoodkevWitness),
+          screen.getByTestId(dataTestIdButton.operation.voteWitness),
         );
       });
       expect(
         await screen.findByText(
-          chrome.i18n.getMessage('html_popup_vote_stoodkev_witness_success'),
+          chrome.i18n.getMessage('html_popup_vote_good-karma_witness_success'),
         ),
       ).toBeInTheDocument();
     });
@@ -64,7 +64,7 @@ describe('witness-voting-section.component tests:\n', () => {
         .mockRejectedValue(new Error('Error trying to vote for witness'));
       await act(async () => {
         await userEvent.click(
-          screen.getByTestId(dataTestIdButton.operation.voteStoodkevWitness),
+          screen.getByTestId(dataTestIdButton.operation.voteWitness),
         );
       });
       expect(
@@ -98,13 +98,13 @@ describe('witness-voting-section.component tests:\n', () => {
     it('Must show error if no witness votes left', async () => {
       await act(async () => {
         await userEvent.click(
-          screen.getByTestId(dataTestIdButton.operation.voteStoodkevWitness),
+          screen.getByTestId(dataTestIdButton.operation.voteWitness),
         );
       });
       expect(
         await screen.findByText(
           chrome.i18n.getMessage(
-            'html_popup_vote_stoodkev_witness_error_30_votes',
+            'html_popup_vote_witness_error_30_votes',
           ),
         ),
       ).toBeInTheDocument();
@@ -138,7 +138,7 @@ describe('witness-voting-section.component tests:\n', () => {
     it('Must show error trying to vote', async () => {
       await act(async () => {
         await userEvent.click(
-          screen.getByTestId(dataTestIdButton.operation.voteStoodkevWitness),
+          screen.getByTestId(dataTestIdButton.operation.voteWitness),
         );
       });
       expect(

@@ -2232,21 +2232,13 @@
     "message": "Vote $1 as witness",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_vote_stoodkev_witness_error_30_votes": {
-    "message": "You already voted for 30 witnesses. Please remove one before voting for @stoodkev",
-    "description": "Error message when vote for stoodkev as witness with 30 votes"
-  },
   "html_popup_vote_witness_error_30_votes": {
     "message": "You already voted for 30 witnesses. Please remove one before voting again",
-    "description": "Error message when vote for stoodkev as witness with 30 votes"
+    "description": "Error message when voting with 30 witness votes already cast"
   },
-  "html_popup_vote_stoodkev_witness_success": {
-    "message": "Successfully voted @stoodkev as a witness. Thanks for your support!",
-    "description": "Success message when vote for stoodkev as witness"
-  },
-  "html_popup_vote_cedricguillas_witness_success": {
-    "message": "Successfully voted @cedricguillas as a witness. Thanks for your support!",
-    "description": "Success message when vote for stoodkev as witness"
+  "html_popup_vote_good-karma_witness_success": {
+    "message": "Successfully voted @good-karma as a witness. Thanks for your support!",
+    "description": "Success message when vote for good-karma as witness"
   },
   "html_popup_conversion_operation": {
     "message": "Conversion",
@@ -2481,7 +2473,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "Overwhelmed by governance votes? Set @keychain as proxy to automatically follow Hive Keeper team witness and proposal votes. You can change this anytime from the governance menu.",
+    "message": "Overwhelmed by governance votes? Set @ecency as proxy to automatically follow Hive Keeper team witness and proposal votes. You can change this anytime from the governance menu.",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {

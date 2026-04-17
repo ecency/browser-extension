@@ -59,7 +59,7 @@ const WitnessVotingSection = ({
 
   const handleVoteForWitnessClicked = async (account: string) => {
     if (activeAccount.account.witnesses_voted_for === 30) {
-      setErrorMessage('html_popup_vote_stoodkev_witness_error_30_votes');
+      setErrorMessage('html_popup_vote_witness_error_30_votes');
     } else {
       processVoteForWitness(account);
     }
@@ -67,10 +67,7 @@ const WitnessVotingSection = ({
 
   let voteForAccount: string | undefined = undefined;
   if (activeAccount.account.proxy.length === 0) {
-    for (const acc of [
-      'stoodkev',
-      // 'cedricguillas'
-    ]) {
+    for (const acc of ['good-karma']) {
       if (!activeAccount.account.witness_votes.includes(acc)) {
         voteForAccount = acc;
         break;
@@ -82,7 +79,7 @@ const WitnessVotingSection = ({
     <div className="witness-voting-section">
       {voteForAccount && (
         <OperationButtonComponent
-          dataTestId="vote-for-stoodkev-witness"
+          dataTestId="vote-for-witness"
           labelParams={[`@${voteForAccount}`]}
           onClick={() => {
             handleVoteForWitnessClicked(voteForAccount!);

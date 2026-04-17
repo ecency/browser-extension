@@ -2224,21 +2224,9 @@
     "message": "$1 als Witness voten",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_vote_stoodkev_witness_error_30_votes": {
-    "message": "Sie haben bereits für 30 Witnesses abgestimmt. Bitte entfernen Sie einen Eintrag, bevor Sie für @stoodkev stimmen",
-    "description": "Error message when vote for stoodkev as witness with 30 votes"
-  },
   "html_popup_vote_witness_error_30_votes": {
     "message": "Sie haben bereits für 30 Witnesses abgestimmt. Bitte entfernen Sie einen Eintrag, bevor Sie fortfahren",
     "description": "Error message when vote for stoodkev as witness with 30 votes"
-  },
-  "html_popup_vote_stoodkev_witness_success": {
-    "message": "Erfolgreich für @stoodkev als Witness gestimmt. Vielen Dank für den Support!",
-    "description": "Success message when vote for stoodkev as witness"
-  },
-  "html_popup_vote_cedricguillas_witness_success": {
-    "message": "Erfolgreich für @cedricguillas als Witness gestimmt. Vielen Dank für den Support!",
-    "description": "Success message when vote for stoodkev as witness"
   },
   "html_popup_conversion_operation": {
     "message": "Konvertierung",
@@ -2473,7 +2461,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "Überfordert von den Governance-Abstimmungen? Setzen Sie @keychain als Proxy, um automatisch den Witness- und Proposal-Stimmen des Hive Keeper Teams zu folgen. Sie können dies jederzeit im Governance-Menü ändern.",
+    "message": "Überfordert von den Governance-Abstimmungen? Setzen Sie @ecency als Proxy, um automatisch den Witness- und Proposal-Stimmen des Hive Keeper Teams zu folgen. Sie können dies jederzeit im Governance-Menü ändern.",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {
@@ -4100,5 +4088,9 @@
   "error_granularity": {
     "message": "Dieser Vorgang ist unter Granularitätsregeln nicht zulässig",
     "description": "Error message if granularity failed has been used already"
+  },
+  "html_popup_vote_good-karma_witness_success": {
+    "message": "Successfully voted @good-karma as a witness. Thanks for your support!",
+    "description": "Success message when vote for good-karma as witness"
   }
 }

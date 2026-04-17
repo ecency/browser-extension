@@ -1711,14 +1711,6 @@
     "message": "Votez pour @stoodkev en tant que witness",
     "description": "On main page, in the vote witness section"
   },
-  "html_popup_vote_stoodkev_witness_error_30_votes": {
-    "message": "Vous avez déjà voté pour 30 witness. Veuillez en retirer un avant de voter pour @stoodkev",
-    "description": "Error message when vote for stoodkev as witness with 30 votes"
-  },
-  "html_popup_vote_stoodkev_witness_success": {
-    "message": "A voté pour @stoodkev comme witness. Merci pour votre soutien !",
-    "description": "Success message when vote for stoodkev as witness"
-  },
   "html_popup_conversion_operation": {
     "message": "Conversion",
     "description": "conversion operation"
@@ -1868,7 +1860,7 @@
     "description": "Node Rpc auto selection hint"
   },
   "popup_html_proxy_suggestion": {
-    "message": "Vous ne voulez pas vous préoccuper de tout ce qui touche à la gouvernance? Définissez @keychain comme proxy pour suivre automatiquement les votes de witness/proposals de l'équipe Hive Keeper. Vous pouvez modifier cela à tout moment à partir du menu de gouvernance.",
+    "message": "Vous ne voulez pas vous préoccuper de tout ce qui touche à la gouvernance? Définissez @ecency comme proxy pour suivre automatiquement les votes de witness/proposals de l'équipe Hive Keeper. Vous pouvez modifier cela à tout moment à partir du menu de gouvernance.",
     "description": "If no witness voted"
   },
   "popup_html_setting_proxy": {

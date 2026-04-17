@@ -41,16 +41,16 @@ const ProxySuggestion = ({
   const handleSetProxy = async () => {
     try {
       const success = await ProxyUtils.setAsProxy(
-        'keychain',
+        'ecency',
         activeAccount.name!,
         activeAccount.keys.active!,
       );
       if (success) {
-        setSuccessMessage('popup_success_proxy', ['keychain']);
+        setSuccessMessage('popup_success_proxy', ['ecency']);
         refreshActiveAccount();
         handleClose();
       } else {
-        setErrorMessage('popup_error_proxy', ['keychain']);
+        setErrorMessage('popup_error_proxy', ['ecency']);
       }
     } catch (err: any) {
       setErrorMessage(err.message);
