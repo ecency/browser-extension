@@ -132,6 +132,11 @@
 @mixin icon-size($size) {
   height: $size !important;
   width: $size !important;
+  overflow: hidden;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @mixin dmSans400($fontSize) {
