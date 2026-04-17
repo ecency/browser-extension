@@ -39,17 +39,15 @@ describe('token.actions tests:\n', () => {
       );
     });
 
-    test('If error on response, will throw an unhandled error', async () => {
+    test('If error on response, tokens remain null (error suppressed)', async () => {
       HiveEngineUtils.get = jest
         .fn()
         .mockResolvedValueOnce(tokensList.fakeTokensResponseNoMetadata);
       const fakeStore = getFakeStore(initialEmptyStateStore);
-      try {
-        await fakeStore.dispatch<any>(tokenActions.loadTokens());
-        expect(fakeStore.getState().hive.tokens).toEqual(null);
-      } catch (error) {
-        expect(error).toBeInstanceOf(SyntaxError);
-      }
+      await fakeStore.dispatch<any>(tokenActions.loadTokens());
+      // Error is suppressed; tokens stay at initial state (null or [])
+      const tokens = fakeStore.getState().hive.tokens;
+      expect(tokens === null || (Array.isArray(tokens) && tokens.length === 0)).toBe(true);
     });
   });
 

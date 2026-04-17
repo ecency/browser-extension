@@ -53,7 +53,7 @@ describe('witness-voting-section.component tests:\n', () => {
       });
       expect(
         await screen.findByText(
-          chrome.i18n.getMessage('html_popup_vote_good-karma_witness_success'),
+          chrome.i18n.getMessage('html_popup_vote_good_karma_witness_success'),
         ),
       ).toBeInTheDocument();
     });

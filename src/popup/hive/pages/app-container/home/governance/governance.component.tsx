@@ -43,9 +43,9 @@ const Governance = ({
         ['', 100],
       );
       ranking = (result || []).map((w: any, i: number) => ({
-        name: w.owner,
-        rank: String(i + 1),
-        active_rank: String(i + 1),
+        name: w.owner || w.name,
+        rank: w.rank || String(i + 1),
+        active_rank: w.active_rank || String(i + 1),
         votes: w.votes,
         signing_key: w.signing_key,
         url: w.url,
