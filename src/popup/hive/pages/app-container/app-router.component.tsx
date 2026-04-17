@@ -1,4 +1,7 @@
 import { KeylessKeychainComponent } from '@popup/hive/pages/add-account/keyless-keychain/keyless-keychain.component';
+import { BuyComponent } from '@popup/hive/pages/app-container/home/buy/buy.component';
+import { EcosystemComponent } from '@popup/hive/pages/app-container/home/ecosystem/ecosystem.component';
+import { SwapComponent } from '@popup/hive/pages/app-container/home/swap/swap.component';
 import { TokenPendingUnstakePage } from '@popup/hive/pages/app-container/home/tokens/token-pending-unstacking/token-pending-unstacking.component';
 import { PendingRecurrentTransfersPageComponent } from '@popup/hive/pages/app-container/home/transfer-fund/recurrent-transfers/recurrent-transfers.component';
 import { ExportAccountsSubMenuComponent } from '@popup/hive/pages/app-container/settings/accounts/export-accounts/export-accounts-sub-menu.component';
@@ -63,6 +66,12 @@ const AppRouter = ({
     switch (page) {
       case Screen.HOME_PAGE:
         return <HomeComponent />;
+      case Screen.ECOSYSTEM_PAGE:
+        return <EcosystemComponent />;
+      case Screen.BUY_PAGE:
+        return <BuyComponent />;
+      case Screen.SWAP_PAGE:
+        return <SwapComponent />;
       case Screen.GOVERNANCE_PAGE:
         return <GovernanceComponent />;
       case Screen.TRANSFER_FUND_PAGE:
