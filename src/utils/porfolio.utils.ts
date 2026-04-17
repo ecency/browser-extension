@@ -12,11 +12,20 @@ import TokensUtils from '@popup/hive/utils/tokens.utils';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import { Asset } from 'hive-keychain-commons';
 import Config from 'src/config';
-import {
-  PortfolioBalance,
-  UserPortfolio,
-} from 'src/portfolio/portfolio.interface';
 import { AsyncUtils } from 'src/utils/async.utils';
+
+export interface UserPortfolio {
+  account: string;
+  balances: PortfolioBalance[];
+  totalHive: number;
+  totalUSD: number;
+}
+
+export interface PortfolioBalance {
+  symbol: string;
+  balance: number;
+  usdValue: number;
+}
 import FormatUtils from 'src/utils/format.utils';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
 

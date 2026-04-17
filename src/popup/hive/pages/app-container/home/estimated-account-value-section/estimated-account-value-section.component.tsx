@@ -104,12 +104,6 @@ const EstimatedAccountValueSection = ({
     hiddenTokensList,
   ]);
 
-  const openPortfolio = async () => {
-    chrome.tabs.create({
-      url: `portfolio.html`,
-    });
-  };
-
   const onClickEstimatedValue = () => {
     const newAccountValueType =
       accountValueType === AccountValueType.DOLLARS
@@ -156,11 +150,6 @@ const EstimatedAccountValueSection = ({
               ? `${getPrefix()} ${accountValue} ${getSuffix()}`
               : '...'}
           </div>
-          <SVGIcon
-            className={`portfolio-icon `}
-            icon={SVGIcons.PORTOLIO}
-            onClick={openPortfolio}
-          />
         </div>
       </div>
     </>
