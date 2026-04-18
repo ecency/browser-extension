@@ -25,7 +25,7 @@
       "id": "{b6bd7e35-0762-42a2-a283-95a94635047d}",
       "data_collection_permissions": {
         "collected": false,
-        "required": false
+        "required": []
       }
     }
   }
