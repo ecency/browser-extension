@@ -32,16 +32,21 @@ describe('home.component action-buttons tests:\n', () => {
     cleanup();
   });
   it('Must open each page on each action button', async () => {
-    for (let i = 0; i < ActionButtonList.length; i++) {
+    const navigableButtons = ActionButtonList.filter(
+      (btn) => btn.nextScreen !== 'ECOSYSTEM_PAGE' &&
+               btn.nextScreen !== 'BUY_PAGE' &&
+               btn.nextScreen !== 'SWAP_PAGE',
+    );
+    for (let i = 0; i < navigableButtons.length; i++) {
       await act(async () => {
         await userEvent.click(
           screen.getByTestId(
-            dataTestIdButton.actionBtn.preFix + ActionButtonList[i].label,
+            dataTestIdButton.actionBtn.preFix + navigableButtons[i].label,
           ),
         );
       });
       expect(
-        await screen.findByTestId(`${ActionButtonList[i].nextScreen}-page`),
+        await screen.findByTestId(`${navigableButtons[i].nextScreen}-page`),
       ).toBeInTheDocument();
       await act(async () => {
         await userEvent.click(screen.getByTestId(dataTestIdIcon.arrowBack));

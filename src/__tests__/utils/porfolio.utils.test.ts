@@ -10,7 +10,7 @@ import HiveUtils from '@popup/hive/utils/hive.utils';
 import TokensUtils from '@popup/hive/utils/tokens.utils';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import Config from 'src/config';
-import type { UserPortfolio } from 'src/portfolio/portfolio.interface';
+import type { UserPortfolio } from 'src/utils/porfolio.utils';
 import { AsyncUtils } from 'src/utils/async.utils';
 import FormatUtils from 'src/utils/format.utils';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
