@@ -52,12 +52,8 @@ export const sendResponse = (response: RequestResponse) => {
   ) {
     window.location.href = response.data.redirect_uri;
   } else {
-    window.postMessage(
-      {
-        type: 'hive_response',
-        response,
-      },
-      window.location.origin,
-    );
+    // Post both new and legacy message types for backward compatibility
+    window.postMessage({ type: 'hive_response', response }, window.location.origin);
+    window.postMessage({ type: 'hive_keychain_response', response }, window.location.origin);
   }
 };

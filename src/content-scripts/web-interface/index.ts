@@ -38,14 +38,10 @@ const setupInjection = () => {
   }
 };
 setupInjection();
-// Answering the handshakes
+// Answering the handshakes (both new and legacy message types)
 document.addEventListener('swHandshake_hive', () => {
-  window.postMessage(
-    {
-      type: 'hive_handshake',
-    },
-    window.location.origin,
-  );
+  window.postMessage({ type: 'hive_handshake' }, window.location.origin);
+  window.postMessage({ type: 'hive_keychain_handshake' }, window.location.origin);
 });
 
 // Answering the requests

@@ -1071,3 +1071,14 @@ window.addEventListener(
   },
   false,
 );
+
+// Backward compatibility: dApps that check window.hive_keychain
+// will also find Hive Keeper. If the original Hive Keychain extension
+// is installed alongside, its injection runs in a separate content
+// script and sets its own window.hive_keychain — Chrome loads both
+// content scripts independently, so the last one to inject wins.
+// This alias ensures dApps using `window.hive_keychain || window.hive`
+// find Hive Keeper regardless of check order.
+if (typeof window.hive_keychain === 'undefined') {
+  window.hive_keychain = hive;
+}
