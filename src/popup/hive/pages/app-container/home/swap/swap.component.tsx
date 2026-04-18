@@ -43,6 +43,7 @@ const Swap = ({
   const [fromAmount, setFromAmount] = useState('');
   const [estimate, setEstimate] = useState<SwapEstimate | null>(null);
   const [loading, setLoading] = useState(false);
+  const estimateSeqRef = React.useRef(0);
 
   useEffect(() => {
     setTitleContainerProperties({
@@ -80,6 +81,8 @@ const Swap = ({
       setEstimate(null);
       return;
     }
+    // Increment sequence so stale responses are discarded
+    const seq = ++estimateSeqRef.current;
     setLoading(true);
     let est: SwapEstimate | null = null;
     if (HIVE_ASSETS.includes(fromAsset) && HIVE_ASSETS.includes(toAsset)) {
@@ -87,8 +90,11 @@ const Swap = ({
     } else {
       est = await SwapUtils.estimateEngineSwap(fromAsset, toAsset, amt);
     }
-    setEstimate(est);
-    setLoading(false);
+    // Only apply if this is still the latest request
+    if (seq === estimateSeqRef.current) {
+      setEstimate(est);
+      setLoading(false);
+    }
   }, [fromAmount, fromAsset, toAsset]);
 
   useEffect(() => {
@@ -121,7 +127,7 @@ const Swap = ({
           buying ? 'buy' : 'sell',
           symbol,
           buying ? estimate.toAmount : amt,
-          estimate.rate,
+          estimate.engineOrderPrice!,
         );
         await HiveEngineUtils.sendOperation(
           [op],

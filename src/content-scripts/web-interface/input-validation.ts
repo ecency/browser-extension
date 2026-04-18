@@ -313,18 +313,6 @@ const convert = Joi.object({
   rpc,
 });
 
-const swap = Joi.object({
-  username: Joi.string().allow(null),
-  amount: Joi.number().required(),
-  startToken: Joi.string().required(),
-  endToken: Joi.string().required(),
-  slippage: Joi.number().required(),
-  rpc,
-  steps: Joi.array(),
-  partnerUsername: Joi.string(),
-  partnerFee: Joi.number(),
-});
-
 const recurrentTransfer = Joi.object({
   username: Joi.string().allow(null),
   to: username,
@@ -378,7 +366,6 @@ const schemas = {
   addAccount,
   convert,
   recurrentTransfer,
-  swap,
 };
 
 export const commonRequestParams = {

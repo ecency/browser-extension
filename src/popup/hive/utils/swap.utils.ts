@@ -14,6 +14,8 @@ export interface SwapEstimate {
   fromAmount: number;
   toAmount: number;
   rate: number;
+  /** SWAP.HIVE per token — the price to submit to Hive Engine */
+  engineOrderPrice?: number;
   slippage: number;
   method: 'hive' | 'engine';
 }
@@ -221,13 +223,25 @@ const estimateEngineSwap = async (
 
     if (remaining > 0.0001) return null;
 
-    const effectiveRate = accumulated / amount;
-    const slippage = Math.abs(effectiveRate - firstPrice) / firstPrice;
+    // For display: how much "to" per 1 "from"
+    const displayRate = accumulated / amount;
+
+    // For the Hive Engine order: price is always SWAP.HIVE per token.
+    // - Buying tokens (SWAP.HIVE → token): we spent `amount` SWAP.HIVE
+    //   and got `accumulated` tokens → price = amount / accumulated
+    // - Selling tokens (token → SWAP.HIVE): we sold `amount` tokens
+    //   and got `accumulated` SWAP.HIVE → price = accumulated / amount
+    const engineOrderPrice = buying
+      ? amount / accumulated    // SWAP.HIVE spent / tokens received
+      : accumulated / amount;   // SWAP.HIVE received / tokens sold
+
+    const slippage = Math.abs(engineOrderPrice - firstPrice) / firstPrice;
 
     return {
       fromAmount: amount,
       toAmount: parseFloat(accumulated.toFixed(8)),
-      rate: parseFloat(effectiveRate.toFixed(8)),
+      rate: parseFloat(displayRate.toFixed(8)),
+      engineOrderPrice: parseFloat(engineOrderPrice.toFixed(8)),
       slippage: parseFloat((slippage * 100).toFixed(2)),
       method: 'engine',
     };
