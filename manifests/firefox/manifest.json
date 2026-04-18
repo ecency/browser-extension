@@ -20,6 +20,9 @@
     }
   ],
   "manifest_version": 2,
+  "data_collection_permissions": {
+    "collected": false
+  },
   "applications": {
     "gecko": { "id": "{b6bd7e35-0762-42a2-a283-95a94635047d}" }
   }
