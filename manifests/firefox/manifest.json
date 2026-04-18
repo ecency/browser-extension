@@ -22,7 +22,7 @@
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
-      "id": "{b6bd7e35-0762-42a2-a283-95a94635047d}",
+      "id": "{c295b428-dcac-45aa-ac4c-bc8a5e1bd8f6}",
       "data_collection_permissions": {
         "required": ["none"]
       }
