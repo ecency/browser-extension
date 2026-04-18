@@ -3918,7 +3918,7 @@
     "description": "Message container success title"
   },
   "accept_terms_and_condition": {
-    "message": "I have read and agreed to the Hive Keeper <a target='__blank' href='https://github.com/ecency/browser-extension'>Terms of Service</a>, and <a target='__blank' href='https://github.com/ecency/browser-extension'>Privacy Policy</a>",
+    "message": "I have read and agreed to the Hive Keeper <a target='__blank' href='https://ecency.github.io/browser-extension/terms.html'>Terms of Service</a>, and <a target='__blank' href='https://ecency.github.io/browser-extension/privacy.html'>Privacy Policy</a>",
     "description": "Accept terms and conditions text"
   },
   "delete_label": {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Hive Keeper</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #1a1f2e; color: #e0e0e0; line-height: 1.7; }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+    h1 { color: #f7c737; font-size: 1.8em; margin-bottom: 4px; }
+    h2 { color: #f7c737; font-size: 1.2em; margin: 28px 0 8px; }
+    p, li { margin-bottom: 12px; }
+    ul { padding-left: 24px; }
+    a { color: #f7c737; }
+    .date { font-size: 0.85em; opacity: 0.5; margin-bottom: 24px; }
+    .back { display: inline-block; margin-bottom: 24px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="index.html">&larr; Back</a>
+    <h1>Privacy Policy</h1>
+    <div class="date">Last updated: April 18, 2026</div>
+
+    <h2>Overview</h2>
+    <p>Hive Keeper is a browser extension that manages Hive blockchain accounts and keys. We are committed to protecting your privacy. This policy explains what data Hive Keeper handles and how.</p>
+
+    <h2>Data We Do NOT Collect</h2>
+    <ul>
+      <li>We do <strong>not</strong> collect, store, or transmit your private keys to any server.</li>
+      <li>We do <strong>not</strong> use analytics, telemetry, or tracking of any kind.</li>
+      <li>We do <strong>not</strong> collect personal information, browsing history, or usage data.</li>
+      <li>We do <strong>not</strong> use cookies or third-party tracking services.</li>
+    </ul>
+
+    <h2>Data Stored Locally</h2>
+    <p>The following data is stored exclusively on your device using the browser's built-in extension storage (<code>chrome.storage.local</code>):</p>
+    <ul>
+      <li><strong>Encrypted private keys</strong> — your Hive account keys are encrypted with your master password using AES encryption. The master password itself is never stored permanently.</li>
+      <li><strong>Account names</strong> — Hive usernames associated with your keys.</li>
+      <li><strong>User preferences</strong> — theme, auto-lock settings, RPC node configuration, favorite accounts.</li>
+    </ul>
+    <p>This data never leaves your device. It is not synced to any cloud service.</p>
+
+    <h2>Network Requests</h2>
+    <p>Hive Keeper makes the following network requests, all to public infrastructure:</p>
+    <ul>
+      <li><strong>Hive RPC nodes</strong> (default: api.hive.blog) — to read blockchain data and broadcast transactions. You can configure which RPC node to use.</li>
+      <li><strong>Hive Engine RPC</strong> (api.hive-engine.com) — to read Hive Engine token balances and order books.</li>
+      <li><strong>CoinGecko API</strong> — to fetch current HIVE/HBD/BTC prices in USD for display purposes only.</li>
+      <li><strong>GitHub</strong> (raw.githubusercontent.com) — to fetch the open-source phishing account list from <a href="https://github.com/openhive-network/watchmen">openhive-network/watchmen</a>.</li>
+    </ul>
+    <p>No personal data, keys, or account information is included in these requests.</p>
+
+    <h2>Content Script</h2>
+    <p>Hive Keeper injects a content script on web pages to enable dApp integration (similar to how MetaMask injects <code>window.ethereum</code>). This script:</p>
+    <ul>
+      <li>Exposes a <code>window.hive</code> API for dApps to request transaction signing.</li>
+      <li>Does <strong>not</strong> read, modify, or monitor page content.</li>
+      <li>Does <strong>not</strong> access any data on the page beyond dApp signing requests initiated by the page's own JavaScript.</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>Hive Keeper does not integrate with any third-party analytics, advertising, or data collection services. The extension contains no telemetry code.</p>
+
+    <h2>Open Source</h2>
+    <p>Hive Keeper is fully open source under the MIT license. You can review the complete source code at <a href="https://github.com/ecency/browser-extension">github.com/ecency/browser-extension</a>.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>If we update this privacy policy, the changes will be posted on this page with an updated date. Significant changes will be noted in the extension's release notes.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy-related questions or concerns, please contact <a href="mailto:security@ecency.com">security@ecency.com</a> or open an issue on <a href="https://github.com/ecency/browser-extension/issues">GitHub</a>.</p>
+  </div>
+</body>
+</html>
