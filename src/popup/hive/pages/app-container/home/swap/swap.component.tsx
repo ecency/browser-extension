@@ -76,13 +76,14 @@ const Swap = ({
   }, [activeAccount, fromAsset, userTokens]);
 
   const fetchEstimate = useCallback(async () => {
+    // Bump sequence on EVERY call so any in-flight request is invalidated
+    const seq = ++estimateSeqRef.current;
     const amt = parseFloat(fromAmount);
     if (!amt || amt <= 0) {
       setEstimate(null);
+      setLoading(false);
       return;
     }
-    // Increment sequence so stale responses are discarded
-    const seq = ++estimateSeqRef.current;
     setLoading(true);
     let est: SwapEstimate | null = null;
     if (HIVE_ASSETS.includes(fromAsset) && HIVE_ASSETS.includes(toAsset)) {
