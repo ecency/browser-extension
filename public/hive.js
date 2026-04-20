@@ -1073,12 +1073,67 @@ window.addEventListener(
 );
 
 // Backward compatibility: dApps that check window.hive_keychain
-// will also find Hive Keeper. If the original Hive Keychain extension
-// is installed alongside, its injection runs in a separate content
-// script and sets its own window.hive_keychain — Chrome loads both
-// content scripts independently, so the last one to inject wins.
-// This alias ensures dApps using `window.hive_keychain || window.hive`
-// find Hive Keeper regardless of check order.
+// will also find Hive Keeper.
 if (typeof window.hive_keychain === 'undefined') {
   window.hive_keychain = hive;
 }
+
+// ---------------------------------------------------------------------------
+// Hive Multi-Wallet Discovery Protocol
+// (Hive equivalent of Ethereum's EIP-6963)
+//
+// Allows multiple Hive wallet extensions (Hive Keeper, Hive Keychain,
+// Peak Vault, etc.) to coexist without fighting over a single global.
+//
+// Protocol:
+//   - Wallets dispatch "hive:announceProvider" with { info, provider }
+//   - DApps dispatch "hive:requestProvider" to trigger re-announcements
+//   - Each wallet identifies itself via info.rdns (reverse domain name)
+//
+// DApp usage:
+//   const wallets = [];
+//   window.addEventListener("hive:announceProvider", (e) => {
+//     wallets.push(e.detail);
+//     // e.detail.info.name  → "Hive Keeper"
+//     // e.detail.info.rdns  → "com.ecency.keeper"
+//     // e.detail.info.icon  → data URI
+//     // e.detail.provider   → the signing API (same as window.hive)
+//   });
+//   window.dispatchEvent(new Event("hive:requestProvider"));
+//   // wallets[] now contains all installed Hive wallet extensions
+// ---------------------------------------------------------------------------
+
+(function () {
+  var providerInfo = Object.freeze({
+    uuid: crypto.randomUUID
+      ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = (Math.random() * 16) | 0;
+          return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+        }),
+    name: 'Hive Keeper',
+    icon: 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="119 90 515 585"><circle cx="375" cy="400" r="200" fill="#f7c737"/></svg>'),
+    rdns: 'com.ecency.keeper',
+  });
+
+  var announceDetail = Object.freeze({
+    info: providerInfo,
+    provider: hive,
+  });
+
+  function announce() {
+    window.dispatchEvent(
+      new CustomEvent('hive:announceProvider', {
+        detail: announceDetail,
+      }),
+    );
+  }
+
+  // Announce on load
+  announce();
+
+  // Re-announce when dApps request discovery
+  window.addEventListener('hive:requestProvider', function () {
+    announce();
+  });
+})();
