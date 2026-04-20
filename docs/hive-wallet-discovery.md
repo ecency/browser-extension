@@ -1,129 +1,150 @@
-# Hive Multi-Wallet Discovery Protocol
+# Hive Unified Wallet Protocol
 
-**Status:** Draft
-**Inspired by:** [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) (Ethereum Multi Injected Provider Discovery)
+**Status:** Draft proposal for standardization across Hive wallet extensions
 
 ## Problem
 
-Multiple Hive wallet extensions (Hive Keeper, Hive Keychain, Peak Vault) compete for `window.hive_keychain`. The last extension to inject wins, and users can't choose which wallet to use. DApps have no standard way to detect all available wallets.
+Three Hive wallet extensions exist today, each with a different global and API:
+
+| Extension | Global | Events |
+|---|---|---|
+| Hive Keychain | `window.hive_keychain` | `swRequest_hive` / `hive_keychain_response` |
+| Hive Keeper | `window.hive` | `swRequest_hive` / `hive_response` |
+| Peak Vault | `window.peakvault` | `peak-vault-event` / `peak-vault-response` |
+
+DApps must write extension-specific detection code for each wallet. Users can't easily switch wallets without the dApp supporting it.
 
 ## Solution
 
-An event-based announcement protocol where each wallet announces itself independently. DApps collect all announcements and present a wallet chooser to the user.
+All Hive wallet extensions share **`window.hive`** as the unified namespace. The API methods are the same across all wallets. Each wallet identifies itself with a boolean flag.
 
-## Protocol
+## Standard API
 
-### Events
-
-| Event | Direction | Payload |
-|---|---|---|
-| `hive:announceProvider` | Wallet → DApp | `CustomEvent` with `detail: { info, provider }` |
-| `hive:requestProvider` | DApp → Wallets | Plain `Event` (no payload) |
-
-### Provider Info (`info`)
-
-| Field | Type | Description |
-|---|---|---|
-| `uuid` | `string` | Unique identifier per session (UUIDv4). Changes on each page load. |
-| `name` | `string` | Human-readable wallet name (e.g., `"Hive Keeper"`, `"Hive Keychain"`, `"Peak Vault"`) |
-| `icon` | `string` | Data URI (SVG or PNG) of the wallet icon, square, minimum 96x96 |
-| `rdns` | `string` | Reverse domain name identifier, stable across sessions |
-
-### Known `rdns` values
-
-| Wallet | `rdns` |
-|---|---|
-| Hive Keeper | `com.ecency.keeper` |
-| Hive Keychain | `com.hivekeychain` |
-| Peak Vault | `com.peakd.vault` |
-
-### Provider Object (`provider`)
-
-The standard Hive signing API with methods like:
-- `requestHandshake(callback)`
-- `requestBroadcast(account, operations, key, callback)`
-- `requestSignBuffer(account, message, key, callback)`
-- `requestTransfer(account, to, amount, memo, currency, callback)`
-- `requestCustomJson(account, id, key, json, display_msg, callback)`
-- etc.
-
-## Wallet Implementation
-
-Each wallet extension's injected page script should:
+All wallets implement these methods on `window.hive`:
 
 ```javascript
-(function () {
-  var announceDetail = Object.freeze({
-    info: Object.freeze({
-      uuid: crypto.randomUUID(),
-      name: 'My Wallet Name',
-      icon: 'data:image/svg+xml;base64,...',
-      rdns: 'com.example.mywallet',
-    }),
-    provider: myWalletApiObject,
-  });
-
-  function announce() {
-    window.dispatchEvent(
-      new CustomEvent('hive:announceProvider', { detail: announceDetail })
-    );
-  }
-
-  // Announce on load
-  announce();
-
-  // Re-announce when dApps request discovery
-  window.addEventListener('hive:requestProvider', announce);
-})();
+window.hive.requestHandshake(callback)
+window.hive.requestBroadcast(account, operations, key, callback)
+window.hive.requestTransfer(account, to, amount, memo, currency, callback)
+window.hive.requestCustomJson(account, id, key, json, displayMsg, callback)
+window.hive.requestSignBuffer(account, message, key, callback)
+window.hive.requestSignTx(account, tx, key, callback)
+window.hive.requestVote(account, author, permlink, weight, callback)
+window.hive.requestPost(account, title, body, parent_author, parent_permlink, json_metadata, permlink, comment_options, callback)
+window.hive.requestDelegation(account, delegatee, amount, unit, callback)
+window.hive.requestWitnessVote(account, witness, vote, callback)
+window.hive.requestProxy(account, proxy, callback)
+// ... and other standard operations
 ```
 
-`Object.freeze()` prevents tampering by other scripts on the page.
+## Identity Flags
 
-## DApp Implementation
+Each wallet sets a boolean flag on the `window.hive` object:
 
 ```javascript
-const hiveWallets = [];
+window.hive.isKeeper    // true — Hive Keeper (Ecency)
+window.hive.isKeychain  // true — Hive Keychain
+window.hive.isVault     // true — Peak Vault
+```
 
-// Listen for wallet announcements
-window.addEventListener('hive:announceProvider', (event) => {
-  const { info, provider } = event.detail;
+## Multi-Wallet Coexistence
 
-  // Deduplicate by rdns (same wallet re-announcing)
-  const existing = hiveWallets.findIndex(w => w.info.rdns === info.rdns);
-  if (existing >= 0) {
-    hiveWallets[existing] = { info, provider };
-  } else {
-    hiveWallets.push({ info, provider });
-  }
+When multiple wallet extensions are installed, each registers itself in the `window.hive.providers` array:
+
+```javascript
+window.hive.providers = [
+  { name: 'Hive Keeper',   rdns: 'com.ecency.keeper',  provider: <api> },
+  { name: 'Hive Keychain', rdns: 'com.hivekeychain',   provider: <api> },
+  { name: 'Peak Vault',    rdns: 'com.peakd.vault',    provider: <api> },
+];
+```
+
+The `window.hive` object itself points to whichever wallet loaded last (same as the legacy behavior). DApps that want multi-wallet support check `window.hive.providers`.
+
+## DApp Integration
+
+### Simple (works with any single wallet)
+
+```javascript
+if (window.hive) {
+  window.hive.requestHandshake(() => {
+    console.log('Connected to a Hive wallet');
+  });
+}
+```
+
+### With wallet detection
+
+```javascript
+if (window.hive) {
+  if (window.hive.isKeeper) console.log('Using Hive Keeper');
+  if (window.hive.isKeychain) console.log('Using Hive Keychain');
+  if (window.hive.isVault) console.log('Using Peak Vault');
+}
+```
+
+### Multi-wallet picker
+
+```javascript
+if (window.hive && window.hive.providers && window.hive.providers.length > 1) {
+  // Show wallet chooser UI
+  window.hive.providers.forEach(wallet => {
+    console.log(`${wallet.name} available`);
+    // wallet.provider.requestBroadcast(...) to use this specific wallet
+  });
+} else if (window.hive) {
+  // Only one wallet — use directly
+  window.hive.requestBroadcast(...);
+}
+```
+
+## Wallet Implementation Guide
+
+Each wallet extension should add this to their injected page script:
+
+```javascript
+// 1. Create your API object with standard methods
+var myWalletApi = {
+  requestHandshake: function(cb) { /* ... */ },
+  requestBroadcast: function(account, ops, key, cb) { /* ... */ },
+  // ... all standard methods
+};
+
+// 2. Set identity flag
+myWalletApi.isMyWallet = true;  // e.g., isKeeper, isKeychain, isVault
+
+// 3. Register on window.hive
+if (!window.hive) {
+  window.hive = myWalletApi;
+}
+if (!window.hive.providers) {
+  window.hive.providers = [];
+}
+window.hive.providers.push({
+  name: 'My Wallet Name',
+  rdns: 'com.example.mywallet',
+  provider: myWalletApi,
 });
 
-// Request all wallets to announce
-window.dispatchEvent(new Event('hive:requestProvider'));
-
-// After a short delay, hiveWallets[] contains all installed wallets.
-// Present a wallet chooser UI to the user:
-//
-// hiveWallets.forEach(w => {
-//   console.log(w.info.name, w.info.rdns);
-//   // w.provider.requestTransfer(...) to use this wallet
-// });
+// 4. Legacy compat (optional)
+if (typeof window.hive_keychain === 'undefined') {
+  window.hive_keychain = myWalletApi;
+}
 ```
 
-## Backward Compatibility
+## Migration Path
 
-Wallets SHOULD continue to set legacy globals for old dApps:
-- `window.hive_keychain` — for dApps that check this directly
-- `window.hive` — for dApps using the newer convention
+| Phase | What happens |
+|---|---|
+| **Now** | Hive Keeper implements the full protocol. Legacy `window.hive_keychain` alias kept. |
+| **Next** | Propose to Keychain and Peak Vault teams to adopt `window.hive` + identity flags. |
+| **Future** | DApps migrate from `window.hive_keychain` / `window.peakvault` to `window.hive`. |
+| **Eventually** | Legacy globals deprecated. All dApps use `window.hive` only. |
 
-The discovery protocol is purely additive. Old dApps that don't use it continue to work via the global variables. New dApps can use the discovery protocol for a better multi-wallet experience.
+## Benefits
 
-## FAQ
-
-**Q: What if only one wallet is installed?**
-A: The dApp receives one announcement and can auto-select it (no chooser needed).
-
-**Q: What if the user has both Hive Keeper and Hive Keychain?**
-A: The dApp receives two announcements and shows a wallet picker. Each wallet's `provider` object works independently.
-
-**Q: Does this affect existing dApp integrations?**
-A: No. Existing `window.hive_keychain` checks continue to work. The discovery protocol is opt-in for dApps that want multi-wallet support.
+- **DApps write one integration** — `window.hive.requestBroadcast(...)` works with any wallet
+- **Users can choose** — dApps with `providers[]` support show a wallet picker
+- **Wallets don't conflict** — each registers independently via providers array
+- **Backward compatible** — legacy globals still work during migration
+- **Extensible** — wallets can add custom methods beyond the standard set
