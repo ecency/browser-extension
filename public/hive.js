@@ -1072,68 +1072,64 @@ window.addEventListener(
   false,
 );
 
-// Backward compatibility: dApps that check window.hive_keychain
-// will also find Hive Keeper.
+// Backward compatibility
 if (typeof window.hive_keychain === 'undefined') {
   window.hive_keychain = hive;
 }
 
 // ---------------------------------------------------------------------------
-// Hive Multi-Wallet Discovery Protocol
-// (Hive equivalent of Ethereum's EIP-6963)
+// Hive Unified Wallet Protocol
 //
-// Allows multiple Hive wallet extensions (Hive Keeper, Hive Keychain,
-// Peak Vault, etc.) to coexist without fighting over a single global.
+// All Hive wallet extensions share window.hive as the standard namespace.
+// Each wallet sets its identity flag so dApps know which wallet(s) are
+// available without caring about extension-specific globals.
 //
-// Protocol:
-//   - Wallets dispatch "hive:announceProvider" with { info, provider }
-//   - DApps dispatch "hive:requestProvider" to trigger re-announcements
-//   - Each wallet identifies itself via info.rdns (reverse domain name)
+// Standard API (same methods across all wallets):
+//   window.hive.requestHandshake(cb)
+//   window.hive.requestBroadcast(account, ops, key, cb)
+//   window.hive.requestTransfer(...)
+//   window.hive.requestCustomJson(...)
+//   window.hive.requestSignBuffer(...)
+//   etc.
+//
+// Identity flags:
+//   window.hive.isKeeper   — true if Hive Keeper
+//   window.hive.isKeychain — true if Hive Keychain
+//   window.hive.isVault    — true if Peak Vault
+//
+// Multi-wallet (when multiple extensions are installed):
+//   window.hive.providers[] — array of all registered wallet providers
+//   Each entry: { name, rdns, provider }
 //
 // DApp usage:
-//   const wallets = [];
-//   window.addEventListener("hive:announceProvider", (e) => {
-//     wallets.push(e.detail);
-//     // e.detail.info.name  → "Hive Keeper"
-//     // e.detail.info.rdns  → "com.ecency.keeper"
-//     // e.detail.info.icon  → data URI
-//     // e.detail.provider   → the signing API (same as window.hive)
-//   });
-//   window.dispatchEvent(new Event("hive:requestProvider"));
-//   // wallets[] now contains all installed Hive wallet extensions
+//   if (window.hive) {
+//     // Works with ANY Hive wallet — no extension-specific code needed
+//     window.hive.requestHandshake(() => console.log('wallet connected'));
+//
+//     // Optional: check which wallet
+//     if (window.hive.isKeeper) { /* Hive Keeper specific */ }
+//
+//     // Optional: multiple wallets — show picker
+//     if (window.hive.providers && window.hive.providers.length > 1) {
+//       window.hive.providers.forEach(w => console.log(w.name));
+//     }
+//   }
 // ---------------------------------------------------------------------------
 
-(function () {
-  var providerInfo = Object.freeze({
-    uuid: crypto.randomUUID
-      ? crypto.randomUUID()
-      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-          var r = (Math.random() * 16) | 0;
-          return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-        }),
-    name: 'Hive Keeper',
-    icon: 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="119 90 515 585"><circle cx="375" cy="400" r="200" fill="#f7c737"/></svg>'),
-    rdns: 'com.ecency.keeper',
-  });
+// Set identity
+hive.isKeeper = true;
 
-  var announceDetail = Object.freeze({
-    info: providerInfo,
-    provider: hive,
-  });
+// Register on the shared window.hive namespace
+if (!window.hive) {
+  window.hive = hive;
+}
 
-  function announce() {
-    window.dispatchEvent(
-      new CustomEvent('hive:announceProvider', {
-        detail: announceDetail,
-      }),
-    );
-  }
-
-  // Announce on load
-  announce();
-
-  // Re-announce when dApps request discovery
-  window.addEventListener('hive:requestProvider', function () {
-    announce();
-  });
-})();
+// Providers registry — each wallet pushes itself
+if (!window.hive.providers) {
+  window.hive.providers = [];
+}
+window.hive.providers.push({
+  name: 'Hive Keeper',
+  rdns: 'com.ecency.keeper',
+  provider: hive,
+});
