@@ -1034,6 +1034,7 @@ var hive = {
     data = Object.assign(
       {
         request_id: this.current_id,
+        extension_id: 'keeper',
       },
       data,
     );
