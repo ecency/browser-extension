@@ -2,7 +2,7 @@
   "name": "__MSG_keychain__",
   "description": "__MSG_description__",
   "default_locale": "en",
-  "version": "3.17.1",
+  "version": "3.17.2",
   "permissions": ["storage", "idle", "alarms"],
   "content_security_policy": "script-src 'self'; object-src 'self';",
   "browser_action": {
@@ -23,9 +23,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "{c295b428-dcac-45aa-ac4c-bc8a5e1bd8f6}",
-      "data_collection_permissions": {
-        "required": ["none"]
-      }
+      "data_collection_permissions": { "required": ["none"] }
     }
   }
 }
