@@ -227,7 +227,26 @@ const decryptToJsonWithLegacySupport = async (
     return decryptedJSON?.list != null ? decryptedJSON : null;
   }
 
-  return LegacyEncryptUtils.decryptToJsonWithoutHashCheck(msg, pwd);
+  // Try legacy hex-encoded salt+iv+ciphertext format first
+  try {
+    const result = LegacyEncryptUtils.decryptToJsonWithoutHashCheck(msg, pwd);
+    if (result) return result;
+  } catch (e) {
+    // Fall through to simple passphrase format
+  }
+
+  // Try simple CryptoJS passphrase format (used by Hive Keychain)
+  try {
+    const decrypted = decryptNoIV(msg, pwd);
+    if (decrypted) {
+      const decryptedJSON = JSON.parse(decrypted);
+      if (decryptedJSON?.list != null) return decryptedJSON;
+    }
+  } catch (e) {
+    // Neither format worked
+  }
+
+  throw new Error('Unable to decrypt payload');
 };
 
 const decryptToJson = async (msg: string, pwd: string): Promise<any> => {

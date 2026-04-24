@@ -6,9 +6,7 @@ body {
   justify-content: center;
 }
 html {
-  background-image: url('assets/images/background/detached-popup-background.png');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(135deg, #1a2030 0%, #212838 40%, #293144 100%);
 }
 #root {
   display: flex;

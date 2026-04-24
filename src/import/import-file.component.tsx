@@ -1,4 +1,3 @@
-import { BackgroundMessage } from '@background/background-message.interface';
 import { Theme } from '@popup/theme.context';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import React, { useEffect, useRef, useState } from 'react';
@@ -17,20 +16,29 @@ import './import-file.scss';
 interface PropsType {
   title: string;
   text: string;
-  command: BackgroundCommand;
   accept: string;
+  askPassword?: boolean;
+  onImport?: (fileData: string, password: string) => Promise<{
+    feedback?: { message: string; params?: string[] } | null;
+  }>;
+  /** Legacy: send file to background via message */
+  command?: BackgroundCommand;
   callBackCommand?: BackgroundCommand;
 }
 
 const ImportFile = ({
   title,
   text,
-  command,
   accept,
+  askPassword,
+  onImport,
+  command,
   callBackCommand,
 }: PropsType) => {
   const [selectedFile, setSelectedFile] = useState<File>();
   const [feedback, setFeedBack] = useState<any>();
+  const [filePassword, setFilePassword] = useState('');
+  const [importing, setImporting] = useState(false);
 
   const inputEl = useRef<HTMLInputElement>(null);
 
@@ -43,47 +51,43 @@ const ImportFile = ({
     const res = await LocalStorageUtils.getMultipleValueFromLocalStorage([
       LocalStorageKeyEnum.ACTIVE_THEME,
     ]);
-
     setTheme(res.ACTIVE_THEME ?? Theme.LIGHT);
   };
 
   const handleFileUpload = (event: any) => {
     setSelectedFile(event.target.files[0]);
+    setFeedBack(null);
   };
 
   const importKeysFromFile = async () => {
-    if (selectedFile) {
+    if (!selectedFile) return;
+    setImporting(true);
+    setFeedBack(null);
+
+    try {
       const base64 = await FileUtils.toBase64(selectedFile);
       const fileData = atob(base64);
-      chrome.runtime.sendMessage({
-        command: command,
-        value: fileData,
-      });
-      if (callBackCommand) {
-        chrome.runtime.onMessage.addListener(onCallBackCommandeMessageListener);
-      } else {
-        window.close();
-      }
-    }
-  };
 
-  const onCallBackCommandeMessageListener = (
-    backgroundMessage: BackgroundMessage,
-    sender: chrome.runtime.MessageSender,
-    sendResp: (response?: any) => void,
-  ) => {
-    if (backgroundMessage.command === callBackCommand) {
-      if (backgroundMessage.value.feedback) {
-        setFeedBack(backgroundMessage.value.feedback);
-      } else {
-        setTimeout(() => {
+      if (onImport) {
+        const result = await onImport(fileData, filePassword);
+        setImporting(false);
+        if (result.feedback) {
+          setFeedBack(result.feedback);
+        } else {
+          setTimeout(() => window.close(), 3000);
+        }
+      } else if (command) {
+        chrome.runtime.sendMessage({
+          command: command,
+          value: fileData,
+        });
+        if (!callBackCommand) {
           window.close();
-        }, 3000);
+        }
       }
-
-      chrome.runtime.onMessage.removeListener(
-        onCallBackCommandeMessageListener,
-      );
+    } catch (e) {
+      setImporting(false);
+      setFeedBack({ message: 'import_html_error' });
     }
   };
 
@@ -119,6 +123,14 @@ const ImportFile = ({
           className="file-input"
           onChange={handleFileUpload}
         />
+        {askPassword && selectedFile && (
+          <InputComponent
+            type={InputType.PASSWORD}
+            onChange={setFilePassword}
+            value={filePassword}
+            placeholder={'import_html_file_password_placeholder'}
+          />
+        )}
         {feedback && (
           <div
             className="feedback"
@@ -142,9 +154,10 @@ const ImportFile = ({
         {selectedFile && (
           <ButtonComponent
             onClick={importKeysFromFile}
-            label="popup_html_import"
+            label={importing ? 'popup_html_loading' : 'popup_html_import'}
             type={ButtonType.IMPORTANT}
-            height="small"></ButtonComponent>
+            height="small"
+            disabled={(askPassword && !filePassword) || importing}></ButtonComponent>
         )}
       </div>
     </div>

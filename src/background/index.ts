@@ -24,7 +24,6 @@ import { RequestsHandler } from '@background/requests/request-handler';
 import RPCModule from '@background/rpc.module';
 import SettingsModule from '@background/settings.module';
 import getMessage from '@background/utils/i18n.utils';
-import VaultModule from '@background/vault.module';
 import {
   KeychainRequest,
   KeychainRequestWrapper,
@@ -32,7 +31,7 @@ import {
 import { BackgroundCommand } from '@reference-data/background-message-key.enum';
 import { DialogCommand } from '@reference-data/dialog-message-key.enum';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
-import { VaultCommand, VaultKey } from '@reference-data/vault-message-key.enum';
+import { VaultKey } from '@reference-data/vault-message-key.enum';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
 import Logger from 'src/utils/logger.utils';
 import VaultUtils from 'src/utils/vault.utils';
@@ -43,10 +42,6 @@ Object.assign(global, { contextType: 'service_worker' });
 
 /* istanbul ignore next */
 (async () => {
-  if (!process.env.IS_FIREFOX) {
-    Logger.log('Initializing vault');
-    VaultModule.init();
-  }
   await RPCModule.init();
   LocalStorageUtils.removeFromLocalStorage(LocalStorageKeyEnum.__MK);
   Logger.info('Initializing background tasks');
@@ -158,18 +153,6 @@ const chromeMessageHandler = async (
       Logger.log('ping');
       break;
 
-    // Replace vault by persistent data storage for Firefox
-    case VaultCommand.GET_VALUE:
-      if (!process.env.IS_FIREFOX) return;
-      return MkModule.getMk();
-    case VaultCommand.SET_VALUE:
-      if (!process.env.IS_FIREFOX) return;
-      MkModule.saveMk(backgroundMessage.value);
-      return true;
-    case VaultCommand.REMOVE_VALUE:
-      if (!process.env.IS_FIREFOX) return;
-      MkModule.lock();
-      return true;
   }
   return true;
 };
@@ -178,9 +161,7 @@ const chromeMessageHandler = async (
 chrome.windows.onRemoved.addListener(() => {
   chrome.windows.getAll(async (windows) => {
     if (windows.length === 0) {
-      if (await chrome.offscreen.hasDocument()) {
-        VaultUtils.removeFromVault(VaultKey.__MK);
-      }
+      VaultUtils.removeFromVault(VaultKey.__MK);
     }
   });
 });
@@ -202,4 +183,9 @@ export const performKeylessOperation = async (
   KeylessKeychainModule.handleOperation(requestHandler, request, domain, tab);
 };
 
-chrome.runtime.onMessage.addListener(chromeMessageHandler);
+chrome.runtime.onMessage.addListener(
+  (message, sender, sendResp) => {
+    chromeMessageHandler(message, sender, sendResp);
+    return true;
+  },
+);

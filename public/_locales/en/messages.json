@@ -1623,13 +1623,16 @@
     "description": "Title of import keys popup"
   },
   "import_html_text": {
-    "message": "Import your keys from another Hive Keeper instance using a .kc file.<br/><br/>You need to use the same master password on both instances to decrypt the keys."
+    "message": "Import your keys from a .kc file exported from Hive Keeper or Hive Keychain.<br/><br/>Enter the master password that was used when the file was exported."
   },
   "import_html_success": {
-    "message": "You succesfully imported your keys!"
+    "message": "You successfully imported your keys!"
   },
   "import_html_error": {
-    "message": "There was an error importing your keys.<br/>Make sure you that you are using the same password than when you exported the file."
+    "message": "There was an error importing your keys.<br/>Make sure the password matches the one used when the file was exported."
+  },
+  "import_html_file_password_placeholder": {
+    "message": "Master password of the exported file"
   },
   "import_permissions_html_title": {
     "message": "Import settings"

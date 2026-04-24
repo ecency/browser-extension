@@ -21,6 +21,34 @@ if (!global.chrome?.storage?.local?.onChanged?.addListener) {
   };
 }
 
+/** VaultUtils uses `chrome.storage.session`; jest-chrome does not provide it. */
+if (!global.chrome?.storage?.session) {
+  const sessionStore = {};
+  global.chrome.storage.session = {
+    get: jest.fn((key) => {
+      if (typeof key === 'string') {
+        return Promise.resolve(
+          key in sessionStore ? { [key]: sessionStore[key] } : {},
+        );
+      }
+      const result = {};
+      for (const k of key) {
+        if (k in sessionStore) result[k] = sessionStore[k];
+      }
+      return Promise.resolve(result);
+    }),
+    set: jest.fn((items) => {
+      Object.assign(sessionStore, items);
+      return Promise.resolve();
+    }),
+    remove: jest.fn((key) => {
+      if (typeof key === 'string') delete sessionStore[key];
+      else for (const k of key) delete sessionStore[k];
+      return Promise.resolve();
+    }),
+  };
+}
+
 /** VaultUtils uses `runtime.connect`; jest-chrome may omit a full port. */
 global.chrome = global.chrome || {};
 global.chrome.runtime = global.chrome.runtime || {};

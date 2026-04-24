@@ -4,15 +4,6 @@
   animation: bee-bounce 1.2s infinite ease-in-out;
 }
 
-@keyframes bee-bounce {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-8px) scale(1.05);
-  }
-}
-
 .rotating-logo-wrapper {
   height: 100%;
   width: 100%;

@@ -1,5 +1,5 @@
 $dark: (
-  --background: url('assets/images/background/dark.svg'),
+  --background: radial-gradient(ellipse at 50% 120%, rgba(54, 67, 96, 0.6) 0%, transparent 70%),
   --main-font-color: white,
   --main-font-color-inverted: $dark-blue,
   --background-color: $dark-background,
@@ -99,7 +99,7 @@ $dark: (
   --menu-bottom-bar-icon-color: white,
 );
 $light: (
-  --background: url('assets/images/background/light.svg'),
+  --background: radial-gradient(ellipse at 50% 120%, rgba(180, 192, 207, 0.5) 0%, transparent 70%),
   --main-font-color: $dark-blue,
   --main-font-color-inverted: white,
   --background-color: $light-background,

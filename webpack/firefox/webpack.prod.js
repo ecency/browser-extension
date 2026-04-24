@@ -7,7 +7,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: false,
   output: {
     path: path.join(__dirname, '../../dist-prod-firefox'),
     filename: '[name]Bundle.js',
