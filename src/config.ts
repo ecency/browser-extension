@@ -36,9 +36,6 @@ const Config = {
   keyless: {
     host: process.env.KEYLESS_HOST || 'https://hive-auth.arcange.eu/',
   },
-  vault: {
-    portName: 'vault-connection',
-  },
 };
 
 export default Config;

@@ -1,10 +1,9 @@
 /* istanbul ignore file */
 import { DialogCommand } from '@reference-data/dialog-message-key.enum';
 import { BackgroundCommand } from 'src/reference-data/background-message-key.enum';
-import { VaultCommand } from 'src/reference-data/vault-message-key.enum';
 
 export interface BackgroundMessage {
-  command: BackgroundCommand | VaultCommand;
+  command: BackgroundCommand;
   value?: any;
   key?: string;
 }

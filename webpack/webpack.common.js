@@ -16,7 +16,6 @@ const config = {
     linkLedgerDevice: './src/ledger/link-device/index.tsx',
     addAccountsFromLedger: './src/ledger/add-accounts/index.tsx',
     web_interface: './src/content-scripts/web-interface/index.ts',
-    vault: './src/vault/index.ts',
   },
   module: {
     rules: [
