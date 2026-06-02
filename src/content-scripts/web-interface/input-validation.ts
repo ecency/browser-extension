@@ -371,6 +371,13 @@ const schemas = {
 export const commonRequestParams = {
   request_id: Joi.number().required(),
   type: Joi.string().required(),
+  // Transport envelope field stamped on every request by the injected page
+  // script (hive.js dispatchCustomEvent) for the Hive Wallet Discovery
+  // protocol. Like request_id it is not part of any operation payload, so it
+  // must be whitelisted here or the object schema rejects the whole request
+  // with `"extension_id" is not allowed`. Optional for legacy/dApp callers
+  // and Keychain's page script, which don't send it.
+  extension_id: Joi.string().optional(),
 };
 
 export default schemas;
