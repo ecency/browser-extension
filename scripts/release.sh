@@ -25,17 +25,6 @@ else
     echo "No errors"    
 fi
 
-echo "Compiling beta..."
-resultBeta=`npm run build:beta | grep -o "compiled with .* error[s]* in"`
-echo "Checking errors"
-if [ ${#resultBeta} -gt 0 ]
-then
-    echo "Errors during Beta compilation... Cannot create release"
-    exit
-else 
-    echo "No errors"    
-fi
-
 mkdir -p _releases
 manifestVersion=`cat manifests/chromium/manifest.json | grep '"version":'`
 
@@ -48,8 +37,6 @@ cd dist-prod-firefox
 zip -qr "../_releases/${version}-firefox.zip" *
 cd ../dist-prod
 zip -qr "../_releases/${version}-chromium.zip" *
-cd ../dist-beta
-zip -qr "../_releases/${version}-chromium-beta.zip" *
 cd ..
 zip -q -r "_releases/${version}-source.zip" . -x node_modules\* dist-*\* example\* coverage\* .github\* _releases\* .vscode\* scripts\* .env .DS_Store
 
