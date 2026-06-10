@@ -38,5 +38,5 @@ zip -qr "../_releases/${version}-firefox.zip" *
 cd ../dist-prod
 zip -qr "../_releases/${version}-chromium.zip" *
 cd ..
-zip -q -r "_releases/${version}-source.zip" . -x node_modules\* dist-*\* example\* coverage\* .github\* _releases\* .vscode\* scripts\* .env .DS_Store
+zip -q -r "_releases/${version}-source.zip" . -x node_modules\* dist-*\* example\* coverage\* .github\* _releases\* .vscode\* scripts\* .env .DS_Store .git/\* .idea\*
 
