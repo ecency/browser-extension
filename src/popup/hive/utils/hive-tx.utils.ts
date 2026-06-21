@@ -260,7 +260,14 @@ const getData = async (
   }
 };
 
-const switchToWorkingRpc = async (method: string, error: any) => {
+const switchToWorkingRpc = (method: string, error: any) => {
+  // getData calls this fire-and-forget on an RPC failure. Log the error here
+  // rather than throwing from an un-awaited async function (which would surface
+  // as a swallowed unhandled promise rejection). getData still resolves to
+  // undefined on failure, so callers are unaffected.
+  Logger.error(
+    `Error while retrieving data from ${method} : ${JSON.stringify(error)}`,
+  );
   // Only the popup (a DOM document) can run the RPC switcher. Use `typeof
   // window` rather than a bare `window` so this never throws a ReferenceError
   // in a worker-like scope, regardless of how the background global is set up.
@@ -269,9 +276,6 @@ const switchToWorkingRpc = async (method: string, error: any) => {
       useWorkingRPC();
     });
   }
-  throw new Error(
-    `Error while retrieving data from ${method} : ${JSON.stringify(error)}`,
-  );
 };
 
 const getTransaction = async (txId: string) => {
