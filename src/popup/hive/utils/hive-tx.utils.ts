@@ -261,7 +261,10 @@ const getData = async (
 };
 
 const switchToWorkingRpc = async (method: string, error: any) => {
-  if (window && window.document) {
+  // Only the popup (a DOM document) can run the RPC switcher. Use `typeof
+  // window` rather than a bare `window` so this never throws a ReferenceError
+  // in a worker-like scope, regardless of how the background global is set up.
+  if (typeof window !== 'undefined' && window.document) {
     import('src/utils/rpc-switcher.utils').then(({ useWorkingRPC }) => {
       useWorkingRPC();
     });
