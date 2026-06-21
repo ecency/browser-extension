@@ -1,16 +1,8 @@
-// Service workers don't have `window`; some bundled libraries (e.g. the
-// websocket package from sscjs/hive-tx) check `typeof window` to decide
-// on a WebSocket class.  Alias it to `self` so those checks pass.
-if (typeof window === 'undefined' && typeof self !== 'undefined') {
-  (self as any).window = self;
-}
-
-// Service workers don't have `window` — alias it to `self` so libraries
-// that check `typeof window !== 'undefined'` (e.g. websocket) find the
-// native WebSocket class on `self` instead of throwing.
-if (typeof window === 'undefined' && typeof self !== 'undefined') {
-  (self as any).window = self;
-}
+// Aliases window/global onto the service-worker global. MUST be first: it has
+// to run before any dependency that decides a WebSocket class at import time
+// (e.g. @hiveio/hive-js), and ES import hoisting means inline top-of-file code
+// would run too late. See sw-globals.ts.
+import './sw-globals';
 
 import AccountModule from '@background/account';
 import AutoStakeTokensModule from '@background/auto-stake-tokens.module';
