@@ -6,8 +6,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    hiveTx: 'hive-tx',
-    popup: { import: './src/popup/index.tsx', dependOn: 'hiveTx' },
+    popup: './src/popup/index.tsx',
     dialog: './src/dialog/index.tsx',
     background: './src/background/index.ts',
     importAccounts: './src/import/import-accounts.tsx',

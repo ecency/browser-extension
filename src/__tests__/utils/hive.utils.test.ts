@@ -4,8 +4,7 @@ import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import HiveUtils from '@hiveapp/utils/hive.utils';
 import { ExtendedAccount } from '@hiveio/dhive';
 import { Rpc } from '@interfaces/rpc.interface';
-import { config as HiveTxConfig } from 'hive-tx';
-import { PrivateKey, Signature } from '@ecency/sdk/hive';
+import { config as HiveTxConfig, PrivateKey, Signature } from '@ecency/sdk/hive';
 import { sha256 } from '@noble/hashes/sha256';
 import Config from 'src/config';
 import accounts from 'src/__tests__/utils-for-testing/data/accounts';
@@ -39,7 +38,7 @@ describe('hive.utils tests:\n', () => {
       };
       const result = await HiveTxUtils.setRpc(fakeRpc);
       expect(result).toBeUndefined();
-      expect(HiveTxConfig.node).toEqual(Config.rpc.DEFAULT.uri);
+      expect(HiveTxConfig.nodes[0]).toEqual(Config.rpc.DEFAULT.uri);
     });
   });
 

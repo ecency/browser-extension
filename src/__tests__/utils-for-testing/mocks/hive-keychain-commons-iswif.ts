@@ -1,4 +1,4 @@
-import { PrivateKey } from 'hive-tx';
+import { PrivateKey } from '@ecency/sdk/hive';
 
 /**
  * In jsdom/Jest, `hive-keychain-commons` `isWif` can disagree with hive-tx for the

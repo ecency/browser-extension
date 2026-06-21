@@ -10,7 +10,7 @@ import AccountUtils from '@popup/hive/utils/account.utils';
 import EncryptUtils from '@popup/hive/utils/encrypt.utils';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
 import { VaultKey } from '@reference-data/vault-message-key.enum';
-import { config } from 'hive-tx';
+import { config, setNodes } from '@ecency/sdk/hive';
 import Config from 'src/config';
 import {
   KeychainKeyTypesLC,
@@ -92,7 +92,7 @@ export class RequestsHandler {
     await this.setupHiveEngine();
     this.data.preferences = preferences;
 
-    config.node = rpc.uri;
+    setNodes([rpc.uri]);
   }
 
   closeWindow() {
@@ -103,7 +103,11 @@ export class RequestsHandler {
 
   reset(resetWinId: boolean) {
     if (resetWinId) {
-      config.node = this.defaultRpcConfig.node;
+      // Restore the node list captured when this handler was created. config
+      // exposes `nodes` (array) in @ecency/sdk rather than a single `node`.
+      if (this.defaultRpcConfig?.nodes?.length) {
+        setNodes(this.defaultRpcConfig.nodes);
+      }
       RequestsHandler.clearLocalStorage();
     } else {
       this.data = {
