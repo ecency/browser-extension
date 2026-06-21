@@ -120,7 +120,7 @@ const twoAccounts = [local.one, local.two];
  * matching `local.justTwoKeys` keys. Regenerate with the same utils + webcrypto if needed.
  */
 const ENCRYPTED_JUST_TWO_KEYS_V2 =
-  '{"version":2,"kdf":"PBKDF2-HMAC-SHA256","iterations":600000,"salt":"m2eFGr3Vm2Wh7ZfA0yiVtw==","iv":"oi6rCEg2SYURxq0s","ciphertext":"fICNRas60Osq1U/+1sNLDQCXPlAkt7+0ov6Z5uqlxGS8JaeM1TqQzDT/u/vK6PyQpYEuaeeqiLLvaD0KKITOsLyq16WsKENQompc84nPQL21ZIkqQh98Z8k+1kFz6NXv5ql2tyAZTOC1ofbBhaqRzWgmcT+ftuVXmsjG7eWL+i7bATuOJ4ArKHyVoMuGLadkimvRwVCk8WA5iF/cPAIhlWNhUno+NoT/L5IcdmRlT9bYsa9E1ARvPhLGp2dimHpXXxFvk0Idqr2pk3YaViqLHBqFmWO26s1+/874SUdKecHgJJnXjlpwkxK++iOSZnarONMCQlO+hUEVFrzqeqCjZuPvNCp+R6JN6xCVZRN41XBGnDqUpqTJxQn19XI6SZpvhBwmF/thryFgpiMI0MlloswbCQWNkOQx1bcJPOyNuua8plwFn9AGODCyjA=="}';
+  '{"version":2,"kdf":"PBKDF2-HMAC-SHA256","iterations":600000,"salt":"Yhu6DcQ7PbmMyXbtOpR4Yw==","iv":"QSS0pM3XQWAbx5IC","ciphertext":"5te/nl2Dbgcw0r2YhO3CwAmn1tJlY+52J5S3qb5RRR/zIfo5mBCnh38xpB96TUWqBMiFxuQNK+nJ6pnjs4Gq7KWTnsyHKM3lqXNz7H4rdtvi1hF+wDDTWH+6uxk5YANpSpTViTRWhw2+frI3b+GyaikUwGLPk+fLRZ9fqOT8DolCmQrlpeJ4fErJkZaEjkJvgSrm/zkFvD+zzqM4Upy4ZytKj05HdjkFkezLhqtZblb4k5F5XJRxr4hEHRfQlXl8Ac/5jc3smvsuKzDJXDQhq5n+jPZ4VtPmjprWtJLK/AZ02JmcJTQheCfPeQ/LQAAyN9gtosBMFtdW1xwmGtxQJ1bZ11Dm6CYpW9pzljIU8h+Ei3Iw3nm0K5JPFtGXXDURjrSfCCqxpdY4wBq7tWO6+twaYBosFJ6WvDU01S0vDq3nCH7DJNR1rdN2Dg=="}';
 
 const encrypted = {
   noHash: {
