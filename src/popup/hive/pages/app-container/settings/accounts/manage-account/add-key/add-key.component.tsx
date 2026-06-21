@@ -53,10 +53,11 @@ const AddKey = ({
     goBack();
   };
 
-  const navigateToUseLedger = async () => {
-    const extensionId = (await chrome.management.getSelf()).id;
+  const navigateToUseLedger = () => {
     chrome.tabs.create({
-      url: `chrome-extension://${extensionId}/add-key-from-ledger.html?keyType=${keyType}&username=${activeAccountName}`,
+      url: chrome.runtime.getURL(
+        `add-key-from-ledger.html?keyType=${keyType}&username=${activeAccountName}`,
+      ),
     });
   };
 

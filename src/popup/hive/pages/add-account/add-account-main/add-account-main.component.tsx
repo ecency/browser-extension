@@ -67,10 +67,12 @@ const AddAccountMain = ({
     }
   };
 
-  const handleAddFromLedger = async () => {
-    const extensionId = (await chrome.management.getSelf()).id;
+  const handleAddFromLedger = () => {
+    // chrome.runtime.getURL yields the correct extension-page URL on both
+    // Chromium (chrome-extension://) and Firefox (moz-extension://). The old
+    // chrome.management.getSelf() promise call returned undefined on Firefox.
     chrome.tabs.create({
-      url: `chrome-extension://${extensionId}/add-accounts-from-ledger.html`,
+      url: chrome.runtime.getURL('add-accounts-from-ledger.html'),
     });
   };
 

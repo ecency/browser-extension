@@ -50,7 +50,10 @@ const sendBackImportedAccounts = async (fileContent: string) => {
         account.keys.posting?.startsWith('#') ||
         account.keys.memo?.startsWith('#'),
     );
-    const extensionId = (await chrome.management.getSelf()).id;
+    // chrome.runtime.id is synchronous and cross-browser; the promise form of
+    // chrome.management.getSelf() returns undefined on Firefox (callback-based
+    // chrome.* aliases), which would throw on `.id` and abort this handler.
+    const extensionId = chrome.runtime.id;
     chrome.runtime.sendMessage({
       command: BackgroundCommand.SEND_BACK_IMPORTED_ACCOUNTS,
       value: {
