@@ -8,7 +8,7 @@ import {
   RequestDecode,
   RequestId,
 } from 'hive-keychain-commons';
-import * as HiveMemo from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import memo from 'src/__tests__/utils-for-testing/data/memo';
 import mk from 'src/__tests__/utils-for-testing/data/mk';
 import userData from 'src/__tests__/utils-for-testing/data/user-data';
@@ -39,7 +39,7 @@ describe('decode-memo tests:\n', () => {
 
   it('Must return success and decoded memo', async () => {
     jest
-      .spyOn(HiveMemo, 'decode')
+      .spyOn(Memo, 'decode')
       .mockReturnValue('# keychain tha best wallet!');
     const requestHandler = new RequestsHandler();
     requestHandler.data.key = userData.one.nonEncryptKeys.memo;

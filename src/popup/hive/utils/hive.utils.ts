@@ -1,5 +1,6 @@
 import type { ExtendedAccount, Price } from '@hiveio/dhive';
-import * as hive from '@hiveio/hive-js';
+import { Memo, PrivateKey } from '@ecency/sdk/hive';
+import { sha256 } from '@noble/hashes/sha256';
 import { Asset } from 'hive-keychain-commons';
 import {
   GlobalProperties,
@@ -8,8 +9,6 @@ import {
 import { KeychainError } from 'src/keychain-error';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
-
-const signature = require('@hiveio/hive-js/lib/auth/ecc');
 
 const DEFAULT_RPC = 'https://api.hive.blog';
 const HIVE_VOTING_MANA_REGENERATION_SECONDS = 432000;
@@ -177,13 +176,13 @@ const encodeMemo = (
 ) => {
   if (KeysUtils.isUsingLedger(privateKey))
     throw new KeychainError('encode_with_memo_key_in_ledger');
-  return hive.memo.encode(privateKey, receiverPublicKey, memo);
+  return Memo.encode(privateKey, receiverPublicKey, memo);
 };
 /* istanbul ignore next */
 const decodeMemo = (memo: string, privateKey: string) => {
   if (KeysUtils.isUsingLedger(privateKey))
     throw new KeychainError('decode_with_memo_key_in_ledger');
-  return hive.memo.decode(privateKey, memo);
+  return Memo.decode(privateKey, memo);
 };
 
 const signMessage = (message: string, privateKey: string) => {
@@ -210,7 +209,12 @@ const signMessage = (message: string, privateKey: string) => {
   } catch (e) {
     buf = message;
   }
-  return signature.Signature.signBuffer(buf, privateKey).toHex();
+  // Matches hive-js Signature.signBuffer: sha256 the buffer (utf8 bytes for a
+  // string), then sign the digest with @ecency/sdk. Uint8Array/TextEncoder,
+  // not Node Buffer: @noble validates `instanceof Uint8Array`.
+  const bytes =
+    typeof buf === 'string' ? new TextEncoder().encode(buf) : new Uint8Array(buf);
+  return PrivateKey.fromString(privateKey).sign(sha256(bytes)).customToString();
 };
 
 const getCurrentMedianHistoryPrice = async (): Promise<Price> => {

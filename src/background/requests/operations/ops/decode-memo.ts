@@ -1,6 +1,6 @@
 import { createMessage } from '@background/requests/operations/operations.utils';
 import { RequestsHandler } from '@background/requests/request-handler';
-import { decode } from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import { RequestDecode, RequestId } from '@interfaces/keychain.interface';
 export const decodeMessage = async (
   requestHandler: RequestsHandler,
@@ -10,7 +10,7 @@ export const decodeMessage = async (
   let error = null;
   const key = requestHandler.data.key;
   try {
-    decoded = await decode(key, data.message);
+    decoded = await Memo.decode(key!, data.message);
   } catch (err) {
     error = err;
   } finally {

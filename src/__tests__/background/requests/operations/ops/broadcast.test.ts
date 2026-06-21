@@ -1,4 +1,4 @@
-import * as HiveMemo from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import LedgerModule from '@background/ledger.module';
 import { broadcastOperations } from '@background/requests/operations/ops/broadcast';
 import { RequestsHandler } from '@background/requests/request-handler';
@@ -42,7 +42,7 @@ describe('broadcast tests:\n', () => {
     chrome.i18n.getMessage = jest
       .fn()
       .mockImplementation(mocksImplementation.i18nGetMessageCustom);
-    jest.spyOn(HiveMemo, 'encode').mockReturnValue('#mock-encoded-memo');
+    jest.spyOn(Memo, 'encode').mockReturnValue('#mock-encoded-memo');
   });
 
   describe('Default cases:\n', () => {

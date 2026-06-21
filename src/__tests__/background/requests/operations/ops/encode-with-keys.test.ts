@@ -1,5 +1,5 @@
 import { encodeWithKeys } from '@background/requests/operations/ops/encode-with-keys';
-import * as MemoEncode from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 
 describe('encodeWithKeys', () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('encodeWithKeys', () => {
 
   it('encodes the message for each public key using the request key', async () => {
     const encodeSpy = jest
-      .spyOn(MemoEncode, 'encode')
+      .spyOn(Memo, 'encode')
       .mockReturnValueOnce('enc-a')
       .mockReturnValueOnce('enc-b');
 
@@ -36,7 +36,7 @@ describe('encodeWithKeys', () => {
   });
 
   it('returns createMessage with error when encode throws', async () => {
-    jest.spyOn(MemoEncode, 'encode').mockImplementation(() => {
+    jest.spyOn(Memo, 'encode').mockImplementation(() => {
       throw new Error('bad_memo');
     });
 

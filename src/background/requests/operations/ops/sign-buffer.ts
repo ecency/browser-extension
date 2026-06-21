@@ -8,7 +8,8 @@ import {
 import { KeychainError } from 'src/keychain-error';
 import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
 import Logger from 'src/utils/logger.utils';
-const signature = require('@hiveio/hive-js/lib/auth/ecc');
+import { PrivateKey } from '@ecency/sdk/hive';
+import { sha256 } from '@noble/hashes/sha256';
 
 export type SignedBuffer = string;
 
@@ -76,5 +77,13 @@ const signMessage = (message: string, privateKey: string): SignedBuffer => {
   } catch (e) {
     buf = message;
   }
-  return signature.Signature.signBuffer(buf, privateKey).toHex();
+  // Matches hive-js Signature.signBuffer: sha256 the buffer (utf8 bytes for a
+  // string), then sign the digest. A different-but-valid canonical signature
+  // from the previous lib is fine - signBuffer results are verified, not
+  // compared byte-for-byte.
+  // Use Uint8Array/TextEncoder (not Node Buffer): @noble validates
+  // `instanceof Uint8Array`, and a Buffer fails that check across realms.
+  const bytes =
+    typeof buf === 'string' ? new TextEncoder().encode(buf) : new Uint8Array(buf);
+  return PrivateKey.fromString(privateKey).sign(sha256(bytes)).customToString();
 };

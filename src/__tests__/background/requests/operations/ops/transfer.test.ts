@@ -1,7 +1,7 @@
 import LedgerModule from '@background/ledger.module';
 import { broadcastTransfer } from '@background/requests/operations/ops/transfer';
 import { RequestsHandler } from '@background/requests/request-handler';
-import * as MemoEncodeHiveJS from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import { TransactionResult } from '@interfaces/hive-tx.interface';
@@ -149,7 +149,7 @@ describe('transfer tests:\n', () => {
       describe('Encrypted memo:\n', () => {
         beforeEach(() => {
           jest
-            .spyOn(MemoEncodeHiveJS, 'encode')
+            .spyOn(Memo, 'encode')
             .mockReturnValue('#mock-encoded-memo');
         });
 
