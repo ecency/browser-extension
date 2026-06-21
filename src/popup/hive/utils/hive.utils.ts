@@ -1,5 +1,5 @@
 import type { ExtendedAccount, Price } from '@hiveio/dhive';
-import * as hive from '@hiveio/hive-js';
+import { Memo } from '@ecency/sdk/hive';
 import { Asset } from 'hive-keychain-commons';
 import {
   GlobalProperties,
@@ -8,8 +8,7 @@ import {
 import { KeychainError } from 'src/keychain-error';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
-
-const signature = require('@hiveio/hive-js/lib/auth/ecc');
+import { signMessage } from 'src/utils/sign-message.utils';
 
 const DEFAULT_RPC = 'https://api.hive.blog';
 const HIVE_VOTING_MANA_REGENERATION_SECONDS = 432000;
@@ -177,40 +176,13 @@ const encodeMemo = (
 ) => {
   if (KeysUtils.isUsingLedger(privateKey))
     throw new KeychainError('encode_with_memo_key_in_ledger');
-  return hive.memo.encode(privateKey, receiverPublicKey, memo);
+  return Memo.encode(privateKey, receiverPublicKey, memo);
 };
 /* istanbul ignore next */
 const decodeMemo = (memo: string, privateKey: string) => {
   if (KeysUtils.isUsingLedger(privateKey))
     throw new KeychainError('decode_with_memo_key_in_ledger');
-  return hive.memo.decode(privateKey, memo);
-};
-
-const signMessage = (message: string, privateKey: string) => {
-  let buf;
-  try {
-    const o = JSON.parse(message, (k, v) => {
-      if (
-        v !== null &&
-        typeof v === 'object' &&
-        'type' in v &&
-        v.type === 'Buffer' &&
-        'data' in v &&
-        Array.isArray(v.data)
-      ) {
-        return Buffer.from(v.data);
-      }
-      return v;
-    });
-    if (Buffer.isBuffer(o)) {
-      buf = o;
-    } else {
-      buf = message;
-    }
-  } catch (e) {
-    buf = message;
-  }
-  return signature.Signature.signBuffer(buf, privateKey).toHex();
+  return Memo.decode(privateKey, memo);
 };
 
 const getCurrentMedianHistoryPrice = async (): Promise<Price> => {

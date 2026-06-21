@@ -17,7 +17,7 @@ const fromTsconfigPaths = pathsToModuleNameMapper(tsPaths, {
 module.exports = {
   setupFiles: ['dotenv/config'],
   preset: 'ts-jest',
-  testEnvironment: 'jsdom', //initial was testEnvironment: 'node', using jsdom
+  testEnvironment: '<rootDir>/jest.jsdom-node-typedarrays.js', // jsdom + Node TypedArrays (for @noble/@ecency crypto)
   rootDir: '.',
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',
@@ -25,10 +25,24 @@ module.exports = {
   ],
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
+    // @ecency/sdk and its nested @noble/* ship ESM .js; transpile them to CJS
+    // for jest (transpile-only, no type-check).
+    '^.+\\.(js|cjs|mjs)$': [
+      'ts-jest',
+      { isolatedModules: true, tsconfig: { allowJs: true } },
+    ],
   },
+  // By default jest skips node_modules; allow @ecency/sdk + @noble through so
+  // the transform above can convert their ESM to CJS.
+  transformIgnorePatterns: ['/node_modules/(?!(@ecency/sdk|@noble)/)'],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     ...fromTsconfigPaths,
+    // jsdom resolves @ecency/sdk/hive to its ESM browser build, which jest
+    // can't parse from node_modules. Map to the CJS node build for tests (same
+    // approach as axios below). Runtime/webpack still use the browser build.
+    '^@ecency/sdk/hive$':
+      '<rootDir>/node_modules/@ecency/sdk/dist/node/hive.cjs',
     '^axios$': 'axios/dist/node/axios.cjs',
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '@ledgerhq/devices/hid-framing': '@ledgerhq/devices/lib/hid-framing',

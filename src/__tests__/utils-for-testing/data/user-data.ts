@@ -1,5 +1,5 @@
 import { Keys } from '@interfaces/keys.interface';
-import { PrivateKey } from 'hive-tx';
+import { PrivateKey } from '@ecency/sdk/hive';
 
 /**
  * Canonical Hive test identities — fixed WIFs with pubkeys derived via hive-tx at

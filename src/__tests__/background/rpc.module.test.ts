@@ -1,7 +1,7 @@
 import RPCModule from '@background/rpc.module';
 import { DefaultRpcs } from '@reference-data/default-rpc.list';
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
-import { config as HiveTxConfig } from 'hive-tx';
+import { config as HiveTxConfig } from '@ecency/sdk/hive';
 import Config from 'src/config';
 import mocksImplementation from 'src/__tests__/utils-for-testing/implementations/implementations';
 import { CustomDataFromLocalStorage } from 'src/__tests__/utils-for-testing/interfaces/mocks.interface';
@@ -51,7 +51,7 @@ describe('rpc.module tests:\n', () => {
       .fn()
       .mockResolvedValue({ uri: 'DEFAULT', chainId: '1' });
     await RPCModule.init();
-    expect(HiveTxConfig.node).toEqual(Config.rpc.DEFAULT.uri);
+    expect(HiveTxConfig.nodes[0]).toEqual(Config.rpc.DEFAULT.uri);
   });
 
   it('Must set uri', async () => {
@@ -59,6 +59,6 @@ describe('rpc.module tests:\n', () => {
       .fn()
       .mockResolvedValue({ uri: 'https://saturnoman' });
     await RPCModule.init();
-    expect(HiveTxConfig.node).toEqual('https://saturnoman');
+    expect(HiveTxConfig.nodes[0]).toEqual('https://saturnoman');
   });
 });

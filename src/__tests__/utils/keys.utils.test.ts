@@ -1,7 +1,7 @@
 import { KeysUtils } from '@hiveapp/utils/keys.utils';
 import { Account, ExtendedAccount } from '@hiveio/dhive';
 import { Keys, PrivateKeyType } from '@interfaces/keys.interface';
-import { PrivateKey } from 'hive-tx';
+import { PrivateKey } from '@ecency/sdk/hive';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
 import type { WrongKeysOnUser } from 'src/popup/hive/utils/keys.utils';

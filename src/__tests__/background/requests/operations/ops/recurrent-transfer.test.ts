@@ -1,7 +1,7 @@
 import LedgerModule from '@background/ledger.module';
 import { recurrentTransfer } from '@background/requests/operations/ops/recurrent-transfer';
 import { RequestsHandler } from '@background/requests/request-handler';
-import * as HiveMemo from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import accounts from 'src/__tests__/utils-for-testing/data/accounts';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
@@ -41,7 +41,7 @@ describe('recurrent-transfer tests:\n', () => {
     jest
       .spyOn(AccountUtils, 'getExtendedAccount')
       .mockResolvedValue(accounts.extended);
-    jest.spyOn(HiveMemo, 'encode').mockReturnValue('#mock-memo');
+    jest.spyOn(Memo, 'encode').mockReturnValue('#mock-memo');
     jest.spyOn(chrome.i18n, 'getUILanguage').mockReturnValueOnce('en-US');
     chrome.i18n.getMessage = jest
       .fn()

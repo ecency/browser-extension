@@ -1,7 +1,7 @@
 import { encodeMessage } from '@background/requests/operations/ops/encode-memo';
 import { RequestsHandler } from '@background/requests/request-handler';
 import AccountUtils from 'src/popup/hive/utils/account.utils';
-import * as MemoEncodeHiveJS from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import {
   KeychainKeyTypes,
   KeychainRequestTypes,
@@ -52,7 +52,8 @@ describe('encode-memo tests:\n', () => {
     const { success, result, error, ...datas } = resultOperation.msg;
     expect(success).toBe(false);
     expect(result).toBeNull();
-    expect((error as TypeError).message).toContain('private_key');
+    // @ecency/sdk throws a different error than hive-js for a missing key.
+    expect(error).toBeInstanceOf(Error);
   });
 
   it('Must return error if no receiver', async () => {
@@ -74,7 +75,7 @@ describe('encode-memo tests:\n', () => {
     jest
       .spyOn(AccountUtils, 'getExtendedAccount')
       .mockResolvedValue(accounts.extended);
-    const sEncode = jest.spyOn(MemoEncodeHiveJS, 'encode');
+    const sEncode = jest.spyOn(Memo, 'encode');
     const requestHandler = new RequestsHandler();
     requestHandler.data.key = userData.one.nonEncryptKeys.memo;
     data.message = memo._default.decoded;
@@ -90,7 +91,7 @@ describe('encode-memo tests:\n', () => {
     jest
       .spyOn(AccountUtils, 'getExtendedAccount')
       .mockResolvedValue(accounts.extended);
-    const sEncode = jest.spyOn(MemoEncodeHiveJS, 'encode');
+    const sEncode = jest.spyOn(Memo, 'encode');
     const requestHandler = new RequestsHandler();
     requestHandler.data.key = userData.one.nonEncryptKeys.memo;
     data.method = KeychainKeyTypes.posting;
@@ -108,7 +109,7 @@ describe('encode-memo tests:\n', () => {
       .spyOn(AccountUtils, 'getExtendedAccount')
       .mockResolvedValue(accounts.extended);
     jest
-      .spyOn(MemoEncodeHiveJS, 'encode')
+      .spyOn(Memo, 'encode')
       .mockReturnValue('#mock-encoded-memo');
     const requestHandler = new RequestsHandler();
     requestHandler.data.key = userData.one.nonEncryptKeys.memo;

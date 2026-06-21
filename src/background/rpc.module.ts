@@ -1,5 +1,5 @@
 import { LocalStorageKeyEnum } from '@reference-data/local-storage-key.enum';
-import { config as HiveTxConfig } from 'hive-tx';
+import { config as HiveTxConfig, setNodes } from '@ecency/sdk/hive';
 import Config from 'src/config';
 import { Rpc } from 'src/interfaces/rpc.interface';
 import LocalStorageUtils from 'src/utils/localStorage.utils';
@@ -9,9 +9,9 @@ const resolveDefaultUri = () => Config.rpc.DEFAULT.uri;
 const init = async () => {
   const rpc = await RPCModule.getActiveRpc();
   if (!rpc || rpc.uri === 'DEFAULT') {
-    HiveTxConfig.node = resolveDefaultUri();
+    setNodes([resolveDefaultUri()]);
   } else {
-    HiveTxConfig.node = rpc.uri;
+    setNodes([rpc.uri]);
     if (rpc.chainId) {
       HiveTxConfig.chain_id = rpc.chainId;
     }
@@ -20,9 +20,9 @@ const init = async () => {
 
 const setActiveRpc = async (rpc: Rpc) => {
   if (!rpc || rpc.uri === 'DEFAULT') {
-    HiveTxConfig.node = resolveDefaultUri();
+    setNodes([resolveDefaultUri()]);
   } else {
-    HiveTxConfig.node = rpc.uri;
+    setNodes([rpc.uri]);
     if (rpc.chainId) {
       HiveTxConfig.chain_id = rpc.chainId;
     }

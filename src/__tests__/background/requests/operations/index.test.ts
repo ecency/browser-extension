@@ -193,7 +193,7 @@ describe('index tests:\n', () => {
       .spyOn(DecodeOpModule, 'decodeMessage')
       .mockImplementation(() => cbImplementation(KeychainRequestTypes.decode));
 
-    const DecodeHiveModule = require('@hiveio/hive-js/lib/auth/memo');
+    const DecodeHiveModule = require('@ecency/sdk/hive').Memo;
     jest
       .spyOn(DecodeHiveModule, 'decode')
       .mockImplementation(() => cbImplementation(KeychainRequestTypes.decode));

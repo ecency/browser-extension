@@ -1,7 +1,7 @@
 import type { Account, ExtendedAccount } from '@hiveio/dhive';
 import AccountUtils from '@popup/hive/utils/account.utils';
 import { KeychainKeyTypes, KeychainKeyTypesLC } from 'hive-keychain-commons';
-import { PrivateKey } from 'hive-tx';
+import { PrivateKey } from '@ecency/sdk/hive';
 import { Key, Keys, PrivateKeyType } from 'src/interfaces/keys.interface';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 

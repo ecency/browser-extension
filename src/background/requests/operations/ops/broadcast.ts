@@ -2,7 +2,7 @@ import LedgerModule from '@background/ledger.module';
 import { createMessage } from '@background/requests/operations/operations.utils';
 import { RequestsHandler } from '@background/requests/request-handler';
 import type { Operation } from '@hiveio/dhive';
-import { encode } from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import {
   KeychainKeyTypesLC,
   RequestBroadcast,
@@ -47,7 +47,7 @@ export const broadcastOperations = async (
             throw new KeychainError('popup_html_memo_key_missing', []);
           }
           const memoReceiver = receiver.memo_key;
-          op[1].memo = encode(memoKey, memoReceiver, memo);
+          op[1].memo = Memo.encode(memoKey, memoReceiver, memo);
         }
       } else if (
         op[0] === 'update_proposal_votes' ||

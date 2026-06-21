@@ -8,7 +8,7 @@ import {
 import { KeychainError } from 'src/keychain-error';
 import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
 import Logger from 'src/utils/logger.utils';
-const signature = require('@hiveio/hive-js/lib/auth/ecc');
+import { signMessage } from 'src/utils/sign-message.utils';
 
 export type SignedBuffer = string;
 
@@ -52,29 +52,3 @@ export const signBuffer = async (
   }
 };
 
-const signMessage = (message: string, privateKey: string): SignedBuffer => {
-  let buf;
-  try {
-    const o = JSON.parse(message, (k, v) => {
-      if (
-        v !== null &&
-        typeof v === 'object' &&
-        'type' in v &&
-        v.type === 'Buffer' &&
-        'data' in v &&
-        Array.isArray(v.data)
-      ) {
-        return Buffer.from(v.data);
-      }
-      return v;
-    });
-    if (Buffer.isBuffer(o)) {
-      buf = o;
-    } else {
-      buf = message;
-    }
-  } catch (e) {
-    buf = message;
-  }
-  return signature.Signature.signBuffer(buf, privateKey).toHex();
-};

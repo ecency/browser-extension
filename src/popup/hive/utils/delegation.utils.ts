@@ -4,7 +4,7 @@ import {
   PendingOutgoingUndelegation,
 } from '@interfaces/delegations.interface';
 import { Key, TransactionOptions } from '@interfaces/keys.interface';
-import { config as HiveTxConfig } from 'hive-tx';
+import { config as HiveTxConfig } from '@ecency/sdk/hive';
 import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 import Logger from 'src/utils/logger.utils';
 
@@ -21,7 +21,7 @@ const VESTS_PER_RAW = 1_000_000;
 // hive/delegators/{username} endpoint.
 const getDelegators = async (name: string): Promise<Delegator[] | null> => {
   try {
-    const baseUrl = (HiveTxConfig.node || 'https://api.hive.blog').replace(
+    const baseUrl = (HiveTxConfig.nodes?.[0] || 'https://api.hive.blog').replace(
       /\/$/,
       '',
     );

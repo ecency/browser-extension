@@ -1,15 +1,18 @@
 /**
- * getData tests use a dedicated file so `hive-tx` `call` can be mocked without
- * conflicting with hive-tx.utils.test.ts, which replaces HiveTxUtils.getData in beforeEach.
+ * getData tests use a dedicated file so `@ecency/sdk/hive` `callRPC` can be
+ * mocked without conflicting with hive-tx.utils.test.ts, which replaces
+ * HiveTxUtils.getData in beforeEach.
  */
-const mockHiveTxCall = jest.fn();
+const mockCallRPC = jest.fn();
 
-jest.mock('hive-tx', () => {
-  const actual = jest.requireActual('hive-tx');
+jest.mock('@ecency/sdk/hive', () => {
+  const actual = jest.requireActual('@ecency/sdk/hive');
   return {
     ...actual,
-    call: (method: string, params: unknown, timeout?: number) =>
-      mockHiveTxCall(method, params, timeout),
+    // @ecency/sdk callRPC returns the RPC `result` directly (unlike hive-tx's
+    // `call`, which wrapped it in { result }).
+    callRPC: (method: string, params: unknown, timeout?: number) =>
+      mockCallRPC(method, params, timeout),
   };
 });
 
@@ -17,7 +20,7 @@ import { HiveTxUtils } from 'src/popup/hive/utils/hive-tx.utils';
 
 describe('HiveTxUtils.getData', () => {
   beforeEach(() => {
-    mockHiveTxCall.mockReset();
+    mockCallRPC.mockReset();
   });
 
   afterEach(() => {
@@ -25,13 +28,13 @@ describe('HiveTxUtils.getData', () => {
   });
 
   it('returns full RPC result when key is omitted', async () => {
-    mockHiveTxCall.mockResolvedValue({
-      result: { accounts: ['a'] },
-    });
+    mockCallRPC.mockResolvedValue({ accounts: ['a'] });
 
-    const out = await HiveTxUtils.getData('condenser_api.get_accounts', ['alice']);
+    const out = await HiveTxUtils.getData('condenser_api.get_accounts', [
+      'alice',
+    ]);
 
-    expect(mockHiveTxCall).toHaveBeenCalledWith(
+    expect(mockCallRPC).toHaveBeenCalledWith(
       'condenser_api.get_accounts',
       ['alice'],
       3000,
@@ -39,10 +42,8 @@ describe('HiveTxUtils.getData', () => {
     expect(out).toEqual({ accounts: ['a'] });
   });
 
-  it('returns response.result[key] when key is provided', async () => {
-    mockHiveTxCall.mockResolvedValue({
-      result: { rows: [{ id: 1 }] },
-    });
+  it('returns result[key] when key is provided', async () => {
+    mockCallRPC.mockResolvedValue({ rows: [{ id: 1 }] });
 
     const out = await HiveTxUtils.getData('condenser_api.foo', ['x'], 'rows');
 

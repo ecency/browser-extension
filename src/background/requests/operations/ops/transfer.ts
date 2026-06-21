@@ -1,7 +1,7 @@
 import LedgerModule from '@background/ledger.module';
 import { createMessage } from '@background/requests/operations/operations.utils';
 import { RequestsHandler } from '@background/requests/request-handler';
-import { encode } from '@hiveio/hive-js/lib/auth/memo';
+import { Memo } from '@ecency/sdk/hive';
 import {
   KeychainKeyTypesLC,
   RequestId,
@@ -41,7 +41,7 @@ export const broadcastTransfer = async (
         throw new KeychainError('popup_html_memo_key_missing');
       }
       const memoReceiver = receiver.memo_key;
-      memo = encode(memoKey, memoReceiver, memo);
+      memo = Memo.encode(memoKey, memoReceiver, memo);
     }
 
     const key = requestHandler.getUserPrivateKey(
