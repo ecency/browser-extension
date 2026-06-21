@@ -102,6 +102,23 @@ describe('hive-tx.utils.ts tests:\n', () => {
 
       expect(tx).toEqual(created);
     });
+
+    it('passes each operation to addOperation as separate (name, body) args', async () => {
+      const addOp = mockBuild({ ...constants.tx });
+
+      await HiveTxUtils.createTransaction(constants.operations);
+
+      // The core of the hive-tx -> @ecency/sdk migration: each [name, body]
+      // tuple must be forwarded to addOperation as two positional args.
+      expect(addOp).toHaveBeenCalledTimes(constants.operations.length);
+      expect(addOp).toHaveBeenCalledWith(
+        'account_create',
+        expect.objectContaining({
+          creator: mk.user.one,
+          new_account_name: 'new_account',
+        }),
+      );
+    });
   });
 
   describe('setRpc cases:\n', () => {

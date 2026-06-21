@@ -8,8 +8,7 @@ import {
 import { KeychainError } from 'src/keychain-error';
 import { KeysUtils } from 'src/popup/hive/utils/keys.utils';
 import Logger from 'src/utils/logger.utils';
-import { PrivateKey } from '@ecency/sdk/hive';
-import { sha256 } from '@noble/hashes/sha256';
+import { signMessage } from 'src/utils/sign-message.utils';
 
 export type SignedBuffer = string;
 
@@ -53,37 +52,3 @@ export const signBuffer = async (
   }
 };
 
-const signMessage = (message: string, privateKey: string): SignedBuffer => {
-  let buf;
-  try {
-    const o = JSON.parse(message, (k, v) => {
-      if (
-        v !== null &&
-        typeof v === 'object' &&
-        'type' in v &&
-        v.type === 'Buffer' &&
-        'data' in v &&
-        Array.isArray(v.data)
-      ) {
-        return Buffer.from(v.data);
-      }
-      return v;
-    });
-    if (Buffer.isBuffer(o)) {
-      buf = o;
-    } else {
-      buf = message;
-    }
-  } catch (e) {
-    buf = message;
-  }
-  // Matches hive-js Signature.signBuffer: sha256 the buffer (utf8 bytes for a
-  // string), then sign the digest. A different-but-valid canonical signature
-  // from the previous lib is fine - signBuffer results are verified, not
-  // compared byte-for-byte.
-  // Use Uint8Array/TextEncoder (not Node Buffer): @noble validates
-  // `instanceof Uint8Array`, and a Buffer fails that check across realms.
-  const bytes =
-    typeof buf === 'string' ? new TextEncoder().encode(buf) : new Uint8Array(buf);
-  return PrivateKey.fromString(privateKey).sign(sha256(bytes)).customToString();
-};
