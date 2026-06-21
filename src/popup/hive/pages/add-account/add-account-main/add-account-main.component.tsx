@@ -46,9 +46,11 @@ const AddAccountMain = ({
         left: currentWindow.width! - 350 + currentWindow.left!,
         top: currentWindow.top,
       };
-      // Except on Firefox
-      //@ts-ignore
-      if (typeof InstallTrigger === undefined) win.focused = true;
+      // Only focus the created window on Chromium. The previous
+      // `typeof InstallTrigger === undefined` check was always false (typeof
+      // yields a string) so focused was never set; InstallTrigger is also gone
+      // from modern Firefox. Use the build-time flag instead.
+      if (!process.env.IS_FIREFOX) win.focused = true;
       const window = await chrome.windows.create(win);
       // setImportWindow(window.id);
       chrome.runtime.onMessage.addListener(onSentBackAccountsListener);
