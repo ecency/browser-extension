@@ -2,7 +2,7 @@
   "name": "Hive Keeper Beta",
   "description": "Hive Keeper Beta (don't forget to switch back to production version)",
   "default_locale": "en",
-  "version": "3.17.5",
+  "version": "3.17.6",
   "permissions": ["storage", "idle", "alarms"],
   "host_permissions": ["https://*/*"],
   "action": {
@@ -10,7 +10,7 @@
     "default_icon": "/assets/images/iconhive.png"
   },
   "icons": { "128": "/assets/images/iconhive.png" },
-  "background": { "service_worker": "backgroundBundle.js", "type": "module" },
+  "background": { "service_worker": "backgroundBundle.js" },
   "web_accessible_resources": [
     {
       "resources": ["/images/logo.png", "hive.js", "_locales/*"],
