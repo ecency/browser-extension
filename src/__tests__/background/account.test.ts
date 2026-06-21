@@ -32,9 +32,6 @@ describe('account tests:\n', () => {
   });
 
   it('Must import and save accounts', async () => {
-    chrome.management.getSelf = jest
-      .fn()
-      .mockResolvedValueOnce({ id: 'unique-ID' });
     jest
       .spyOn(MkModule, 'getMk')
       .mockResolvedValue(accounts.encrypted.noHash.oneAccount.mkUsed);

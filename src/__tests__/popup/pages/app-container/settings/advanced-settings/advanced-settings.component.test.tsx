@@ -82,8 +82,9 @@ describe('advanced-settings.component tests:\n', () => {
   });
 
   it('Must call tabs.create when opening ledger menu', async () => {
-    const tabId = 'unique-ID';
-    chrome.management.getSelf = jest.fn().mockResolvedValue({ id: tabId });
+    chrome.runtime.getURL = jest
+      .fn()
+      .mockReturnValue('extension://link-ledger-device.html');
     const ledgerMenuItem = getAdvancedSettingsMenuItems(true).filter(
       (item) => item.label === 'ledger_link_ledger_device',
     )[0];
@@ -92,8 +93,9 @@ describe('advanced-settings.component tests:\n', () => {
         screen.getByTestId(dataTestIdButton.menuPreFix + ledgerMenuItem.icon),
       );
     });
+    expect(chrome.runtime.getURL).toHaveBeenCalledWith('link-ledger-device.html');
     expect(jest.spyOn(chrome.tabs, 'create')).toHaveBeenCalledWith({
-      url: `chrome-extension://${tabId}/link-ledger-device.html`,
+      url: 'extension://link-ledger-device.html',
     });
   });
 });

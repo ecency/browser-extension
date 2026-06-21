@@ -50,7 +50,6 @@ const sendBackImportedAccounts = async (fileContent: string) => {
         account.keys.posting?.startsWith('#') ||
         account.keys.memo?.startsWith('#'),
     );
-    const extensionId = (await chrome.management.getSelf()).id;
     chrome.runtime.sendMessage({
       command: BackgroundCommand.SEND_BACK_IMPORTED_ACCOUNTS,
       value: {
@@ -58,7 +57,12 @@ const sendBackImportedAccounts = async (fileContent: string) => {
         feedback: useLedger
           ? {
               message: 'ledger_import_account_has_ledger',
-              params: [extensionId],
+              // Pass the full extension-page URL as $1 so the locale link uses
+              // the correct scheme on both Chromium (chrome-extension://) and
+              // Firefox (moz-extension://). chrome.runtime.getURL is synchronous
+              // and cross-browser; the old chrome.management.getSelf() promise
+              // call returned undefined on Firefox.
+              params: [chrome.runtime.getURL('link-ledger-device.html')],
             }
           : null,
       },

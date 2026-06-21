@@ -27,10 +27,9 @@ const getAdvancedSettingsMenuItems = (isLedgerSupported: boolean) => {
     {
       label: 'ledger_link_ledger_device',
       icon: SVGIcons.MENU_ADVANCED_SETTINGS_LINK_LEDGER_DEVICE,
-      action: async () => {
-        const extensionId = (await chrome.management.getSelf()).id;
+      action: () => {
         chrome.tabs.create({
-          url: `chrome-extension://${extensionId}/link-ledger-device.html`,
+          url: chrome.runtime.getURL('link-ledger-device.html'),
         });
       },
     },
