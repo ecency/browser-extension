@@ -1,7 +1,6 @@
 import { decodeMessage } from '@background/requests/operations/ops/decode-memo';
 import { RequestsHandler } from '@background/requests/request-handler';
 import { DialogCommand } from '@reference-data/dialog-message-key.enum';
-import { AssertionError } from 'assert';
 import {
   KeychainKeyTypes,
   KeychainRequestTypes,
@@ -70,11 +69,9 @@ describe('decode-memo tests:\n', () => {
       command: DialogCommand.ANSWER_REQUEST,
       msg: {
         success: false,
-        error: new AssertionError({
-          expected: true,
-          operator: '==',
-          message: 'private_key is required',
-        }),
+        // @ecency/sdk throws a different error than hive-js for a missing key;
+        // assert the error path, not the exact message/type.
+        error: expect.any(Error),
         result: null,
         data: datas,
         message: chrome.i18n.getMessage('bgd_ops_decode_err'),

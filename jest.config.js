@@ -18,12 +18,6 @@ module.exports = {
   setupFiles: ['dotenv/config'],
   preset: 'ts-jest',
   testEnvironment: '<rootDir>/jest.jsdom-node-typedarrays.js', // jsdom + Node TypedArrays (for @noble/@ecency crypto)
-  // Resolve package "exports" using node/require conditions instead of jsdom's
-  // default "browser", so modern deps (e.g. @ecency/sdk, @noble/*) load their
-  // CJS node builds that jest can require, rather than ESM browser builds.
-  testEnvironmentOptions: {
-    customExportConditions: ['node', 'require', 'default'],
-  },
   rootDir: '.',
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',

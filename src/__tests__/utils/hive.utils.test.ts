@@ -5,6 +5,8 @@ import HiveUtils from '@hiveapp/utils/hive.utils';
 import { ExtendedAccount } from '@hiveio/dhive';
 import { Rpc } from '@interfaces/rpc.interface';
 import { config as HiveTxConfig } from 'hive-tx';
+import { PrivateKey, Signature } from '@ecency/sdk/hive';
+import { sha256 } from '@noble/hashes/sha256';
 import Config from 'src/config';
 import accounts from 'src/__tests__/utils-for-testing/data/accounts';
 import conversions from 'src/__tests__/utils-for-testing/data/conversions';
@@ -241,11 +243,16 @@ describe('hive.utils tests:\n', () => {
   });
 
   describe('signMessage tests:\n', () => {
-    test('Must return a stable hex signature for a given message and key', () => {
+    test('Must return a valid hex signature that recovers the signing key', () => {
       const key = userData.one.nonEncryptKeys.posting;
       const result = HiveUtils.signMessage('test message', key);
-      expect(result).toBe(HiveUtils.signMessage('test message', key));
       expect(result).toMatch(/^[0-9a-f]{130}$/);
+      // @ecency/sdk signatures are non-deterministic, so verify the signature
+      // recovers the signer's public key rather than being byte-stable.
+      const digest = sha256(new TextEncoder().encode('test message'));
+      expect(Signature.from(result).getPublicKey(digest).toString()).toBe(
+        PrivateKey.fromString(key).createPublic().toString(),
+      );
     });
     test('Must throw when given a public key instead of a private key', () => {
       expect(() =>

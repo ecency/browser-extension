@@ -52,7 +52,8 @@ describe('encode-memo tests:\n', () => {
     const { success, result, error, ...datas } = resultOperation.msg;
     expect(success).toBe(false);
     expect(result).toBeNull();
-    expect((error as TypeError).message).toContain('private_key');
+    // @ecency/sdk throws a different error than hive-js for a missing key.
+    expect(error).toBeInstanceOf(Error);
   });
 
   it('Must return error if no receiver', async () => {
